@@ -19,8 +19,8 @@ function App() {
             speakersAvatars={[
               "https://tse1.mm.bing.net/th?id=OIP.AwGBn0RaiFXEpXemdj-2LQHaLG&pid=Api",
               "https://tse1.mm.bing.net/th?id=OIP.DLHhRiRhIpjzEjOYgGuFowHaKn&pid=Api",
-              "https://tse3.mm.bing.net/th?id=OIP.Qvf9UmzJS1V5YafT9NQZlAHaKL&pid=Api",
               "https://tse1.mm.bing.net/th?id=OIP.QjynegEfQVPq5kIEuX9fWQHaFj&pid=Api",
+              "https://tse3.mm.bing.net/th?id=OIP.Qvf9UmzJS1V5YafT9NQZlAHaKL&pid=Api",
             ]}
             describtion={
               "Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, repellendus?dolor sit amet consectetur adipisicing elit. Ea, repellendus?"
