@@ -59,7 +59,7 @@ export const Card = ({
             </svg>
             {location}
           </p>
-          <button>50 RSVP</button>
+          <div className="tag">50 RSVP</div>
         </div>
 
         <div className="speakers">
