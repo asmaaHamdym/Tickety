@@ -14,7 +14,7 @@ export const Card = ({
         <div>
           <h3>{eventName}</h3>
           <p>{describtion}</p>
-          <p>
+          <div className="location-container">
             <svg
               width="24"
               height="24"
@@ -57,8 +57,8 @@ export const Card = ({
                 </linearGradient>
               </defs>
             </svg>
-            {location}
-          </p>
+            <div className="location">{location}</div>
+          </div>
           <div className="tag">50 RSVP</div>
         </div>
 

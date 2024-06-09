@@ -59,7 +59,8 @@ p {
 
 }
 
-.address {
+.location {
+    padding: 0.5rem;
     color: #2E4052;
 
 }
@@ -85,4 +86,8 @@ svg {
     flex-direction: column;
     justify-content: center;
 
+}
+
+.location-container {
+    display: flex;
 }
