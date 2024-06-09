@@ -1,5 +1,5 @@
 import { Card } from "./components/Card";
-import "./assets/Card.css";
+import "./styles/App.css";
 
 function App() {
   return (
@@ -11,6 +11,8 @@ function App() {
           doloribus.
         </p>
         <div>
+          <Card />
+          <Card />
           <Card />
         </div>
       </div>
