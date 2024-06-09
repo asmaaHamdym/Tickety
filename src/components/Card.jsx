@@ -1,21 +1,18 @@
 import "../styles/Card.css";
 
-export const Card = () => {
+export const Card = ({
+  eventName,
+  eventImgUrl,
+  speakersAvatars,
+  describtion,
+  location,
+}) => {
   return (
     <div className="events-grid">
-      <img
-        className="event-img"
-        src="https://s3-alpha-sig.figma.com/img/680f/9c55/374e07f4a0f6cfdbf755fb905475bbad?Expires=1718582400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VwGQvqWpbuiJHt-079H5UlI1iBFs6RKXeZCZW6oRTCGhoCkUibpEtwsVWSvmjMAj2jTUeBuKnVMDA8HVD9k0IhBgfWNvXx-ZLLKYE1m4Mn7Lqv7Xd3aQFM1b1WqQhcGQxWqqonsZgL4kr-sRxlt5umHP5HBRd2Sp2HNLm9R1vC6w5nMO8QHnb-izXBrq~m4LXXA9zmUS-MDwXVF6Pgte19EoKBSZImKMZbnF0pxckG4YLSrgjOcft77jdp4sFP4o328CvFsue4MnOjlLrba-Pksw5vVBflJQ~hk0rJr7E191dWdRLzPWtvCoUAz9EaTvye6pGw7LrdHJM79KwobKsA__"
-        alt=""
-      />
+      <img className="event-img" src={eventImgUrl} alt="" />
       <div className="event-data">
-        <h3>Event Name</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
-          voluptates quibusdam exercitationem suscipit tempora delectus sunt
-          reiciendis odit quam? Quidem tempore sequi labore rerum eius obcaecati
-          distinctio consequatur mollitia recusandae.
-        </p>
+        <h3>{eventName}</h3>
+        <p>{describtion}</p>
         <p>
           <svg
             width="24"
@@ -59,28 +56,15 @@ export const Card = () => {
               </linearGradient>
             </defs>
           </svg>
-          2464 Royal Ln. Mesa, New Jersey 45463
+          {location}
         </p>
         <button>50 RSVP</button>
         <div className="speakers">
           <h3>Speakers</h3>
           <div className="speaker-img">
-            <img
-              src="https://tse1.mm.bing.net/th?id=OIP.AwGBn0RaiFXEpXemdj-2LQHaLG&pid=Api"
-              alt=""
-            />
-            <img
-              src="https://tse1.mm.bing.net/th?id=OIP.DLHhRiRhIpjzEjOYgGuFowHaKn&pid=Api"
-              alt=""
-            />
-            <img
-              src="https://tse1.mm.bing.net/th?id=OIP.QjynegEfQVPq5kIEuX9fWQHaFj&pid=Api"
-              alt=""
-            />
-            <img
-              src="https://tse3.mm.bing.net/th?id=OIP.Qvf9UmzJS1V5YafT9NQZlAHaKL&pid=Api"
-              alt=""
-            />
+            {speakersAvatars.map((item) => (
+              <img src={item} key={item} />
+            ))}
           </div>
         </div>
       </div>
