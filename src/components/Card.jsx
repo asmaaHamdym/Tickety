@@ -59,7 +59,7 @@ export const Card = ({
             </svg>
             <p className="location">{location}</p>
           </div>
-          <span className="tag">50 RSVP</span>
+          <p className="tag">50 RSVP</p>
         </div>
 
         <div className="speakers">
