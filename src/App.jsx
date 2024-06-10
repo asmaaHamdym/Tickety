@@ -1,3 +1,4 @@
+import CreateEvent from "./pages/CreateEvent";
 import Home from "./pages/Home";
 // import { createRoot } from "react-dom/client";
 
@@ -11,10 +12,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home/>
   },
-  // {
-  //   path: "/",
-  //   element: <Navbar/>
-  // },
+  {
+    path: "/createevent",
+    element: <CreateEvent/>
+  },
 ]);
 
 function App() {
