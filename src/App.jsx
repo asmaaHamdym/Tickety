@@ -1,4 +1,3 @@
-import Navbar from "./pages/Navbar";
 import Home from "./pages/Home";
 // import { createRoot } from "react-dom/client";
 
@@ -10,12 +9,12 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navbar/>
-  },
-  {
-    path: "/home",
     element: <Home/>
   },
+  // {
+  //   path: "/",
+  //   element: <Navbar/>
+  // },
 ]);
 
 function App() {

@@ -8,14 +8,14 @@ const Navbar = () => {
   const handleClick = () => setNav(!nav)
 
   return (
-    <div className='fixed w-full h-[80px] flex justify-between items-center py-4 md:px-14 text-black'>
+    <div className='relative w-full h-[80px] flex justify-between items-center py-4 md:px-14 text-black z-10'>
       <div className='px-2 ml-8'>
         <img src={tickety} alt ='Logo Icon'></img>
       </div>
 
       {/* Desktop Menu */}
       <ul className='hidden md:flex'>
-        <li className='hover:text-[#1B0E16] text-[#806B77] mr-14'><Link  to="/home" smooth={true} duration={500}>Home</Link></li>
+        <li className='hover:text-[#1B0E16] text-[#806B77] mr-14'><Link  to="/" smooth={true} duration={500}>Home</Link></li>
         <li className='hover:text-[#1B0E16] text-[#806B77] mr-14'><Link  to="/events" smooth={true} duration={500}>Events</Link></li>
         <li className='hover:text-[#1B0E16] text-[#806B77]'><Link  to="/faqs" smooth={true} duration={500}>FAQs</Link></li>
       </ul>
@@ -33,7 +33,7 @@ const Navbar = () => {
       
       
       {/* Hamburger Menu */}
-      <div onClick = {handleClick} className='md:hidden z-10 px-2 cursor-pointer'>
+      <div onClick = {handleClick} className='md:hidden z-10 px-2 cursor-pointer pr-8'>
         {!nav ? <FaBars size={35}/> : <FaTimes size={35}/>}
       </div>
 
