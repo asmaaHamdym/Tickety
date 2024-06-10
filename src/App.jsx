@@ -1,4 +1,5 @@
 import { Card } from "./components/Card";
+import { Faqs } from "./components/Faqs";
 import "./styles/App.css";
 
 function App() {
@@ -60,6 +61,9 @@ function App() {
             location={"2464 Royal Ln. Mesa, New Jersey 45463"}
           />
         </div>
+      </div>
+      <div>
+        <Faqs />
       </div>
     </>
   );

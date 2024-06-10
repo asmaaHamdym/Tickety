@@ -57,9 +57,9 @@ export const Card = ({
                 </linearGradient>
               </defs>
             </svg>
-            <div className="location">{location}</div>
+            <p className="location">{location}</p>
           </div>
-          <div className="tag">50 RSVP</div>
+          <span className="tag">50 RSVP</span>
         </div>
 
         <div className="speakers">
