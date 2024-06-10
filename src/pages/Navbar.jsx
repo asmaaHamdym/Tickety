@@ -40,8 +40,9 @@ const Navbar = () => {
       {/* Hamburger Menu Items */}
       <ul className = {!nav ? 'hidden' : 'absolute top-0 left-0 w-full h-screen bg-[#2E4052] flex flex-col justify-center items-center'}>
         <li className='hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl'><Link onClick = {handleClick} to="/" smooth={true} duration={500}>Home</Link></li>
-        <li className='hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl'><Link onClick = {handleClick} to="/contact" smooth={true} duration={500}>Contact Us</Link></li>
         <li className='hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl'><Link onClick = {handleClick} to="/events" smooth={true} duration={500}>Events</Link></li>
+        <li className='hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl'><Link onClick = {handleClick} to="/faqs" smooth={true} duration={500}>FAQs</Link></li>
+        <li className='hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl'><Link onClick = {handleClick} to="/contact" smooth={true} duration={500}>Contact Us</Link></li>
       </ul>
           
     </div>
