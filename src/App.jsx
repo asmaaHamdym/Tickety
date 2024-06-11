@@ -1,10 +1,14 @@
-import "./styles/App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
+import { Events } from "./pages/Events";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+  },
+  {
+    path: "/events",
+    element: <Events />,
   },
 ]);
 function App() {

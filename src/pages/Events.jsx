@@ -1,20 +1,9 @@
 import { Card } from "../components/Card";
-// import { Link } from "react-router-dom";
 
 export const Events = () => {
   return (
     <>
       <div>
-        <h1>Event Listing</h1>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam,
-          doloribus.
-        </p>
-        <div>
-          <button className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
-            {/* <Link to="./pages/Events">View All</Link> */}
-          </button>
-        </div>
         <div>
           <Card
             eventName={"Movie Night"}
