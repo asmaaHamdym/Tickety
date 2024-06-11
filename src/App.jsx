@@ -1,10 +1,16 @@
-import { Events } from "./pages/Events";
 import "./styles/App.css";
-
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { HomePage } from "./pages/HomePage";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+]);
 function App() {
   return (
     <>
-      <Events />
+      <RouterProvider router={router} />
     </>
   );
 }
