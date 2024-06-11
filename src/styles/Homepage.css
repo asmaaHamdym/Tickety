@@ -1,0 +1,9 @@
+.events-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.view-icon {
+    border: 1px solid black;
+    background: white;
+}
