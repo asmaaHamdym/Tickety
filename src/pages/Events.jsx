@@ -1,10 +1,11 @@
 import { Card } from "../components/Card";
+import Footer from "../components/Footer";
 
 export const Events = () => {
   return (
     <>
       <div>
-        <div>
+        <div className="mx-12 my-4 py-8 px-4">
           <Card
             eventName={"Movie Night"}
             eventImgUrl={
@@ -55,6 +56,7 @@ export const Events = () => {
           />
         </div>
       </div>
+      <Footer />
     </>
   );
 };
