@@ -5,7 +5,7 @@ export const Events = () => {
   return (
     <>
       <div>
-        <div className="mx-12 my-4 py-8 px-4">
+        <div className="mx-12 py-8 px-0">
           <Card
             eventName={"Movie Night"}
             eventImgUrl={

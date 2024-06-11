@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export const HomePage = () => {
   return (
     <>
-      <div className="mx-12 my-4 py-8 pt-4 p-0">
+      <div className="mx-12 my-4 py-8 pt-4 pb-0">
         <h1 className="text-3xl font-bold">Event Listing</h1>
         <div className="text-xl font-bold flex justify-between">
           <p>

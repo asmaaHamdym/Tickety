@@ -10,7 +10,7 @@ export const Card = ({
   return (
     <div className="events-grid">
       <img className="w-full h-full rounded-lg" src={eventImgUrl} alt="" />
-      <div className="flex justify-around border-2 border-gray-300 rounded-md p-4">
+      <div className="flex flex-col justify-around border-2 border-gray-300 rounded-md p-8">
         <div>
           <h3 className="text-blue-900 text-lg font-semibold leading-6 mb-2">
             {eventName}
