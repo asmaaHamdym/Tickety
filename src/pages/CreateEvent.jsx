@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import ReactFlagsSelect from "react-flags-select";
+import { RiUploadCloudFill } from "react-icons/ri"
 import Navbar from './Navbar';
-import eventImage from '../assets/events-image.png'
+import eventImage from '../assets/events-image.png';
+import uploadImage from '../assets/upload.png'
 import Input from '../components/Input';
 
 const CreateEvent = () => {
@@ -27,11 +29,14 @@ const CreateEvent = () => {
             <div className='mt-6 mb-2'>
               <p className='mb-1 text-[#212D3A]text-sm'>Upload event image</p>
 
-              <div className='bg-white p-10 flex justify-center'>
-                <button className='border-[#806B77] border-2 p-5 rounded-lg'>
-                  <p className='text-[#412234] flex justify-center text-sm'>Upload Photos <br></br>and Video</p>
+              <div className='p-10 flex justify-center bg-cover bg-center' style={{ backgroundImage: `url(${uploadImage})` }}>
+                {/* <div className="absolute inset-0 bg-black opacity-50"></div> */}
+                <button className='bg-white border-[#806B77] border-2 p-5 rounded-lg'>
+                  <RiUploadCloudFill className='mx-auto upload-icon' size={20} />
+                  <p className='text-[#412234] flex justify-center text-sm font-semibold'>Upload Photos <br></br>and Video</p>
                 </button>
               </div>
+
             </div>
             <form className='mt-3'>
 
@@ -75,6 +80,7 @@ const CreateEvent = () => {
 
               <div className="mb-2">
                 <label htmlFor="rsvp" className="block text-[#212D3A] text-sm mb-1 font-medium">RSVP</label>
+                
                 <Input type="number" id="rsvp" name="rsvp" placeholder="Enter RSVP Number"/>
               </div>
 

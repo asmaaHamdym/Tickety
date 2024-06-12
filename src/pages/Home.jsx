@@ -1,6 +1,6 @@
 import React from 'react';
 import {FaTimes} from 'react-icons/fa'
-import heroImage from '../assets/hero-image.png'
+import heroImage from '../assets/hero.png'
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 
@@ -8,17 +8,20 @@ const Home = () => {
   return (
     <div className='h-screen'>
       <Navbar/>
-      <div className='relative h-screen bg-cover bg-center' style={{ backgroundImage: `url(${heroImage})` }}>
+      <div className='relative h-screen bg-cover bg-center bg-white' style={{ backgroundImage: `url(${heroImage})` }}>
         {/* <div className="absolute inset-0 bg-gradient-to-r from-[#2E4052] via-[#2E4052]"></div> */}
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative md:flex items-center px-10 h-full md:justify-between">
 
           <div className="text-white py-8">
-            <h1 className="md:text-6xl text-4xl font-bold mb-4">Let's help you create a <br></br>Memorable event</h1>
-            <p className="text-lg">Experience seamless planning and extraordinary<br></br> celebrations with our expert event management team</p>
+            <div className='md:mb-28 mb-4 text-center md:text-left'>
+              <h1 className="md:text-6xl text-4xl font-bold mb-6">Let's help you create a <br></br>Memorable event</h1>
+              <p className="text-lg leading-8">Experience seamless planning and extraordinary<br></br> celebrations with our expert event management team</p>
+            </div>
             
-            <div>
-              <button className= 'px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md mt-2'><Link to="/createevent">Create your next Event</Link></button>
+            
+            <div className='flex justify-center md:justify-start'>
+              <button className= 'px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md'><Link to="/createevent">Create your next Event</Link></button>
             </div>
           </div>
 

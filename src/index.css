@@ -50,3 +50,19 @@
   height: 0;
 }
 
+/* Line Behind an Image */
+.line-behind::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px; /* Adjust the thickness of the line */
+  background-color: #D0D3D9; /* Adjust the color of the line */
+  transform: translateY(-50%);
+  z-index: -1;
+}
+
+.upload-icon{
+  color: #412234;
+}
