@@ -15,8 +15,8 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <ul className='hidden md:flex'>
-        <li className='hover:text-[#1B0E16] text-[#806B77] mr-14'><Link  to="/" smooth={true} duration={500}>Home</Link></li>
-        <li className='hover:text-[#1B0E16] text-[#806B77] mr-14'><Link  to="/about" smooth={true} duration={500}>About Us</Link></li>
+        <li className='hover:text-[#1B0E16] text-[#806B77] mr-14'><Link to="/" smooth={true} duration={500}>Home</Link></li>
+        <li className='hover:text-[#1B0E16] text-[#806B77] mr-14'><Link to="/about" smooth={true} duration={500}>About Us</Link></li>
         <li className='hover:text-[#1B0E16] text-[#806B77]'><Link  to="/events" smooth={true} duration={500}>Events</Link></li>
         
       </ul>

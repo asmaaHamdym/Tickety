@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactFlagsSelect from "react-flags-select";
 import Navbar from './Navbar';
 import eventImage from '../assets/events-image.png'
+import Input from '../components/Input';
 
 const CreateEvent = () => {
   const [selected, setSelected] = useState("");
@@ -36,7 +37,7 @@ const CreateEvent = () => {
 
               <div className="mb-2">
                 <label htmlFor="event name" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Name</label>
-                <input type="text" id="event" name="event" className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]" placeholder="Enter event name"/>
+                <Input type="text" id="event" name="event"placeholder="Enter event name"/>
               </div>
 
               <div className="mb-2">
@@ -64,17 +65,17 @@ const CreateEvent = () => {
 
               <div className="mb-2">
                 <label htmlFor="date" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Date</label>
-                <input type="date" id="date" name="date" className="date-input mt-1 px-3 py-2 bg-[#eaecee] border-2  shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]" placeholder="Enter event date"/>  
+                <Input type="date" id="date" name="date" placeholder="Enter event date" className='date-input'/>
               </div>
 
               <div className="mb-2">
-                <label htmlFor="dtime" className="block text-[#212D3A] text-sm mb-1 font-medium">Start Time</label>
-                <input type="time" id="time" name="time" className="time-input mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]" placeholder="Enter event time"/>  
+                <label htmlFor="dtime" className="block text-[#212D3A] text-sm mb-1 font-medium">Start Time</label>  
+                <Input type="time" id="time" name="time" placeholder="Enter event time" className='time-input'/>
               </div>
 
               <div className="mb-2">
                 <label htmlFor="rsvp" className="block text-[#212D3A] text-sm mb-1 font-medium">RSVP</label>
-                <input type="number" id="rsvp" name="rsvp" className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]" placeholder="Enter RSVP Number"/>
+                <Input type="number" id="rsvp" name="rsvp" placeholder="Enter RSVP Number"/>
               </div>
 
               <div className='mt-4'>
