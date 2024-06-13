@@ -57,9 +57,7 @@ const Home = () => {
             </div>
 
             <div className='mt-3'>
-              <button className='w-full px-4 py-2 bg-[#2E4052] text-white rounded-lg text-sm'>
-                Manage your Event
-              </button>
+              <button className='w-full px-4 py-2 bg-[#2E4052] text-white rounded-lg text-sm'><Link to="/manageevent">Manage your Event</Link></button>
             </div>
 
           </div>

@@ -7,6 +7,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import ManageEvent from "./pages/ManageEvent";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/about",
     element: <AboutUs/>
+  },
+  {
+    path: "/manageevent",
+    element: <ManageEvent/>
   },
 ]);
 

@@ -19,7 +19,7 @@ const AboutUs = () => {
         <div className='md:flex gap-20'>
 
           <div className='relative line-behind boder border-[#D0D3D9] flex items-center P-6'>
-            {/* <img src={aboutImage} alt ='About Photo' className='rounded-r-lg relative'/> */}
+            <img src={aboutImage} alt ='About Photo' className='rounded-r-lg relative'/>
           </div>
 
           <div className='mt-4 px-10'>
