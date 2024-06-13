@@ -51,6 +51,12 @@ export const LogIn = () => {
           <button className="submit">Create an Account</button>
           <button className="submit">Continue with Google</button>
         </form>
+        <div className="noaccout">
+          <p className="accountr">
+            Don’t have an account?
+            <Link to="createaccount"> Create an account</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -6,6 +6,9 @@ export default {
       backgroundImage: {
         "login-img": "url('./src/assets/login.jpeg')",
       },
+      fontFamily: {
+        raleway: ["Raleway", "sans-serif"],
+      },
     },
   },
   plugins: [],
