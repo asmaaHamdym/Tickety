@@ -5,6 +5,8 @@ import Navbar from './Navbar';
 import eventImage from '../assets/events-image.png';
 import uploadImage from '../assets/upload.png'
 import Input from '../components/Input';
+import { createUser } from '../api/CreateUser';
+
 
 const CreateEvent = () => {
   const [selected, setSelected] = useState("");
@@ -17,6 +19,28 @@ const CreateEvent = () => {
     if (file) {
       setFileName(file.name);
     }
+  };
+
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    category: '',
+    location: '',
+    date: '',
+    Time:'',
+    status: '',
+    RSVP:''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await createUser(formData)
   };
 
   
@@ -53,22 +77,22 @@ const CreateEvent = () => {
               )}
             </div>
             
-            <form className='mt-3'>
+            <form onSubmit={handleSubmit} className='mt-3'>
 
               <div className="mb-2">
                 <label htmlFor="event name" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Name</label>
-                <Input type="text" id="event" name="event"placeholder="Enter event name"/>
+                <Input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Enter event name"/>
               </div>
 
               <div className="mb-2">
                 <label htmlFor="event description" className="block text-[#212D3A] text-sm mb-1 font-medium">About the event</label>
-                <textarea type="text" id="description" name="description" className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]" placeholder="Describe your event"/>  
+                <textarea type="text" id="description" name="description" value={formData.description} onChange={handleChange} className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]" placeholder="Describe your event"/>  
               </div>
 
               <div className="mb-2">
                 <label htmlFor="options" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Category</label>
-                <select id="options" name="options" className="w-full px-3 py-3 text-sm bg-[#eaecee] border-2  border-[#C4BAC0] rounded-md shadow-sm focus:outline-none focus:border-sky-500 text-[#9FA7AF]">
-                  <option value="" disabled selected>Select event category</option>
+                <select id="options" className="w-full px-3 py-3 text-sm bg-[#eaecee] border-2  border-[#C4BAC0] rounded-md shadow-sm focus:outline-none focus:border-sky-500">
+                  <option disabled selected name="category" value={formData.category} onChange={handleChange}>Select event category</option>
                   <option value="party" className='text-[#212D3A]'>Party</option>
                   <option value="conference" className='text-[#212D3A]'>Conference</option>
                   <option value="concert" className='text-[#212D3A]'>Concert</option>
@@ -79,23 +103,22 @@ const CreateEvent = () => {
          
               <div className="mb-2">
                 <label htmlFor="location" className="block text-[#212D3A] text-sm mb-1 font-medium">Location</label>
-                <ReactFlagsSelect selected={selected}  onSelect={(code) => setSelected(code)} className="bg-[#eaecee] border-2 "  placeholder="Enter location"/>
-                {/* <input type="text" id="location" name="location" className="mt-1 px-3 py-2 bg-white border shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]"/>   */}
+                <ReactFlagsSelect selected={selected}  onSelect={(code) => setSelected(code)} name="location" id='location' value={formData.location} onChange={handleChange} className="bg-[#eaecee] border-2" placeholder="Enter location"/>
               </div>
 
               <div className="mb-2">
                 <label htmlFor="date" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Date</label>
-                <Input type="date" id="date" name="date" placeholder="Enter event date" className='date-input'/>
+                <Input type="date" id="date" name="date" placeholder="Enter event date" value={formData.date} onChange={handleChange} className='date-input'/>
               </div>
 
               <div className="mb-2">
                 <label htmlFor="dtime" className="block text-[#212D3A] text-sm mb-1 font-medium">Start Time</label>  
-                <Input type="time" id="time" name="time" placeholder="Enter event time" className='time-input'/>
+                <Input type="time" id="time" name="Time" placeholder="Enter event time" value={formData.Time} onChange={handleChange} className='time-input'/>
               </div>
 
               <div className="mb-2">
                 <label htmlFor="rsvp" className="block text-[#212D3A] text-sm mb-1 font-medium">RSVP</label>
-                <Input type="number" id="rsvp" name="rsvp" placeholder="Enter RSVP Number"/>
+                <Input type="number" id="rsvp" name="RSVP" value={formData.RSVP} onChange={handleChange} placeholder="Enter RSVP Number"/>
               </div>
 
               <div className='mt-4'>
