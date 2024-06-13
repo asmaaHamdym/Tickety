@@ -3,6 +3,7 @@ import { HomePage } from "./pages/HomePage";
 import { Events } from "./pages/Events";
 import { LogIn } from "./pages/LogIn";
 import { CreateAccount } from "./pages/CreateAccount";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     element: <LogIn />,
   },
   {
-    path: "/createaccount",
+    path: "/login/create-account",
     element: <CreateAccount />,
   },
 ]);

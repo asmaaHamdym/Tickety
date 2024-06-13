@@ -1,4 +1,5 @@
 import tickety from "../assets/tickety.png";
+import googleImg from "../assets/google.png";
 import { Link } from "react-router-dom";
 
 export const LogIn = () => {
@@ -42,19 +43,29 @@ export const LogIn = () => {
             placeholder="Enter your password"
             id="password"
           />
-          <div className="checkbox">
-            <input type="checkbox" className="checkbox" id="checkbox" />
-            <label htmlFor="checkbox" className="checkbox">
-              Keep me Logged In
-            </label>
+          <div className="flex justify-between">
+            <div className="checkbox">
+              <input type="checkbox" className="checkbox" id="checkbox" />
+              <label htmlFor="checkbox" className="p-2 ">
+                Keep me Logged in
+              </label>
+            </div>
+            <p className="forgot">Forgot Password?</p>
           </div>
-          <button className="submit">Create an Account</button>
-          <button className="submit">Continue with Google</button>
+          <div className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md ">
+            <button className="submit">Log into Account</button>
+          </div>
+          <div>
+            <button className="flex px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
+              <img src={googleImg} alt="google icon" className="ffffff" />{" "}
+              Continue with Google
+            </button>
+          </div>
         </form>
-        <div className="noaccout">
-          <p className="accountr">
+        <div className="s">
+          <p className="">
             Don’t have an account?
-            <Link to="createaccount"> Create an account</Link>
+            <Link to="create-account"> Create an account</Link>
           </p>
         </div>
       </div>
