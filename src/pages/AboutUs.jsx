@@ -1,9 +1,9 @@
 import React from 'react';
 import Navbar from './Navbar';
 import aboutImage from '../assets/about.png';
-import noteIcon from '../assets/note-icon.png'
-import reachIcon from '../assets/reach-icon.png'
-import ticketIcon from '../assets/ticket-icon.png'
+import noteIcon from '../assets/note-icon.png';
+import reachIcon from '../assets/reach-icon.png';
+import ticketIcon from '../assets/ticket-icon.png';
 
 
 const AboutUs = () => {
@@ -35,7 +35,7 @@ const AboutUs = () => {
 
             <div className='flex gap-10 border border-[#BDD9BF] rounded-md p-4 mb-10'>
               <div>
-               <img src={reachIcon} alt ='Reach Icon' className='mt-2'></img>
+               <img src={reachIcon} alt ='Reach Icon' className='mt-2'/>
               </div>
               <div>
                 <p className='text-sm text-[#212D3A] font-semibold'>Reach more Audience</p>

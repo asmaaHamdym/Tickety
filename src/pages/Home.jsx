@@ -21,7 +21,7 @@ const Home = () => {
             
             
             <div className='flex justify-center md:justify-start'>
-              <button className= 'px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md'><Link to="/createevent">Create your next Event</Link></button>
+              <button className= 'px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md'><Link to="/create-event">Create your next Event</Link></button>
             </div>
           </div>
 
@@ -57,7 +57,7 @@ const Home = () => {
             </div>
 
             <div className='mt-3'>
-              <button className='w-full px-4 py-2 bg-[#2E4052] text-white rounded-lg text-sm'><Link to="/manageevent">Manage your Event</Link></button>
+              <button className='w-full px-4 py-2 bg-[#2E4052] text-white rounded-lg text-sm'><Link to="/manage-event">Manage your Event</Link></button>
             </div>
 
           </div>

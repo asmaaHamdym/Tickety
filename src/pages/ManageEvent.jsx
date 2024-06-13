@@ -5,6 +5,8 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 import Navbar from './Navbar';
 import uploadImage from '../assets/upload.png'
 import Input from '../components/Input';
+import { Link } from 'react-router-dom';
+
 
 const ManageEvent = () => {
   const [selected, setSelected] = useState("");
@@ -14,10 +16,10 @@ const ManageEvent = () => {
     <div>
       <Navbar/>
       <div className='bg-[#c297af]'> 
-        <div className='flex justify-between px-40 py-6'>
+        <div className='flex justify-between md:px-40 px-6 py-6'>
           <div className='flex'>
-           <FaArrowAltCircleLeft className='arrow-icon mr-4' size={30}/>
-           <div className='font-bold text-lg'>My Events</div>
+            <Link to="/events"><FaArrowAltCircleLeft className='arrow-icon mr-4 cursor-pointer' size={30}/></Link>
+            <div className='font-bold text-lg'>My Events</div>
           </div>
           
           <div>
@@ -25,7 +27,7 @@ const ManageEvent = () => {
           </div>
         </div>
         
-        <div className='h-full w-3/4 items-center mx-auto container bg-white'>
+        <div className='h-full md:w-3/4 items-center mx-auto container bg-white'>
           <div className=''>
 
             <div className='py-6 px-12'>
@@ -88,9 +90,9 @@ const ManageEvent = () => {
                   <Input type="number" id="rsvp" name="rsvp" placeholder="Enter RSVP Number"/>
                 </div>
 
-                <div className='mt-4 flex justify-between'>
-                  <button className='w-2/5 px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'>Delete Event</button>
-                  <button className= 'w-2/5 px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md'>Save Changes</button>
+                <div className='mt-4 flex justify-between gap-2'>
+                  <button className='md:w-2/5 px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'>Delete Event</button>
+                  <button className= 'md:w-2/5 px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md'>Save Changes</button>
                 </div>
               
             </form>

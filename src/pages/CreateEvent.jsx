@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactFlagsSelect from "react-flags-select";
 import { RiUploadCloudFill } from "react-icons/ri"
 import Navbar from './Navbar';
@@ -8,12 +8,22 @@ import Input from '../components/Input';
 
 const CreateEvent = () => {
   const [selected, setSelected] = useState("");
+  const [fileName, setFileName] = useState('');
+  
+  const inputRef = useRef(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFileName(file.name);
+    }
+  };
 
   
   return (
     <div>
       <Navbar/>
-      <div className='bg-[#ECE9EB] h-max w-max rounded-lg items-center mx-auto container justify-center'>
+      <div className='bg-[#ECE9EB] h-full w-max rounded-lg items-center mx-auto container justify-center'>
         <div className='flex'>
 
           <div className='hidden md:flex'>
@@ -29,15 +39,20 @@ const CreateEvent = () => {
             <div className='mt-6 mb-2'>
               <p className='mb-1 text-[#212D3A]text-sm'>Upload event image</p>
 
-              <div className='p-10 flex justify-center bg-cover bg-center' style={{ backgroundImage: `url(${uploadImage})` }}>
-                {/* <div className="absolute inset-0 bg-black opacity-50"></div> */}
-                <button className='bg-white border-[#806B77] border-2 p-5 rounded-lg'>
+              <div className='p-10 flex justify-center bg-cover bg-center' style={{ backgroundImage: `url(${uploadImage})`}}>
+                <input style={{ display: 'none' }} type="file" ref= {inputRef} onChange={handleFileChange} accept =".jpg .jpeg .png"/>
+                <button className='bg-white border-[#806B77] border-2 p-5 rounded-lg' onClick={() => inputRef.current.click()}>
                   <RiUploadCloudFill className='mx-auto upload-icon' size={20} />
                   <p className='text-[#412234] flex justify-center text-sm font-semibold'>Upload Photos <br></br>and Video</p>
                 </button>
               </div>
-
+              {fileName && (
+                  <div className='mt-1'>
+                    <h2 className="text-base font-semibold mb-2 border border-[#806B77] w-max p-1 bg-[#806B77] rounded-lg">{fileName}</h2>
+                  </div>
+              )}
             </div>
+            
             <form className='mt-3'>
 
               <div className="mb-2">
@@ -80,7 +95,6 @@ const CreateEvent = () => {
 
               <div className="mb-2">
                 <label htmlFor="rsvp" className="block text-[#212D3A] text-sm mb-1 font-medium">RSVP</label>
-                
                 <Input type="number" id="rsvp" name="rsvp" placeholder="Enter RSVP Number"/>
               </div>
 

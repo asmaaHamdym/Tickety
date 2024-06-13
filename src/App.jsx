@@ -1,13 +1,14 @@
 import AboutUs from "./pages/AboutUs";
 import CreateEvent from "./pages/CreateEvent";
 import Home from "./pages/Home";
-// import { createRoot } from "react-dom/client";
+import ManageEvent from "./pages/ManageEvent";
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import ManageEvent from "./pages/ManageEvent";
+import SignupSuccess from "./pages/SignupSuccess";
+
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
     element: <Home/>
   },
   {
-    path: "/createevent",
+    path: "/create-event",
     element: <CreateEvent/>
   },
   {
@@ -23,8 +24,16 @@ const router = createBrowserRouter([
     element: <AboutUs/>
   },
   {
-    path: "/manageevent",
+    path: "/manage-event",
     element: <ManageEvent/>
+  },
+  {
+    path: "/signup-success",
+    element: <SignupSuccess/>
+  },
+  {
+    path: "/event-success",
+    element: <EventSuccess/>
   },
 ]);
 
