@@ -9,11 +9,11 @@ const Footer = () => {
             <div className="w-24 pb-4">
               <img src={tickety} alt="Logo Icon"></img>
             </div>
-            <p className="w-60 font-raleway font-lg text-base leading-5">
+            <p className="max-w-xs font-raleway font-lg text-base leading-5 pb-4">
               Tickety is an e booking app that aims to make organizing events
               easy and streamlined for organizers and event attendees.
             </p>
-            <h1 className="text-2xl font-bold py-8">Follow us on</h1>
+            <h1 className="text-2xl font-bold py-4">Follow us on</h1>
             <div className="flex gab-4 justify-between pb-8">
               <a href="https://www.instagram.com/" target="_blanke">
                 <svg
