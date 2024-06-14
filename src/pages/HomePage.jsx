@@ -109,6 +109,7 @@ export const HomePage = () => {
             location={"2464 Royal Ln. Mesa, New Jersey 45463"}
             time={"9 am"}
             date={"25-5-2024"}
+            rsvps={20}
           />
           <Card
             eventName={"Open Source Day"}
@@ -127,6 +128,7 @@ export const HomePage = () => {
             location={"2464 Royal Ln. Mesa, New Jersey 45463"}
             time={"9 am"}
             date={"25-5-2024"}
+            rsvps={70}
           />
           <Card
             eventName={"Tech Summit"}
@@ -145,6 +147,7 @@ export const HomePage = () => {
             location={"2464 Royal Ln. Mesa, New Jersey 45463"}
             time={"9 am"}
             date={"25-5-2024"}
+            rsvps={100}
           />
         </div>
         <Footer />
