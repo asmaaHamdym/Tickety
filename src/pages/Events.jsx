@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import Footer from "../components/Footer";
 import { getEvents } from "../api/requests.js";
+import Navbar from "./Navbar.jsx";
 
 export const Events = () => {
   const [events, setEvents] = useState([]);
@@ -25,6 +26,7 @@ export const Events = () => {
   return (
     <>
       <div>
+        <Navbar />
         <div className="mx-12 py-8 px-0">
           {events.map((event) => (
             <Card

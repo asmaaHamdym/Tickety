@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import ReactFlagsSelect from "react-flags-select";
 import { RiUploadCloudFill } from "react-icons/ri";
 import Navbar from "./Navbar";
