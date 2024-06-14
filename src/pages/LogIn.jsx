@@ -18,48 +18,42 @@ export const LogIn = () => {
 
     setFormData({
       ...formData,
-
       [id]: value,
     });
-    if (formData.email) {
-      setErrors({
-        ...errors,
-        email: "",
-      });
-    }
-    if (formData.password) {
-      setErrors({
-        ...errors,
-        password: "",
-      });
+    for (const [key, value] of Object.entries(formData)) {
+      if (value) {
+        setErrors({
+          ...errors,
+          [key]: "",
+        });
+      }
     }
   };
+  const validateForm = (field) => {
+    setErrors({
+      ...errors,
+      [field]: `${field} is required`,
+    });
+  };
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.email) {
-      setErrors({
-        ...errors,
-        email: "Email is required",
-      });
-      return;
-    }
     const emailRegex = new RegExp(
       `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
     );
 
-    if (!emailRegex.test(formData.email)) {
-      setErrors({
-        ...errors,
-        email: "Email is not valid",
-      });
-      return;
-    }
-    if (!formData.password) {
-      setErrors({
-        ...errors,
-        password: "Password is required",
-      });
-      return;
+    e.preventDefault();
+    for (const [key, value] of Object.entries(formData)) {
+      if (!value) {
+        validateForm(key);
+        return;
+      } else if (key === "email") {
+        if (!emailRegex.test(value)) {
+          setErrors({
+            ...errors,
+            email: "Email is not valid",
+          });
+          return;
+        }
+      }
     }
   };
   return (
