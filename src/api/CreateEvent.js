@@ -1,6 +1,6 @@
 const api = import.meta.env.VITE_APP_API_URL;
 
-export const createUser = async (data) => {
+export const createEvent = async (data) => {
   // console.log(api);
   // console.log('API URL:', api);
 

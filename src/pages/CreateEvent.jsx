@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import eventImage from '../assets/events-image.png';
 import uploadImage from '../assets/upload.png'
 import Input from '../components/Input';
-import { createUser } from '../api/CreateUser';
+import { createEvent } from '../api/CreateEvent';
 import EventSuccess from './EventSuccess';
 import { ToastContainer, toast} from'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -45,7 +45,7 @@ const CreateEvent = () => {
     e.preventDefault();
 
     try {
-      const response = await createUser(formData);
+      const response = await createEvent(formData);
       if (response) {
         console.log('Event created successfully:', response);
       }

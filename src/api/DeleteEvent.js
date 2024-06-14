@@ -1,13 +1,14 @@
-export const updateUser = async (id, body) => {
+const api = import.meta.env.VITE_APP_API_URL;
+
+export const deleteEvent = async (id) => {
   const url = `${api}/:${id}`; // Adjust the endpoint as needed
 
   try {
     const response = await fetch(url, {
-      method: 'PATCH',
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
     });
 
     if (!response.ok) {

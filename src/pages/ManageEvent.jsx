@@ -5,8 +5,8 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 import Navbar from './Navbar';
 import uploadImage from '../assets/upload.png'
 import Input from '../components/Input';
-import { updateUser } from '../api/UpdateUser';
-import { deleteUser } from '../api/DeleteUser';
+import { updateEvent } from '../api/UpdateEvent';
+import { deleteEvent } from '../api/DeleteEvent';
 import { Link } from 'react-router-dom';
 
 
@@ -52,9 +52,10 @@ const ManageEvent = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (e) => {
+    e.preventDefault()
     try {
-      const response = await updateUser(formData.id, formData);
+      const response = await updateEvent(formData.id, formData);
       console.log('Event updated successfully:', response);
     } catch (error) {
       console.error('An error occurred:', error);
@@ -63,9 +64,10 @@ const ManageEvent = () => {
     
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (e) => {
+    e.preventDefault()
     try {
-      const response = await deleteUser(formData.id);
+      const response = await deleteEvent(formData.id);
       console.log('User deleted successfully:', response);
       // setFormData(initialState)
     } catch (error) {
