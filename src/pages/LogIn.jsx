@@ -1,6 +1,7 @@
 import tickety from "../assets/tickety.png";
 import googleImg from "../assets/google.png";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export const LogIn = () => {
@@ -12,6 +13,7 @@ export const LogIn = () => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -55,6 +57,7 @@ export const LogIn = () => {
         }
       }
     }
+    navigate("/create-event");
   };
   return (
     <div className="flex">

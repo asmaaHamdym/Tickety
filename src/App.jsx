@@ -4,6 +4,7 @@ import { Events } from "./pages/Events";
 import { LogIn } from "./pages/LogIn";
 import { CreateAccount } from "./pages/CreateAccount";
 import { NotFound } from "./pages/NotFound";
+import CreateEvent from "./pages/CreateEvent";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/create-account",
     element: <CreateAccount />,
+  },
+  {
+    path: "/create-event",
+    element: <CreateEvent />,
   },
 ]);
 function App() {
