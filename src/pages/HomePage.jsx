@@ -19,12 +19,12 @@ export const HomePage = () => {
           {/* <div className="absolute inset-0 bg-gradient-to-r from-[#2E4052] via-[#2E4052]"></div> */}
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative md:flex items-center px-10 h-full md:justify-between">
-            <div className="text-white py-8">
+            <div className="text-white md:py-8 py-20">
               <div className="md:mb-28 mb-4 text-center md:text-left">
-                <h1 className="md:text-6xl text-4xl font-bold mb-6">
+                <h1 className="md:text-6xl text-5xl font-bold mb-6">
                   Let's help you create a <br></br>Memorable event
                 </h1>
-                <p className="text-lg leading-8">
+                <p className="text-xl leading-8">
                   Experience seamless planning and extraordinary<br></br>{" "}
                   celebrations with our expert event management team
                 </p>
@@ -77,18 +77,18 @@ export const HomePage = () => {
         </div>
         <AboutUs />
         <div className="mx-12 my-4 py-8 pt-4 pb-0">
-          <h1 className="text-3xl font-bold">Exciting Event</h1>
-          <div className="text-xl font-bold flex justify-between sm:font-normal">
+          <h1 className="text-3xl font-bold text-center">Exciting Event</h1>
+          <div className="md:text-xl text-sm md:font-bold md:flex justify-between font-normal mt-4 text-center">
             <p>
               Dive into our exciting events! Find upcoming gatherings,
               workshops, conferences, and more. Discover new interests, connect
               with others, and have some fun!
             </p>
-            <div>
-              <button className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md ">
-                <Link to="events">View All</Link>
-              </button>
-            </div>
+          </div>
+          <div className="mt-4 text-center">
+            <button className="px-10 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md ">
+              <Link to="events">View All</Link>
+            </button>
           </div>
         </div>
         <div className="mx-12 py-8 px-0">
