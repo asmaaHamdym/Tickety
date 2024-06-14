@@ -1,8 +1,67 @@
 import tickety from "../assets/tickety.png";
 import googleImg from "../assets/google.png";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export const LogIn = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+
+    setFormData({
+      ...formData,
+
+      [id]: value,
+    });
+    if (formData.email) {
+      setErrors({
+        ...errors,
+        email: "",
+      });
+    }
+    if (formData.password) {
+      setErrors({
+        ...errors,
+        password: "",
+      });
+    }
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.email) {
+      setErrors({
+        ...errors,
+        email: "Email is required",
+      });
+      return;
+    }
+    const emailRegex = new RegExp(
+      `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
+    );
+
+    if (!emailRegex.test(formData.email)) {
+      setErrors({
+        ...errors,
+        email: "Email is not valid",
+      });
+      return;
+    }
+    if (!formData.password) {
+      setErrors({
+        ...errors,
+        password: "Password is required",
+      });
+      return;
+    }
+  };
   return (
     <div className="flex">
       <div className="bg-login-img bg-contain bg-no-repeat w-1/3 h-screen">
@@ -11,7 +70,7 @@ export const LogIn = () => {
         </div>
       </div>
       <div className="w-[65%] px-8">
-        <form className="mt-3">
+        <form className="mt-3" onSubmit={handleSubmit}>
           <div className="py-6 ">
             <h1 className="text-[#131B22] text-lg font-bold">Welcome Back!</h1>
 
@@ -28,11 +87,14 @@ export const LogIn = () => {
             </label>
             <input
               type="email"
-              required
               placeholder="Enter your email address"
+              onChange={handleChange}
               id="email"
+              name="email"
+              value={formData.email}
               className="border-2 p-4 w-full rounded-md"
             />
+            <span className="text-[#E33629]">{errors.email}</span>
           </div>
           <label
             htmlFor="password"
@@ -42,13 +104,18 @@ export const LogIn = () => {
           </label>
           <input
             type="password"
-            required
             placeholder="Enter your password"
             id="password"
-            className="border-2 p-4 w-full rounded-md mb-8"
+            name="password"
+            minLength={8}
+            value={formData.password}
+            className="border-2 p-4 w-full rounded-md"
+            onChange={handleChange}
           />
+          <span className="text-[#E33629]">{errors.password}</span>
+
           <div className="flex justify-between pb-12">
-            <div className="checkbox">
+            <div className="mt-8">
               <input
                 type="checkbox"
                 className="rounded-md text-[#412234]"
@@ -60,20 +127,30 @@ export const LogIn = () => {
             </div>
             <p className="font-semibold">Forgot Password?</p>
           </div>
-          <div className="mb-8 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center">
-            <button className="p-2">Log into Account</button>
-          </div>
+
+          <button
+            type="submit"
+            className="mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center"
+          >
+            Log into Account
+          </button>
+
           <div className="pb-12">
-            <button className="flex justify-center border-1 border-[#806B77] w-full mb-8 px-8 py-4 bg-white text-[#412234] font-semibold rounded-lg shadow-md ">
+            <button
+              type="button"
+              className="flex justify-center border-2 border-button-border w-full bg-white text-[#412234] font-semibold rounded-lg mb-8 px-8 py-4"
+            >
               <img src={googleImg} alt="google icon" className="w-[24px] " />
               <p className="ml-2">Continue with Google</p>
             </button>
           </div>
         </form>
-        <div className="s">
-          <p className="">
+        <div className="flex justify-center">
+          <p>
             Don’t have an account?
-            <Link to="create-account"> Create an account</Link>
+            <Link to="create-account" className="ml-2 font-semibold">
+              Create an account
+            </Link>
           </p>
         </div>
       </div>

@@ -9,6 +9,9 @@ export default {
       fontFamily: {
         raleway: ["Raleway", "sans-serif"],
       },
+      colors: {
+        "button-border": "#806B77",
+      },
     },
   },
   plugins: [],
