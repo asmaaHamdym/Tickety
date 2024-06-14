@@ -8,6 +8,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+    errorElement: <div>404 Not Found!</div>,
   },
   {
     path: "/events",
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
     element: <LogIn />,
   },
   {
-    path: "/login/create-account",
+    path: "/create-account",
     element: <CreateAccount />,
   },
 ]);
