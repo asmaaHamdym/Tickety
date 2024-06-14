@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CheckSignup } from "../api/requests.js";
-import Navbar from "./Navbar";
 
 export const CreateAccount = () => {
   const [formData, setFormData] = useState({
@@ -70,7 +69,6 @@ export const CreateAccount = () => {
   };
   return (
     <div>
-      <Navbar/>
       <div className="flex">
         <div className="bg-login-img  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
           <img

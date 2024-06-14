@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { CheckLogin } from "../api/requests.js";
-import Navbar from "./Navbar";
 
 export const LogIn = () => {
   const [formData, setFormData] = useState({
@@ -68,7 +67,6 @@ export const LogIn = () => {
   };
   return (
     <div>
-      <Navbar/>
       <div className="flex">
         <div className="bg-login-img  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
           <img
