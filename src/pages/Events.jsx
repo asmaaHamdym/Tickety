@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { Card } from "../components/Card";
 import Footer from "../components/Footer";
+import { getEvents } from "../api/requests.js";
 
 export const Events = () => {
   useEffect(() => {
-    let url = "https://event-management-app-z5bk.onrender.com/";
-    async function fetchTrivia() {
-      const response = await fetch(url);
-      console.log(response);
-    }
+    const fetchData = async () => {
+      const data = await getEvents();
+      console.log(data);
+    };
 
-    fetchTrivia();
+    fetchData();
   }, []);
 
   return (

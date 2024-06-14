@@ -2,7 +2,8 @@ import tickety from "../assets/tickety.png";
 import googleImg from "../assets/google.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { CheckLogin } from "../api/requests.js";
 
 export const LogIn = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +14,11 @@ export const LogIn = () => {
     email: "",
     password: "",
   });
+  const [fromValidated, setFromValidated] = useState(false);
   const navigate = useNavigate();
+  useEffect(() => {
+    console.log(CheckLogin(formData));
+  }, [fromValidated]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -57,6 +62,7 @@ export const LogIn = () => {
         }
       }
     }
+    setFromValidated(true);
     navigate("/create-event");
   };
   return (
