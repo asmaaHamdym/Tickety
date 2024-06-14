@@ -64,10 +64,12 @@ export const LogIn = () => {
   };
   return (
     <div className="flex">
-      <div className="bg-login-img bg-contain bg-no-repeat w-1/3 h-screen">
-        <div className="px-2 ml-8 mt-8 w-40">
-          <img src={tickety} alt="Logo Icon"></img>
-        </div>
+      <div className="bg-login-img  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
+        <img
+          src={tickety}
+          alt="Logo Icon"
+          className="px-2 ml-8 mt-8 w-40"
+        ></img>
       </div>
       <div className="w-[65%] px-8">
         <form className="mt-3" onSubmit={handleSubmit}>
