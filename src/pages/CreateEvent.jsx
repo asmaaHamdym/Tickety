@@ -13,13 +13,13 @@ import 'react-toastify/dist/ReactToastify.css';
 const CreateEvent = () => {
   const [fileName, setFileName] = useState('');
   const [formData, setFormData] = useState({
-    name: 'Wedding',
-    description: 'To feed people',
-    category: 'Party',
-    location: 'Nigeria',
-    date: '2024-09-26',
-    time:'09:26',
-    RSVP:'50'
+    name: '',
+    description: '',
+    category: '',
+    location: '',
+    date: '',
+    time:'',
+    RSVP:''
   });
   const inputRef = useRef(null);
 

@@ -11,6 +11,16 @@ import { Link } from 'react-router-dom';
 
 
 const ManageEvent = () => {
+  // const initialState: {
+  //   id: '',
+  //   name: '',
+  //   description: '',
+  //   category: '',
+  //   location: '',
+  //   date: '',
+  //   time:'',
+  //   RSVP:''
+  // };
   const [fileName, setFileName] = useState('');
   const [formData, setFormData] = useState({
     name: 'Wedding',
@@ -18,9 +28,10 @@ const ManageEvent = () => {
     category: 'Party',
     location: 'Nigeria',
     date: '2024-09-26',
-    Time:'09:26',
+    time:'09:26',
     RSVP:'50'
   });
+  
   
   
   const inputRef = useRef(null);
@@ -56,6 +67,7 @@ const ManageEvent = () => {
     try {
       const response = await deleteUser(formData.id);
       console.log('User deleted successfully:', response);
+      // setFormData(initialState)
     } catch (error) {
       console.error('An error occurred:', error);
     }
@@ -135,7 +147,7 @@ const ManageEvent = () => {
 
                 <div className="mb-2">
                   <label htmlFor="dtime" className="block text-[#212D3A] text-sm mb-1 font-medium">Start Time</label>  
-                  <Input type="time" id="time" name="Time" placeholder="Enter event time" value={formData.Time} onChange={handleChange} className='time-input'/>
+                  <Input type="time" id="time" name="time" placeholder="Enter event time" value={formData.time} onChange={handleChange} className='time-input'/>
                 </div>
 
                 <div className="mb-2">
