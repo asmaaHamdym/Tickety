@@ -190,7 +190,7 @@ export const CreateAccount = () => {
         <div className="flex justify-center">
           <p>
             already have an account?
-            <Link to="login" className="ml-2 font-semibold">
+            <Link to="/login" className="ml-2 font-semibold">
               Sign In
             </Link>
           </p>

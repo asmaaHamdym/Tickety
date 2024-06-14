@@ -150,7 +150,7 @@ export const LogIn = () => {
         <div className="flex justify-center">
           <p>
             Don’t have an account?
-            <Link to="create-account" className="ml-2 font-semibold">
+            <Link to="/create-account" className="ml-2 font-semibold">
               Create an account
             </Link>
           </p>

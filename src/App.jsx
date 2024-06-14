@@ -3,12 +3,13 @@ import { HomePage } from "./pages/HomePage";
 import { Events } from "./pages/Events";
 import { LogIn } from "./pages/LogIn";
 import { CreateAccount } from "./pages/CreateAccount";
+import { NotFound } from "./pages/NotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
-    errorElement: <div>404 Not Found!</div>,
+    errorElement: <NotFound />,
   },
   {
     path: "/events",
