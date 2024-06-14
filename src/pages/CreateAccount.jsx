@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CheckSignup } from "../api/requests.js";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 export const CreateAccount = () => {
   const [formData, setFormData] = useState({
@@ -69,6 +70,10 @@ export const CreateAccount = () => {
   };
   return (
     <div>
+      <div className='flex p-6'>
+        <Link to="/"><FaArrowAltCircleLeft className='arrow-icon mr-4 cursor-pointer' size={30}/></Link>
+        <div className='font-bold text-lg'>Home</div>
+      </div>
       <div className="flex">
         <div className="bg-login-img  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
           <img
