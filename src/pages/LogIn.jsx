@@ -67,7 +67,7 @@ export const LogIn = () => {
   };
   return (
     <div className="flex">
-      <div className="bg-login-img  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
+      <div className="bg-[url('https://s3-alpha-sig.figma.com/img/bd7c/d960/d2ed41d82ea0e269a470a2464e484da9?Expires=1719187200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=P3s6P30ZbBAch-Af1yZk6~1HRpKRPJMX7yz8H~I5dF98PUXjsa2AcSrd9urmzR3kJ9PL~obw8mCRTTxjgyuet~U~~fQ-YIxjsjYoOn0hCC6I99NzB3IzOvOSuNWpekgwfBc5LhZWipSlnyFATPMJvkZTwtsEb5j~tGGMuvL-M30u52ivxBBlvyLbc8b83pqshXT5FZYoKlAL4vKuDQBT2AXh4FWxiC4NK5Bu2caNjJXu9YtkEGG9l8xkw-aBM-zP-dU8nnUiTvBzIB4f8J2w0CovlNrM0812CzzcVjfwQdjOWSD~B91DLzKoiO6SreTGfvLCTP7hF9oseRccM0adag__')]  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
         <img
           src={tickety}
           alt="Logo Icon"
