@@ -1,7 +1,9 @@
 import tickety from "../assets/tickety.png";
 import googleImg from "../assets/google.png";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { CheckSignup } from "../api/requests.js";
 
 export const CreateAccount = () => {
   const [formData, setFormData] = useState({
@@ -13,55 +15,56 @@ export const CreateAccount = () => {
     email: "",
     password: "",
   });
+  const [fromValidated, setFromValidated] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    console.log(CheckSignup(formData));
+  }, [fromValidated]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
 
     setFormData({
       ...formData,
-
       [id]: value,
     });
-    if (formData.email) {
-      setErrors({
-        ...errors,
-        email: "",
-      });
-    }
-    if (formData.password) {
-      setErrors({
-        ...errors,
-        password: "",
-      });
+    for (const [key, value] of Object.entries(formData)) {
+      if (value) {
+        setErrors({
+          ...errors,
+          [key]: "",
+        });
+      }
     }
   };
+  const validateForm = (field) => {
+    setErrors({
+      ...errors,
+      [field]: `${field} is required`,
+    });
+  };
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.email) {
-      setErrors({
-        ...errors,
-        email: "Email is required",
-      });
-      return;
-    }
     const emailRegex = new RegExp(
       `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
     );
 
-    if (!emailRegex.test(formData.email)) {
-      setErrors({
-        ...errors,
-        email: "Email is not valid",
-      });
-      return;
+    e.preventDefault();
+    for (const [key, value] of Object.entries(formData)) {
+      if (!value) {
+        validateForm(key);
+        return;
+      } else if (key === "email") {
+        if (!emailRegex.test(value)) {
+          setErrors({
+            ...errors,
+            email: "Email is not valid",
+          });
+          return;
+        }
+      }
     }
-    if (!formData.password) {
-      setErrors({
-        ...errors,
-        password: "Password is required",
-      });
-      return;
-    }
+    setFromValidated(true);
+    navigate("/create-event");
   };
   return (
     <div className="flex">
