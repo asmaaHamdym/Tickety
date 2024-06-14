@@ -70,7 +70,7 @@ const Navbar = () => {
           </a>
         </li>
         <li className="hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl">
-          <a onClick={handleClick} href="/#events">
+          <a onClick={handleClick} href="/events">
             Events
           </a>
         </li>
