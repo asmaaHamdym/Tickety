@@ -2,6 +2,7 @@ import React from 'react';
 import {FaTimes} from 'react-icons/fa'
 import heroImage from '../assets/hero.png'
 import Navbar from './Navbar';
+import AboutUs from './AboutUs';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -25,7 +26,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className='bg-white p-8 rounded-md mt-8'>
+          {/* <div className='bg-white p-8 rounded-md mt-8'>
             <div className='cursor-pointer flex justify-end -mt-2 -mr-4'>
               <FaTimes size={25}/>
             </div>
@@ -60,10 +61,11 @@ const Home = () => {
               <button className='w-full px-4 py-2 bg-[#2E4052] text-white rounded-lg text-sm'><Link to="/manage-event">Manage your Event</Link></button>
             </div>
 
-          </div>
+          </div>*/}
 
-        </div>
+        </div> 
       </div>
+      <AboutUs/>
     </div>
     
   );

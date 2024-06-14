@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactFlagsSelect from "react-flags-select";
 import { RiUploadCloudFill } from "react-icons/ri";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
@@ -9,7 +9,59 @@ import { Link } from 'react-router-dom';
 
 
 const ManageEvent = () => {
-  const [selected, setSelected] = useState("");
+  const [fileName, setFileName] = useState('');
+  const [formData, setFormData] = useState({
+    name: 'Wedding',
+    description: 'To feed people',
+    category: 'Party',
+    location: 'Nigeria',
+    date: '2024-09-26',
+    Time:'09:26',
+    RSVP:'50'
+  });
+  const inputRef = useRef(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFileName(file.name);
+    }
+  };
+
+  const handleSelect = (code) => {
+    setFormData({ ...formData, location: code });
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const saveChanges = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await createUser(formData);
+      if (response) {
+        console.log('Event created successfully:', response);
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+
+  const deleteEvent = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await createUser(formData);
+      if (response) {
+        console.log('Event created successfully:', response);
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
 
   
   return (
@@ -35,31 +87,35 @@ const ManageEvent = () => {
               <div className='mt-6 mb-2'>
                 <p className='mb-1 text-[#212D3A]text-sm'>Upload event image</p>
 
-                <div className='p-10 flex justify-center bg-cover bg-center' style={{ backgroundImage: `url(${uploadImage})` }}>
-                  {/* <div className="absolute inset-0 bg-black opacity-50"></div> */}
-                  <button className='bg-white border-[#806B77] border-2 p-5 rounded-lg'>
+                <div className='p-10 flex justify-center bg-cover bg-center' style={{ backgroundImage: `url(${uploadImage})`}}>
+                  <input style={{ display: 'none' }} type="file" ref= {inputRef} onChange={handleFileChange} accept =".jpg .jpeg .png"/>
+                  <button className='bg-white border-[#806B77] border-2 p-5 rounded-lg' onClick={() => inputRef.current.click()}>
                     <RiUploadCloudFill className='mx-auto upload-icon' size={20} />
                     <p className='text-[#412234] flex justify-center text-sm font-semibold'>Upload Photos <br></br>and Video</p>
                   </button>
                 </div>
-
+                {fileName && (
+                    <div className='mt-1'>
+                      <h2 className="text-base font-semibold mb-2 border border-[#806B77] w-max p-1 bg-[#806B77] rounded-lg">{fileName}</h2>
+                    </div>
+                )}
               </div>
               <form className='mt-3'>
 
                 <div className="mb-2">
                   <label htmlFor="event name" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Name</label>
-                  <Input type="text" id="event" name="event"placeholder="Enter event name"/>
+                  <Input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Enter event name"/>
                 </div>
 
                 <div className="mb-2">
                   <label htmlFor="event description" className="block text-[#212D3A] text-sm mb-1 font-medium">About the event</label>
-                  <textarea type="text" id="description" name="description" className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]" placeholder="Describe your event"/>  
+                  <textarea type="text" id="description" name="description" value={formData.description} onChange={handleChange} className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]" placeholder="Describe your event"/>  
                 </div>
 
                 <div className="mb-2">
                   <label htmlFor="options" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Category</label>
-                  <select id="options" name="options" className="w-full px-3 py-3 text-sm bg-[#eaecee] border-2  border-[#C4BAC0] rounded-md shadow-sm focus:outline-none focus:border-sky-500 text-[#9FA7AF]">
-                    <option value="" disabled selected>Select event category</option>
+                  <select id="category" name="category" value={formData.category} onChange={handleChange} className="w-full px-3 py-3 text-sm bg-[#eaecee] border-2  border-[#C4BAC0] rounded-md shadow-sm focus:outline-none focus:border-sky-500">
+                    <option disabled value="">Select event category</option>
                     <option value="party" className='text-[#212D3A]'>Party</option>
                     <option value="conference" className='text-[#212D3A]'>Conference</option>
                     <option value="concert" className='text-[#212D3A]'>Concert</option>
@@ -70,29 +126,28 @@ const ManageEvent = () => {
 
                 <div className="mb-2">
                   <label htmlFor="location" className="block text-[#212D3A] text-sm mb-1 font-medium">Location</label>
-                  <ReactFlagsSelect selected={selected}  onSelect={(code) => setSelected(code)} className="bg-[#eaecee] border-2 "  placeholder="Enter location"/>
+                  <ReactFlagsSelect selected={formData.location} onSelect={handleSelect} name="location" id='location' className="bg-[#eaecee] border-2" placeholder="Enter location"/>
                   {/* <input type="text" id="location" name="location" className="mt-1 px-3 py-2 bg-white border shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]"/>   */}
                 </div>
 
                 <div className="mb-2">
                   <label htmlFor="date" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Date</label>
-                  <Input type="date" id="date" name="date" placeholder="Enter event date" className='date-input'/>
+                  <Input type="date" id="date" name="date" placeholder="Enter event date" value={formData.date} onChange={handleChange} className='date-input'/>
                 </div>
 
                 <div className="mb-2">
                   <label htmlFor="dtime" className="block text-[#212D3A] text-sm mb-1 font-medium">Start Time</label>  
-                  <Input type="time" id="time" name="time" placeholder="Enter event time" className='time-input'/>
+                  <Input type="time" id="time" name="Time" placeholder="Enter event time" value={formData.Time} onChange={handleChange} className='time-input'/>
                 </div>
 
                 <div className="mb-2">
                   <label htmlFor="rsvp" className="block text-[#212D3A] text-sm mb-1 font-medium">RSVP</label>
-                  
-                  <Input type="number" id="rsvp" name="rsvp" placeholder="Enter RSVP Number"/>
+                  <Input type="number" id="rsvp" name="RSVP" value={formData.RSVP} onChange={handleChange} placeholder="Enter RSVP Number"/>
                 </div>
 
                 <div className='mt-4 flex justify-between gap-2'>
-                  <button className='md:w-2/5 px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'>Delete Event</button>
-                  <button className= 'md:w-2/5 px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md'>Save Changes</button>
+                  <button onSubmit={deleteEvent} className='md:w-2/5 px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'>Delete Event</button>
+                  <button onSubmit={saveChanges} className= 'md:w-2/5 px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md'>Save Changes</button>
                 </div>
               
             </form>

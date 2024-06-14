@@ -16,7 +16,7 @@ const Navbar = () => {
       {/* Desktop Menu */}
       <ul className='hidden md:flex'>
         <li className='hover:text-[#1B0E16] text-[#806B77] mr-14'><Link to="/">Home</Link></li>
-        <li className='hover:text-[#1B0E16] text-[#806B77] mr-14'><Link to="/about">About Us</Link></li>
+        <li className='hover:text-[#1B0E16] text-[#806B77] mr-14'><a href= "/#about">About Us</a></li>
         <li className='hover:text-[#1B0E16] text-[#806B77]'><Link  to="/events">Events</Link></li>
         
       </ul>
@@ -41,9 +41,9 @@ const Navbar = () => {
 
       {/* Hamburger Menu Items */}
       <ul className = {!nav ? 'hidden' : 'absolute top-0 left-0 w-full h-screen bg-[#2E4052] flex flex-col justify-center items-center'}>
-        <li className='hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl'><Link onClick = {handleClick} to="/" smooth={true} duration={500}>Home</Link></li>
-        <li className='hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl'><Link onClick = {handleClick} to="/about" smooth={true} duration={500}>About Us</Link></li>
-        <li className='hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl'><Link onClick = {handleClick} to="/events" smooth={true} duration={500}>Events</Link></li>
+        <li className='hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl'><Link onClick = {handleClick} to="/">Home</Link></li>
+        <li className='hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl'><a onClick = {handleClick} href= "/#about">About Us</a></li>
+        <li className='hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl'><a onClick = {handleClick} href= "/#events">Events</a></li>
       </ul>
           
     </div>

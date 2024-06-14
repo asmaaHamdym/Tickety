@@ -6,12 +6,22 @@ import eventImage from '../assets/events-image.png';
 import uploadImage from '../assets/upload.png'
 import Input from '../components/Input';
 import { createUser } from '../api/CreateUser';
-
+import EventSuccess from './EventSuccess';
+import SignupSuccess from './SignupSuccess';
+import { ToastContainer, toast} from'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateEvent = () => {
-  const [selected, setSelected] = useState("");
   const [fileName, setFileName] = useState('');
-  
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    category: '',
+    location: '',
+    date: '',
+    Time:'',
+    RSVP:''
+  });
   const inputRef = useRef(null);
 
   const handleFileChange = (event) => {
@@ -21,26 +31,32 @@ const CreateEvent = () => {
     }
   };
 
-  const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    category: '',
-    location: '',
-    date: '',
-    Time:'',
-    status: '',
-    RSVP:''
-  });
+  const handleSelect = (code) => {
+    setFormData({ ...formData, location: code });
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await createUser(formData)
+    try {
+      const response = await createUser(formData);
+      if (response) {
+        console.log('Event created successfully:', response);
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+    toast(<SignupSuccess/>, {
+      position: "top-center"
+    })
+
   };
 
   
@@ -48,6 +64,7 @@ const CreateEvent = () => {
     <div>
       <Navbar/>
       <div className='bg-[#ECE9EB] h-full w-max rounded-lg items-center mx-auto container justify-center'>
+        <ToastContainer/>
         <div className='flex'>
 
           <div className='hidden md:flex'>
@@ -91,8 +108,8 @@ const CreateEvent = () => {
 
               <div className="mb-2">
                 <label htmlFor="options" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Category</label>
-                <select id="options" className="w-full px-3 py-3 text-sm bg-[#eaecee] border-2  border-[#C4BAC0] rounded-md shadow-sm focus:outline-none focus:border-sky-500">
-                  <option disabled selected name="category" value={formData.category} onChange={handleChange}>Select event category</option>
+                <select id="category" name="category" value={formData.category} onChange={handleChange} className="w-full px-3 py-3 text-sm bg-[#eaecee] border-2  border-[#C4BAC0] rounded-md shadow-sm focus:outline-none focus:border-sky-500">
+                  <option disabled value="">Select event category</option>
                   <option value="party" className='text-[#212D3A]'>Party</option>
                   <option value="conference" className='text-[#212D3A]'>Conference</option>
                   <option value="concert" className='text-[#212D3A]'>Concert</option>
@@ -103,7 +120,7 @@ const CreateEvent = () => {
          
               <div className="mb-2">
                 <label htmlFor="location" className="block text-[#212D3A] text-sm mb-1 font-medium">Location</label>
-                <ReactFlagsSelect selected={selected}  onSelect={(code) => setSelected(code)} name="location" id='location' value={formData.location} onChange={handleChange} className="bg-[#eaecee] border-2" placeholder="Enter location"/>
+                <ReactFlagsSelect selected={formData.location} onSelect={handleSelect} name="location" id='location' className="bg-[#eaecee] border-2" placeholder="Enter location"/>
               </div>
 
               <div className="mb-2">

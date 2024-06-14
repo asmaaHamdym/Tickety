@@ -1,5 +1,4 @@
-import React from 'react';
-import Navbar from './Navbar';
+import React from 'react'
 import aboutImage from '../assets/about.png';
 import noteIcon from '../assets/note-icon.png';
 import reachIcon from '../assets/reach-icon.png';
@@ -8,9 +7,8 @@ import ticketIcon from '../assets/ticket-icon.png';
 
 const AboutUs = () => {
   return (
-    <div>
-      <Navbar/>
-      <div className='py-2 '>
+    <div id="about">
+      <div className='py-2'>
         <div className='py-4 px-10'>
           <h3 className='text-base font-bold text-[#131B22] mb-2'>What we do</h3>
           <p className='text-sm text-[#586675] mb-10'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quaerat, quisquam labore minima excepturi, <br></br>ducimus earum maxime consectetur, enim unde nesciunt. </p>
