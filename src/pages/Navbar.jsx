@@ -19,7 +19,7 @@ const Navbar = () => {
           <Link to="/">Home</Link>
         </li>
         <li className="hover:text-[#1B0E16] text-[#806B77] mr-14">
-          <a href="/about">About Us</a>
+          <Link to="/about">About Us</Link>
         </li>
         <li className="hover:text-[#1B0E16] text-[#806B77]">
           <Link to="/events">Events</Link>
@@ -65,14 +65,14 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl">
-          <a onClick={handleClick} href="/#about">
+          <Link onClick={handleClick} to="/about">
             About Us
-          </a>
+          </Link>
         </li>
         <li className="hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl">
-          <a onClick={handleClick} href="/events">
+          <Link onClick={handleClick} to="/events">
             Events
-          </a>
+          </Link>
         </li>
       </ul>
     </div>

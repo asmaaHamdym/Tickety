@@ -5,7 +5,12 @@ import Footer from "../components/Footer";
 
 import heroImage from "../assets/hero.png";
 import Navbar from "./Navbar";
-import AboutUs from "./AboutUs";
+import aboutImage from '../assets/about.png';
+import noteIcon from '../assets/note-icon.png';
+import reachIcon from '../assets/reach-icon.png';
+import ticketIcon from '../assets/ticket-icon.png';
+
+
 
 export const HomePage = () => {
   return (
@@ -37,45 +42,57 @@ export const HomePage = () => {
               </div>
             </div>
 
-            {/* <div className='bg-white p-8 rounded-md mt-8'>
-            <div className='cursor-pointer flex justify-end -mt-2 -mr-4'>
-              <FaTimes size={25}/>
-            </div>
-            <div className='text-center'>
-              <p className='text-[#131B22] text-sm font-bold mb-4'>My Upcoming Events</p>
-              <div className='flex mb-4 justify-center'>
-                <div className='mr-4 '>
-                  <p className='text-[#131B22] font-bold text-base'>10</p>
-                  <p className='text-[#131B22] text-sm'>Days</p>
-                </div>
-
-                <div className='mr-4'>
-                  <p className='text-[#131B22] font-bold text-base'>09</p>
-                  <p className='text-[#131B22] text-sm'>Hrs</p>
-                </div>
-
-                <div className=''>
-                  <p className='text-[#131B22] font-bold text-base'>54</p>
-                  <p className='text-[#131B22] text-sm'>Mins</p>
-                </div>
-              </div>
-              
-            </div>
-
-            <div className='mt-2'>
-              <div className='bg-[#ECE9EB] border-[#ECE9EB] text-[#586675] text-sm mb-2 p-4 w-60 rounded-lg'>Youth Conference</div>
-              <div className='bg-[#ECE9EB] border-[#ECE9EB] text-[#586675] text-sm mb-2 p-4 w-60 rounded-lg'>Ikeja, Nigeria</div>
-              <div className='bg-[#ECE9EB] border-[#ECE9EB] text-[#586675] text-sm mb-2 p-4 w-60 rounded-lg'>Education</div>
-            </div>
-
-            <div className='mt-3'>
-              <button className='w-full px-4 py-2 bg-[#2E4052] text-white rounded-lg text-sm'><Link to="/manage-event">Manage your Event</Link></button>
-            </div>
-
-          </div>*/}
           </div>
         </div>
-        <AboutUs />
+        {/* About Section */}
+        <div>
+          <div className='py-2'>
+            <div className='py-4 px-10'>
+              <h3 className='text-base font-bold text-[#131B22] mb-2'>What we do</h3>
+              <p className='text-sm text-[#586675] mb-10'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quaerat, quisquam labore minima excepturi, <br></br>ducimus earum maxime consectetur, enim unde nesciunt. </p>
+            </div>
+
+            <div className='md:flex gap-20'>
+
+              <div className='relative line-behind boder border-[#D0D3D9] flex items-center P-6'>
+                <img src={aboutImage} alt ='About Photo' className='rounded-r-lg relative'/>
+              </div>
+
+              <div className='mt-4 px-10'>
+                <div className='flex gap-10 border border-[#BDD9BF] rounded-md p-4 mb-10'>
+                  <div>
+                  <img src={noteIcon} alt ='Note Icon' className='mt-2'></img>
+                  </div>
+                  <div>
+                    <p className='text-sm text-[#212D3A] font-semibold'>Create your personal event</p>
+                    <p className='text-sm text-[#586675] px-18'>Organize a seamlesss experience for your customers <br></br>at your event like never before.</p>
+                  </div>
+                </div>
+
+                <div className='flex gap-10 border border-[#BDD9BF] rounded-md p-4 mb-10'>
+                  <div>
+                  <img src={reachIcon} alt ='Reach Icon' className='mt-2'/>
+                  </div>
+                  <div>
+                    <p className='text-sm text-[#212D3A] font-semibold'>Reach more Audience</p>
+                    <p className='text-sm text-[#586675] px-18'>Reach new customersand get more audience <br></br>to participate at your event.</p>
+                  </div>
+                </div>
+
+                <div className='flex gap-10 border border-[#BDD9BF] rounded-md p-4 mb-20'>
+                  <div>
+                  <img src={ticketIcon} alt ='Ticket Icon' className='mt-2'></img>
+                  </div>
+                  <div>
+                    <p className='text-sm text-[#212D3A] font-semibold'>Book a Ticket</p>
+                    <p className='text-sm text-[#586675] px-18'>Get a ticket and RSVP for your favourite event<br></br>with ease.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+    </div>
         <div className="mx-12 my-4 py-8 pt-4 pb-0">
           <h1 className="text-3xl font-bold text-center">Exciting Event</h1>
           <div className="md:text-xl text-sm md:font-bold md:flex justify-between font-normal mt-4 text-center">

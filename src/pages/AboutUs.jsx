@@ -3,11 +3,13 @@ import aboutImage from '../assets/about.png';
 import noteIcon from '../assets/note-icon.png';
 import reachIcon from '../assets/reach-icon.png';
 import ticketIcon from '../assets/ticket-icon.png';
+import Navbar from './Navbar'
 
 
 const AboutUs = () => {
   return (
-    <div id="about">
+    <div>
+      <Navbar/>
       <div className='py-2'>
         <div className='py-4 px-10'>
           <h3 className='text-base font-bold text-[#131B22] mb-2'>What we do</h3>
