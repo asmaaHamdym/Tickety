@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Color variables */
+:root {
+  --icon-color: #412234;
+}
+
+/* Target the date input's calendar icon */
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(26%) sepia(18%) saturate(2517%) hue-rotate(288deg) brightness(88%) contrast(83%);
+}
+
+/* Hide default spin buttons in WebKit browsers */
+.date-input::-webkit-inner-spin-button,
+.date-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  display: none;
+}
+
+/* Target the time input's clock icon */
+.time-input::-webkit-calendar-picker-indicator {
+  filter: invert(26%) sepia(18%) saturate(2517%) hue-rotate(288deg) brightness(88%) contrast(83%);
+}
+
+/* Hide default spin buttons in WebKit browsers */
+.time-input::-webkit-inner-spin-button,
+.time-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  display: none;
+}
+
+/* For other browsers */
+.date-input::-ms-clear,
+.date-input::-ms-reveal,
+.time-input::-ms-clear,
+.time-input::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.date-input::-moz-clear,
+.time-input::-moz-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Line Behind an Image */
+.line-behind::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px; /* Adjust the thickness of the line */
+  background-color: #D0D3D9; /* Adjust the color of the line */
+  transform: translateY(-50%);
+  z-index: -1;
+}
+
+.upload-icon, .arrow-icon{
+  color: #412234;
+}
