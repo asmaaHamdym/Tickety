@@ -7,7 +7,7 @@ import { CheckSignup } from "../api/requests.js";
 
 export const CreateAccount = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    full_name: "",
     email: "",
     password: "",
   });
@@ -63,6 +63,7 @@ export const CreateAccount = () => {
         }
       }
     }
+    console.log(formData);
     setFromValidated(true);
     navigate("/create-event");
   };
@@ -97,7 +98,7 @@ export const CreateAccount = () => {
               type="text"
               placeholder="Enter your full name"
               onChange={handleChange}
-              id="name"
+              id="full_name"
               name="name"
               value={formData.name}
               className="border-2 p-4 w-full rounded-md"
