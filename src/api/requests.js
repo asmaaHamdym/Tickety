@@ -22,8 +22,9 @@ export const CheckLogin = async (formData) => {
 
 export const getEvents = async () => {
   try {
-    const response = await fetch(url, {}).then((res) => res);
-    return response;
+    const response = await fetch(url, {});
+    const data = await response.json();
+    return data;
   } catch (error) {
     return error;
   }

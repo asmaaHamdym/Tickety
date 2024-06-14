@@ -5,8 +5,11 @@ export const Card = ({
   eventName,
   eventImgUrl,
   // speakersAvatars,
-  describtion,
+  rsvps,
+  description,
   location,
+  time,
+  date,
 }) => {
   return (
     <div className="events-grid">
@@ -17,14 +20,20 @@ export const Card = ({
             {eventName}
           </h3>
           <p className="font-medium text-base leading-relaxed my-2 max-w-4/5">
-            {describtion}
+            {description}
           </p>
-          <div className="flex align-center pt-4">
-            <img src={locationIcon} alt="location icon" className="w-8 h-8" />
-            <p className="p-2 text-blue-gray-800">{location}</p>
+          <div className="flex align-center pt-4 justify-between">
+            <div className="flex align-center">
+              <img src={locationIcon} alt="location icon" className="w-8 h-8" />
+              <p className="p-2 text-blue-gray-800">{location}</p>
+            </div>
+            <div className="font-bold border-2 rounded-lg p-4 text-center">
+              <p className="">{time}</p>
+              <p className="">{date}</p>
+            </div>
           </div>
           <p className="text-blue-900 font-semibold border border-purple-700 rounded-md py-3 px-8 inline-block my-4">
-            50 RSVP
+            {rsvps} RSVP
           </p>
         </div>
 
