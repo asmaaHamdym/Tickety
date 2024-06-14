@@ -7,20 +7,19 @@ import uploadImage from '../assets/upload.png'
 import Input from '../components/Input';
 import { createUser } from '../api/CreateUser';
 import EventSuccess from './EventSuccess';
-import SignupSuccess from './SignupSuccess';
 import { ToastContainer, toast} from'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const CreateEvent = () => {
   const [fileName, setFileName] = useState('');
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    category: '',
-    location: '',
-    date: '',
-    Time:'',
-    RSVP:''
+    name: 'Wedding',
+    description: 'To feed people',
+    category: 'Party',
+    location: 'Nigeria',
+    date: '2024-09-26',
+    time:'09:26',
+    RSVP:'50'
   });
   const inputRef = useRef(null);
 
@@ -53,7 +52,7 @@ const CreateEvent = () => {
     } catch (error) {
       console.error('An error occurred:', error);
     }
-    toast(<SignupSuccess/>, {
+    toast(<EventSuccess/>, {
       position: "top-center"
     })
 
@@ -78,7 +77,7 @@ const CreateEvent = () => {
             </div>
 
             <div className='mt-6 mb-2'>
-              <p className='mb-1 text-[#212D3A]text-sm'>Upload event image</p>
+              <p className='mb-1 text-[#212D3A] text-sm'>Upload event image</p>
 
               <div className='p-10 flex justify-center bg-cover bg-center' style={{ backgroundImage: `url(${uploadImage})`}}>
                 <input style={{ display: 'none' }} type="file" ref= {inputRef} onChange={handleFileChange} accept =".jpg .jpeg .png"/>
@@ -130,7 +129,7 @@ const CreateEvent = () => {
 
               <div className="mb-2">
                 <label htmlFor="dtime" className="block text-[#212D3A] text-sm mb-1 font-medium">Start Time</label>  
-                <Input type="time" id="time" name="Time" placeholder="Enter event time" value={formData.Time} onChange={handleChange} className='time-input'/>
+                <Input type="time" id="time" name="time" placeholder="Enter event time" value={formData.time} onChange={handleChange} className='time-input'/>
               </div>
 
               <div className="mb-2">

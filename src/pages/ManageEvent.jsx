@@ -5,6 +5,8 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 import Navbar from './Navbar';
 import uploadImage from '../assets/upload.png'
 import Input from '../components/Input';
+import { updateUser } from '../api/UpdateUser';
+import { deleteUser } from '../api/DeleteUser';
 import { Link } from 'react-router-dom';
 
 
@@ -19,6 +21,8 @@ const ManageEvent = () => {
     Time:'09:26',
     RSVP:'50'
   });
+  
+  
   const inputRef = useRef(null);
 
   const handleFileChange = (event) => {
@@ -37,27 +41,21 @@ const ManageEvent = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const saveChanges = async (e) => {
-    e.preventDefault();
-
+  const handleUpdate = async () => {
     try {
-      const response = await createUser(formData);
-      if (response) {
-        console.log('Event created successfully:', response);
-      }
+      const response = await updateUser(formData.id, formData);
+      console.log('Event updated successfully:', response);
     } catch (error) {
       console.error('An error occurred:', error);
     }
+
+    
   };
 
-  const deleteEvent = async (e) => {
-    e.preventDefault();
-
+  const handleDelete = async () => {
     try {
-      const response = await createUser(formData);
-      if (response) {
-        console.log('Event created successfully:', response);
-      }
+      const response = await deleteUser(formData.id);
+      console.log('User deleted successfully:', response);
     } catch (error) {
       console.error('An error occurred:', error);
     }
@@ -70,12 +68,12 @@ const ManageEvent = () => {
       <div className='bg-[#c297af]'> 
         <div className='flex justify-between md:px-40 px-6 py-6'>
           <div className='flex'>
-            <Link to="/events"><FaArrowAltCircleLeft className='arrow-icon mr-4 cursor-pointer' size={30}/></Link>
+            <a href="/#events"><FaArrowAltCircleLeft className='arrow-icon mr-4 cursor-pointer' size={30}/></a>
             <div className='font-bold text-lg'>My Events</div>
           </div>
           
           <div>
-            <button className= 'px-8 py-2 bg-[#412234] text-white font-semibold rounded shadow-md'>View RSVP</button>
+            <Link to="/rsvp"><button className= 'px-8 py-2 bg-[#412234] text-white font-semibold rounded shadow-md'>View RSVP</button></Link>
           </div>
         </div>
         
@@ -85,7 +83,7 @@ const ManageEvent = () => {
             <div className='py-6 px-12'>
 
               <div className='mt-6 mb-2'>
-                <p className='mb-1 text-[#212D3A]text-sm'>Upload event image</p>
+                <p className='mb-1 text-[#212D3A] text-sm'>Upload event image</p>
 
                 <div className='p-10 flex justify-center bg-cover bg-center' style={{ backgroundImage: `url(${uploadImage})`}}>
                   <input style={{ display: 'none' }} type="file" ref= {inputRef} onChange={handleFileChange} accept =".jpg .jpeg .png"/>
@@ -108,7 +106,7 @@ const ManageEvent = () => {
                 </div>
 
                 <div className="mb-2">
-                  <label htmlFor="event description" className="block text-[#212D3A] text-sm mb-1 font-medium">About the event</label>
+                  <label htmlFor="event description" className="block text-[#6e7071] text-sm mb-1 font-medium">About the event</label>
                   <textarea type="text" id="description" name="description" value={formData.description} onChange={handleChange} className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]" placeholder="Describe your event"/>  
                 </div>
 
@@ -132,7 +130,7 @@ const ManageEvent = () => {
 
                 <div className="mb-2">
                   <label htmlFor="date" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Date</label>
-                  <Input type="date" id="date" name="date" placeholder="Enter event date" value={formData.date} onChange={handleChange} className='date-input'/>
+                  <Input type="date" id="date" name="date" placeholder="Enter event date" value={formData.date} onChange={handleChange}  className='date-input'/>
                 </div>
 
                 <div className="mb-2">
@@ -142,12 +140,12 @@ const ManageEvent = () => {
 
                 <div className="mb-2">
                   <label htmlFor="rsvp" className="block text-[#212D3A] text-sm mb-1 font-medium">RSVP</label>
-                  <Input type="number" id="rsvp" name="RSVP" value={formData.RSVP} onChange={handleChange} placeholder="Enter RSVP Number"/>
+                  <Input type="number" id="rsvp" name="RSVP" value={formData.RSVP} onChange={handleChange}  placeholder="Enter RSVP Number"/>
                 </div>
 
                 <div className='mt-4 flex justify-between gap-2'>
-                  <button onSubmit={deleteEvent} className='md:w-2/5 px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'>Delete Event</button>
-                  <button onSubmit={saveChanges} className= 'md:w-2/5 px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md'>Save Changes</button>
+                  <button onClick={handleDelete} className='md:w-2/5 px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'>Delete Event</button>
+                  <button onClick={handleUpdate} className= 'md:w-2/5 px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md'>Save Changes</button>
                 </div>
               
             </form>
