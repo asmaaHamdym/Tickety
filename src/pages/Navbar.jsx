@@ -19,7 +19,7 @@ const Navbar = () => {
           <Link to="/">Home</Link>
         </li>
         <li className="hover:text-[#1B0E16] text-[#806B77] mr-14">
-          <a href="/#about">About Us</a>
+          <a href="/about">About Us</a>
         </li>
         <li className="hover:text-[#1B0E16] text-[#806B77]">
           <Link to="/events">Events</Link>
