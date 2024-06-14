@@ -37,6 +37,14 @@ const router = createBrowserRouter([
     path: "/event-success",
     element: <EventSuccess/>
   },
+  {
+    path: "/delete-success",
+    element: <SignupSuccess/>
+  },
+  {
+    path: "/update-success",
+    element: <EventSuccess/>
+  },
 ]);
 
 function App() {
