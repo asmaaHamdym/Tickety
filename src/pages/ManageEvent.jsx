@@ -8,6 +8,10 @@ import Input from '../components/Input';
 import { updateEvent } from '../api/UpdateEvent';
 import { deleteEvent } from '../api/DeleteEvent';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast} from'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import DeleteSuccess from './DeleteSuccess';
+import UpdateSuccess from './UpdateSuccess';
 
 
 const ManageEvent = () => {
@@ -60,8 +64,10 @@ const ManageEvent = () => {
     } catch (error) {
       console.error('An error occurred:', error);
     }
-
-    
+    toast(<UpdateSuccess/> , {
+      position: "top-center"
+    })
+   
   };
 
   const handleDelete = async (e) => {
@@ -73,6 +79,9 @@ const ManageEvent = () => {
     } catch (error) {
       console.error('An error occurred:', error);
     }
+    toast(<DeleteSuccess/>, {
+      position: "top-center"
+    })
   };
 
   
@@ -80,6 +89,7 @@ const ManageEvent = () => {
     <div>
       <Navbar/>
       <div className='bg-[#c297af]'> 
+      <ToastContainer/>
         <div className='flex justify-between md:px-40 px-6 py-6'>
           <div className='flex'>
             <a href="/#events"><FaArrowAltCircleLeft className='arrow-icon mr-4 cursor-pointer' size={30}/></a>
@@ -91,7 +101,7 @@ const ManageEvent = () => {
           </div>
         </div>
         
-        <div className='h-full md:w-3/4 items-center mx-auto container bg-white'>
+        <div className='h-full md:w-3/4 items-center mx-auto container'>
           <div className=''>
 
             <div className='py-6 px-12'>
