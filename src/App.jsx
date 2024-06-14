@@ -38,6 +38,10 @@ const router = createBrowserRouter([
     path: "/rsvps",
     element: <Rsvps />,
   },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
 ]);
 function App() {
   return (
