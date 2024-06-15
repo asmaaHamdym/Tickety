@@ -92,7 +92,7 @@ const ManageEvent = () => {
       <ToastContainer/>
         <div className='flex justify-between md:px-40 px-6 py-6'>
           <div className='flex'>
-            <a href="/#events"><FaArrowAltCircleLeft className='arrow-icon mr-4 cursor-pointer' size={30}/></a>
+            <Link to="/#events"><FaArrowAltCircleLeft className='arrow-icon mr-4 cursor-pointer' size={30}/></Link>
             <div className='font-bold text-lg'>My Events</div>
           </div>
           
