@@ -7,6 +7,7 @@ import { CreateAccount } from "./pages/CreateAccount";
 import { NotFound } from "./pages/NotFound";
 import CreateEvent from "./pages/CreateEvent";
 import Rsvps from "./pages/Rsvps";
+import Navbar from "./pages/Navbar";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/about",
-    element: <AboutUs/>,
+    element: <AboutUs />,
   },
   {
     path: "/events",
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
     element: <Rsvps />,
   },
   {
-    path: "*",
+    path: "/*",
     element: <NotFound />,
   },
 ]);
