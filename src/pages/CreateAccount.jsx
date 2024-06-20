@@ -70,12 +70,17 @@ export const CreateAccount = () => {
   };
   return (
     <div>
-      <div className='flex p-6'>
-        <Link to="/"><FaArrowAltCircleLeft className='arrow-icon mr-4 cursor-pointer' size={30}/></Link>
-        <div className='font-bold text-lg'>Home</div>
+      <div className="flex p-6">
+        <Link to="/">
+          <FaArrowAltCircleLeft
+            className="arrow-icon mr-4 cursor-pointer"
+            size={30}
+          />
+        </Link>
+        <div className="font-bold text-lg">Home</div>
       </div>
       <div className="flex">
-        <div className="bg-login-img  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
+        <div className="bg-[url('https://i.ibb.co/w0cTWsr/login.jpg')]  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
           <img
             src={tickety}
             alt="Logo Icon"
@@ -208,6 +213,5 @@ export const CreateAccount = () => {
         </div>
       </div>
     </div>
-    
   );
 };
