@@ -1,4 +1,5 @@
 import tickety from "../assets/tickety.png";
+import togglePassword from "../assets/tooglePassword.png";
 import googleImg from "../assets/google.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -140,34 +141,52 @@ export const CreateAccount = () => {
             >
               Password
             </label>
-            <input
-              type="password"
-              placeholder="Create your password"
-              id="password"
-              name="password"
-              minLength={8}
-              value={formData.password}
-              className="border-2 p-4 w-full rounded-md"
-              onChange={handleChange}
-            />
+            <div className="flex border-2 p-4 w-full rounded-md justify-between">
+              <input
+                type="password"
+                placeholder="Create your password"
+                id="password"
+                name="password"
+                minLength={8}
+                value={formData.password}
+                className=""
+                onChange={handleChange}
+              />
+              <button type="button">
+                <img
+                  src={togglePassword}
+                  alt="toggle password "
+                  className="w-6"
+                />
+              </button>
+            </div>
+
             <span className="text-[#E33629]">{errors.password}</span>
             <label
-              htmlFor="password"
+              htmlFor="confirmPassword"
               className="block text-[#212D3A] text-sm mb-1 font-medium mt-8"
             >
               Confirm Password
             </label>
-            <input
-              type="password"
-              placeholder="Confirm your password"
-              id="password2"
-              name="password2"
-              minLength={8}
-              value={formData.password}
-              className="border-2 p-4 w-full rounded-md"
-              onChange={handleChange}
-            />
-            <span className="text-[#E33629]">{errors.password}</span>
+            <div className="flex border-2 p-4 w-full rounded-md justify-between">
+              <input
+                type="password"
+                placeholder="Create your password"
+                id="password"
+                name="password"
+                minLength={8}
+                value={formData.password}
+                className=""
+                onChange={handleChange}
+              />
+              <button type="button">
+                <img
+                  src={togglePassword}
+                  alt="toggle password "
+                  className="w-6"
+                />
+              </button>
+            </div>
 
             <div className="flex justify-between pb-12">
               <div className="mt-8">
