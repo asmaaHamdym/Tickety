@@ -1,7 +1,7 @@
 import tickety from "../assets/tickety.png";
 import togglePassword from "../assets/tooglePassword.png";
 import googleImg from "../assets/google.png";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CheckSignup } from "../api/requests.js";
@@ -18,6 +18,7 @@ export const CreateAccount = () => {
     password: "",
   });
   const [fromValidated, setFromValidated] = useState(false);
+  const [isPasswordShoen, setIsPasswordShoen] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     console.log(CheckSignup(formData));
@@ -69,9 +70,13 @@ export const CreateAccount = () => {
     setFromValidated(true);
     navigate("/create-event");
   };
+  const handlePasswordToggle = () => {};
+  const handleLogoClick = () => {
+    navigate("/");
+  };
   return (
     <div>
-      <div className="flex p-6">
+      {/* <div className="flex p-6">
         <Link to="/">
           <FaArrowAltCircleLeft
             className="arrow-icon mr-4 cursor-pointer"
@@ -79,13 +84,15 @@ export const CreateAccount = () => {
           />
         </Link>
         <div className="font-bold text-lg">Home</div>
-      </div>
+      </div> */}
+
       <div className="flex">
         <div className="bg-[url('https://i.ibb.co/w0cTWsr/login.jpg')]  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
           <img
             src={tickety}
             alt="Logo Icon"
-            className="px-2 ml-8 mt-8 w-40"
+            className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
+            onClick={handleLogoClick}
           ></img>
         </div>
         <div className="w-[65%] px-8">
@@ -172,14 +179,14 @@ export const CreateAccount = () => {
               <input
                 type="password"
                 placeholder="Create your password"
-                id="password"
+                id="confiemPassword"
                 name="password"
                 minLength={8}
                 value={formData.password}
                 className=""
                 onChange={handleChange}
               />
-              <button type="button">
+              <button type="button" onClick="handlePasswordToggle">
                 <img
                   src={togglePassword}
                   alt="toggle password "
@@ -187,6 +194,7 @@ export const CreateAccount = () => {
                 />
               </button>
             </div>
+            <span className="text-[#E33629]">{errors.password}</span>
 
             <div className="flex justify-between pb-12">
               <div className="mt-8">
