@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { CheckLogin } from "../api/requests.js";
-import { FaArrowAltCircleLeft } from "react-icons/fa";
+// import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 export const LogIn = () => {
   const [formData, setFormData] = useState({
@@ -70,7 +70,7 @@ export const LogIn = () => {
   };
   return (
     <div>
-      <div className="flex p-6">
+      {/* <div className="flex p-6">
         <Link to="/">
           <FaArrowAltCircleLeft
             className="arrow-icon mr-4 cursor-pointer"
@@ -78,14 +78,15 @@ export const LogIn = () => {
           />
         </Link>
         <div className="font-bold text-lg">Home</div>
-      </div>
+      </div> */}
 
       <div className="flex w-full">
         <div className="bg-[url('https://i.ibb.co/w0cTWsr/login.jpg')]  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
           <img
             src={tickety}
             alt="Logo Icon"
-            className="px-2 ml-8 mt-8 w-40"
+            className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
+            onClick={() => navigate("/")}
           ></img>
         </div>
         <div className="w-[65%] px-8  ">

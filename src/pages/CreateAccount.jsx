@@ -1,11 +1,11 @@
 import tickety from "../assets/tickety.png";
 import togglePassword from "../assets/tooglePassword.png";
 import googleImg from "../assets/google.png";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CheckSignup } from "../api/requests.js";
-import { FaArrowAltCircleLeft } from "react-icons/fa";
+// import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 export const CreateAccount = () => {
   const [formData, setFormData] = useState({
@@ -71,9 +71,6 @@ export const CreateAccount = () => {
     navigate("/create-event");
   };
   const handlePasswordToggle = () => {};
-  const handleLogoClick = () => {
-    navigate("/");
-  };
   return (
     <div>
       {/* <div className="flex p-6">
@@ -92,7 +89,7 @@ export const CreateAccount = () => {
             src={tickety}
             alt="Logo Icon"
             className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
-            onClick={handleLogoClick}
+            onClick={() => navigate("/")}
           ></img>
         </div>
         <div className="w-[65%] px-8">
