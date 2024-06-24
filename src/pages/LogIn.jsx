@@ -4,7 +4,7 @@ import togglePassword from "../assets/tooglePassword.png";
 
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CheckLogin } from "../api/requests.js";
 // import { FaArrowAltCircleLeft } from "react-icons/fa";
 
@@ -18,6 +18,7 @@ export const LogIn = () => {
     password: "",
   });
   const [fromValidated, setFromValidated] = useState(false);
+  const passwordRef = useRef(null);
   const navigate = useNavigate();
   useEffect(() => {
     console.log(CheckLogin(formData));
@@ -70,16 +71,6 @@ export const LogIn = () => {
   };
   return (
     <div>
-      {/* <div className="flex p-6">
-        <Link to="/">
-          <FaArrowAltCircleLeft
-            className="arrow-icon mr-4 cursor-pointer"
-            size={30}
-          />
-        </Link>
-        <div className="font-bold text-lg">Home</div>
-      </div> */}
-
       <div className="flex w-full">
         <div className="bg-[url('https://i.ibb.co/w0cTWsr/login.jpg')]  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
           <img
@@ -124,7 +115,7 @@ export const LogIn = () => {
             >
               Password
             </label>
-            <div className="flex border-2 p-4 w-full rounded-md justify-between">
+            <div className="flex  justify-between">
               <input
                 type="password"
                 placeholder="Enter your password"
@@ -132,14 +123,20 @@ export const LogIn = () => {
                 name="password"
                 minLength={8}
                 value={formData.password}
-                className=""
+                className="border-2 p-4 w-full rounded-md"
                 onChange={handleChange}
+                ref={passwordRef}
               />
-              <button type="button">
+              <button type="button" className="-ml-16 pr-4">
                 <img
                   src={togglePassword}
                   alt="toggle password "
                   className="w-6"
+                  onClick={() => {
+                    passwordRef.current.type === "text"
+                      ? (passwordRef.current.type = "password")
+                      : (passwordRef.current.type = "text");
+                  }}
                 />
               </button>
             </div>

@@ -2,7 +2,7 @@ import tickety from "../assets/tickety.png";
 import togglePassword from "../assets/tooglePassword.png";
 import googleImg from "../assets/google.png";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CheckSignup } from "../api/requests.js";
 // import { FaArrowAltCircleLeft } from "react-icons/fa";
@@ -18,10 +18,11 @@ export const CreateAccount = () => {
     password: "",
   });
   const [fromValidated, setFromValidated] = useState(false);
-  const [isPasswordShoen, setIsPasswordShoen] = useState(false);
+  const passwordRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(CheckSignup(formData));
+    CheckSignup(formData);
   }, [fromValidated]);
 
   const handleChange = (e) => {
@@ -70,19 +71,9 @@ export const CreateAccount = () => {
     setFromValidated(true);
     navigate("/create-event");
   };
-  const handlePasswordToggle = () => {};
+
   return (
     <div>
-      {/* <div className="flex p-6">
-        <Link to="/">
-          <FaArrowAltCircleLeft
-            className="arrow-icon mr-4 cursor-pointer"
-            size={30}
-          />
-        </Link>
-        <div className="font-bold text-lg">Home</div>
-      </div> */}
-
       <div className="flex">
         <div className="bg-[url('https://i.ibb.co/w0cTWsr/login.jpg')]  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
           <img
@@ -103,7 +94,7 @@ export const CreateAccount = () => {
                 Kindly input your details below to create your account
               </p>
             </div>
-            <div className="mb-2">
+            <div className="mb-4">
               <label
                 htmlFor="name"
                 className="block text-[#212D3A] text-sm mb-1 font-medium "
@@ -141,11 +132,11 @@ export const CreateAccount = () => {
             </div>
             <label
               htmlFor="password"
-              className="block text-[#212D3A] text-sm mb-1 font-medium mt-8"
+              className="block text-[#212D3A] text-sm mb-1 font-medium mt-4"
             >
               Password
             </label>
-            <div className="flex border-2 p-4 w-full rounded-md justify-between">
+            <div className="flex justify-between">
               <input
                 type="password"
                 placeholder="Create your password"
@@ -153,10 +144,19 @@ export const CreateAccount = () => {
                 name="password"
                 minLength={8}
                 value={formData.password}
-                className=""
+                className="border-2 p-4 w-full rounded-md"
                 onChange={handleChange}
+                ref={passwordRef}
               />
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => {
+                  passwordRef.current.type === "text"
+                    ? (passwordRef.current.type = "password")
+                    : (passwordRef.current.type = "text");
+                }}
+                className="-ml-16 pr-4"
+              >
                 <img
                   src={togglePassword}
                   alt="toggle password "
@@ -168,22 +168,31 @@ export const CreateAccount = () => {
             <span className="text-[#E33629]">{errors.password}</span>
             <label
               htmlFor="confirmPassword"
-              className="block text-[#212D3A] text-sm mb-1 font-medium mt-8"
+              className="block text-[#212D3A] text-sm mb-1 font-medium mt-4"
             >
               Confirm Password
             </label>
-            <div className="flex border-2 p-4 w-full rounded-md justify-between">
+            <div className="flex justify-between">
               <input
                 type="password"
                 placeholder="Create your password"
                 id="confiemPassword"
-                name="password"
+                name="confirmPassword"
                 minLength={8}
                 value={formData.password}
-                className=""
+                className="border-2 p-4 w-full rounded-md"
                 onChange={handleChange}
+                ref={confirmPasswordRef}
               />
-              <button type="button" onClick="handlePasswordToggle">
+              <button
+                type="button"
+                onClick={() => {
+                  confirmPasswordRef.current.type === "text"
+                    ? (confirmPasswordRef.current.type = "password")
+                    : (confirmPasswordRef.current.type = "text");
+                }}
+                className="-ml-16 pr-4"
+              >
                 <img
                   src={togglePassword}
                   alt="toggle password "
