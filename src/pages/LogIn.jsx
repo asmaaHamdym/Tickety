@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { CheckLogin } from "../api/requests.js";
-// import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 export const LogIn = () => {
   const [formData, setFormData] = useState({
@@ -21,8 +20,8 @@ export const LogIn = () => {
   const passwordRef = useRef(null);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(CheckLogin(formData));
-  }, [fromValidated]);
+    CheckLogin(formData);
+  }, [formData, fromValidated]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -133,9 +132,8 @@ export const LogIn = () => {
                   alt="toggle password "
                   className="w-6"
                   onClick={() => {
-                    passwordRef.current.type === "text"
-                      ? (passwordRef.current.type = "password")
-                      : (passwordRef.current.type = "text");
+                    passwordRef.current.type =
+                      passwordRef.current.type === "text" ? "password" : "text";
                   }}
                 />
               </button>

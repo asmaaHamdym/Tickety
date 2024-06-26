@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <div className="relative w-full h-[80px] flex justify-between items-center py-4 md:px-14 text-black z-10">
       <div className="px-2 ml-8 w-40">
-        <img src={tickety} alt="Logo Icon"></img>
+        <img src={tickety} alt="Logo Icon" onClick={() => navigate("/")}></img>
       </div>
 
       {/* Desktop Menu */}

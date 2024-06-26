@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CheckSignup } from "../api/requests.js";
-// import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 export const CreateAccount = () => {
   const [formData, setFormData] = useState({
@@ -27,6 +26,7 @@ export const CreateAccount = () => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
+    console.log(formData);
 
     setFormData({
       ...formData,
@@ -151,9 +151,8 @@ export const CreateAccount = () => {
               <button
                 type="button"
                 onClick={() => {
-                  passwordRef.current.type === "text"
-                    ? (passwordRef.current.type = "password")
-                    : (passwordRef.current.type = "text");
+                  passwordRef.current.type =
+                    passwordRef.current.type === "text" ? "password" : "text";
                 }}
                 className="-ml-16 pr-4"
               >
@@ -179,17 +178,17 @@ export const CreateAccount = () => {
                 id="confiemPassword"
                 name="confirmPassword"
                 minLength={8}
-                value={formData.password}
                 className="border-2 p-4 w-full rounded-md"
-                onChange={handleChange}
+                // onChange={handleChange}
                 ref={confirmPasswordRef}
               />
               <button
                 type="button"
                 onClick={() => {
-                  confirmPasswordRef.current.type === "text"
-                    ? (confirmPasswordRef.current.type = "password")
-                    : (confirmPasswordRef.current.type = "text");
+                  confirmPasswordRef.current.type =
+                    confirmPasswordRef.current.type === "text"
+                      ? "password"
+                      : "text";
                 }}
                 className="-ml-16 pr-4"
               >
