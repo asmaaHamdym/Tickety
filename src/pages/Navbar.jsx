@@ -2,15 +2,23 @@ import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import tickety from "../assets/tickety-red.png";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const navigate = useNavigate();
+
   const handleClick = () => setNav(!nav);
 
   return (
     <div className="relative w-full h-[80px] flex justify-between items-center py-4 md:px-14 text-black z-10">
       <div className="px-2 ml-8 w-40">
-        <img src={tickety} alt="Logo Icon" onClick={() => navigate("/")}></img>
+        <img
+          src={tickety}
+          className="hover:cursor-pointer"
+          alt="Logo Icon"
+          onClick={() => navigate("/")}
+        ></img>
       </div>
 
       {/* Desktop Menu */}
