@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import tickety from "../assets/tickety-red.png";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -22,18 +22,20 @@ const Navbar = () => {
       </div>
 
       {/* Desktop Menu */}
-      <ul className="hidden md:flex">
-        <li className="hover:text-[#1B0E16] text-[#806B77] mr-14">
-          <Link to="/">Home</Link>
-        </li>
-        <li className="hover:text-[#1B0E16] text-[#806B77] mr-14">
-          <Link to="/about">About Us</Link>
-        </li>
-        <li className="hover:text-[#1B0E16] text-[#806B77]">
-          <Link to="/events">Events</Link>
-        </li>
-      </ul>
-
+      <nav>
+        <ul className="hidden md:flex">
+          <li className="mr-14">
+            <NavLink to="/" className= {({ isActive }) => isActive ? "text-[#1B0E16] font-medium" : "text-[#806B77]" }>Home</NavLink>
+          </li>
+          <li className="mr-14">
+            <NavLink to="/about" className= {({ isActive }) => isActive ? "text-[#1B0E16] font-medium" : "text-[#806B77]" }>About Us</NavLink>
+          </li>
+          <li>
+            <NavLink to="/events" className= {({ isActive }) => isActive ? "text-[#1B0E16] font-medium" : "text-[#806B77]" }>Events</NavLink>
+          </li>
+        </ul>
+      </nav>
+      
       <div className="hidden md:flex">
         {/* <div className='mr-8'>
           <button className='px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'> Contact Us</button>
@@ -68,19 +70,19 @@ const Navbar = () => {
         }
       >
         <li className="hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl">
-          <Link onClick={handleClick} to="/">
+          <NavLink onClick={handleClick} to="/">
             Home
-          </Link>
+          </NavLink>
         </li>
         <li className="hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl">
-          <Link onClick={handleClick} to="/about">
+          <NavLink onClick={handleClick} to="/about">
             About Us
-          </Link>
+          </NavLink>
         </li>
         <li className="hover:text-[#1B0E16] text-[#806B77] py-6 text-4xl">
-          <Link onClick={handleClick} to="/events">
+          <NavLink onClick={handleClick} to="/events">
             Events
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </div>
