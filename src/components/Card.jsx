@@ -22,17 +22,18 @@ export const Card = ({
           <p className="font-medium text-base leading-relaxed my-2 max-w-4/5">
             {description}
           </p>
-          <div className="md:flex align-center pt-4 justify-between">
-            <div className="md:flex align-center">
+          <div className="flex align-center pt-4 justify-between">
+            <div className="flex">
               <img src={locationIcon} alt="location icon" className="w-6 h-6" />
               <p className="ml-2 text-blue-gray-800">{location}</p>
             </div>
-            <div className="md:font-bold border-2 rounded-lg md:p-4 py-1 text-center">
+            <div className="md:font-bold mt-2 md:mt-0 border-2 rounded-lg md:p-4 text-center w-max p-4">
               <p className="">{time}</p>
               <p className="">{date}</p>
             </div>
+            
           </div>
-          <p className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block">
+          <p className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0">
             {rsvps} RSVP
           </p>
         </div>
