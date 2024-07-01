@@ -60,11 +60,11 @@ const CreateEvent = () => {
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       {/* <div className="bg-[#ECE9EB] h-screen w-full rounded-lg items-center mx-auto container justify-center"> */}
       <div className="flex w-full">
         <ToastContainer />
-        <div className="w-1/3 bg-center bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
+        <div className="hidden md:flex bg-center bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
           <img
             src={tickety}
             alt="Logo Icon"
@@ -73,7 +73,7 @@ const CreateEvent = () => {
           ></img>
         </div>
 
-        <div className="w-[65%] py-6  px-3">
+        <div className="md:w-[65%] py-6  px-3">
           <div>
             <h2 className="text-[#131B22] text-lg font-bold">
               Create your Event
