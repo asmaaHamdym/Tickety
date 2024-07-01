@@ -64,16 +64,16 @@ const CreateEvent = () => {
       {/* <div className="bg-[#ECE9EB] h-screen w-full rounded-lg items-center mx-auto container justify-center"> */}
       <div className="flex w-full">
         <ToastContainer />
-        <div className="hidden md:flex bg-center bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
-          <img
+        <div className="hidden md:block w-1/3 bg-center bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
+          {/* <img
             src={tickety}
             alt="Logo Icon"
-            className="px-2 md:ml-8 ml-2 mt-8 md:w-40 w-32 hover:cursor-pointer"
+            className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
             onClick={() => navigate("/")}
-          ></img>
+          ></img> */}
         </div>
 
-        <div className="md:w-[65%] py-6  px-3">
+        <div className="md:w-[65%] w-full py-6  px-3">
           <div>
             <h2 className="text-[#131B22] text-lg font-bold">
               Create your Event
