@@ -64,16 +64,16 @@ const CreateEvent = () => {
       {/* <div className="bg-[#ECE9EB] h-screen w-full rounded-lg items-center mx-auto container justify-center"> */}
       <div className="flex w-full">
         <ToastContainer />
-        <div className="bg-[url('https://i.ibb.co/w0cTWsr/login.jpg')]  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
+        <div className="w-1/3 bg-center bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
           <img
             src={tickety}
             alt="Logo Icon"
-            className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
+            className="px-2 md:ml-8 ml-2 mt-8 md:w-40 w-32 hover:cursor-pointer"
             onClick={() => navigate("/")}
           ></img>
         </div>
 
-        <div className="w-[65%] p-8 ">
+        <div className="w-[65%] py-6  px-3">
           <div>
             <h2 className="text-[#131B22] text-lg font-bold">
               Create your Event
@@ -116,7 +116,7 @@ const CreateEvent = () => {
             )}
           </div>
 
-          <form onSubmit={handleSubmit} className="mt-3">
+          <form onSubmit={handleSubmit} className="mt-4">
             <div className="mb-2">
               <label
                 htmlFor="event name"
@@ -258,7 +258,7 @@ const CreateEvent = () => {
             </div>
 
             <div className="mt-4">
-              <button className="px-4 py-1 w-full bg-[#412234] text-white font-semibold rounded shadow-md">
+              <button className="px-4 py-2 w-full bg-[#412234] text-white font-semibold rounded shadow-md">
                 Continue
               </button>
             </div>
