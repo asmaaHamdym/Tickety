@@ -24,15 +24,15 @@ export const Card = ({
           </p>
           <div className="md:flex align-center pt-4 justify-between">
             <div className="md:flex align-center">
-              <img src={locationIcon} alt="location icon" className="w-8 h-8" />
-              <p className="p-2 text-blue-gray-800">{location}</p>
+              <img src={locationIcon} alt="location icon" className="w-6 h-6" />
+              <p className="ml-2 text-blue-gray-800">{location}</p>
             </div>
             <div className="md:font-bold border-2 rounded-lg md:p-4 py-1 text-center">
               <p className="">{time}</p>
               <p className="">{date}</p>
             </div>
           </div>
-          <p className="text-blue-900 font-semibold border border-purple-700 rounded-md py-3 px-8 inline-block my-4">
+          <p className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block">
             {rsvps} RSVP
           </p>
         </div>
