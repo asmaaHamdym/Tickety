@@ -1,7 +1,7 @@
 import tickety from "../assets/tickety.png";
 import googleImg from "../assets/google.png";
 import togglePassword from "../assets/tooglePassword.png";
-
+import eventImage from "../assets/events-image.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
@@ -71,7 +71,7 @@ export const LogIn = () => {
   return (
     <div>
       <div className="flex w-full">
-        <div className="bg-[url('https://i.ibb.co/w0cTWsr/login.jpg')]  bg-no-repeat w-1/3 h-screen bg-center bg-cover">
+        <div className="w-1/3 hidden md:block h-screen  bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
           <img
             src={tickety}
             alt="Logo Icon"
@@ -79,7 +79,7 @@ export const LogIn = () => {
             onClick={() => navigate("/")}
           ></img>
         </div>
-        <div className="w-[65%] px-8  ">
+        <div className="md:w-[65%] w-full py-6 px-8">
           <form className="mt-3" onSubmit={handleSubmit}>
             <div className="py-6 ">
               <h1 className="text-[#131B22] text-lg font-bold">

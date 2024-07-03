@@ -10,7 +10,7 @@ import EventSuccess from "./EventSuccess";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import tickety from "../assets/tickety.png";
+
 
 const CreateEvent = () => {
   const [fileName, setFileName] = useState("");
@@ -73,7 +73,7 @@ const CreateEvent = () => {
           ></img> */}
         </div>
 
-        <div className="md:w-[65%] w-full py-6  px-3">
+        <div className="md:w-[65%] w-full py-6 px-3">
           <div>
             <h2 className="text-[#131B22] text-lg font-bold">
               Create your Event
