@@ -36,8 +36,6 @@ const ManageEvent = () => {
     RSVP:'50'
   });
   
-  
-  
   const inputRef = useRef(null);
 
   const handleFileChange = (event) => {

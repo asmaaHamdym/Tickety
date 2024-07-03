@@ -2,6 +2,7 @@ import tickety from "../assets/tickety.png";
 import togglePassword from "../assets/tooglePassword.png";
 import googleImg from "../assets/google.png";
 import eventImage from "../assets/events-image.png";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
@@ -77,12 +78,15 @@ export const CreateAccount = () => {
     <div>
       <div className="flex">
         <div className="w-1/3 hidden md:block h-screen  bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
-          <img
-            src={tickety}
-            alt="Logo Icon"
-            className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
-            onClick={() => navigate("/")}
-          ></img>
+          <div className="flex">
+              <Link to="/login"><FaArrowAltCircleLeft className='arrow-icon mt-8 ml-8 cursor-pointer' fill="white" size={45}/></Link>
+              <img
+                src={tickety}
+                alt="Logo Icon"
+                className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
+                onClick={() => navigate("/")}
+            > </img>
+          </div>
         </div>
         <div className="md:w-[65%] w-full py-6 px-8">
           <form className="mt-3" onSubmit={handleSubmit}>
