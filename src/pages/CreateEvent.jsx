@@ -7,10 +7,6 @@ import uploadImage from "../assets/upload.png";
 import Input from "../components/Input";
 import { createEvent } from "../api/CreateEvent";
 import EventSuccess from "./EventSuccess";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
-
 
 const CreateEvent = () => {
   const [fileName, setFileName] = useState("");
@@ -24,7 +20,10 @@ const CreateEvent = () => {
     RSVP: "",
   });
   const inputRef = useRef(null);
-  const navigate = useNavigate();
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false)
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -53,9 +52,7 @@ const CreateEvent = () => {
     } catch (error) {
       console.error("An error occurred:", error);
     }
-    toast(<EventSuccess />, {
-      position: "top-center",
-    });
+    openModal()
   };
 
   return (
@@ -63,7 +60,7 @@ const CreateEvent = () => {
       <Navbar />
       {/* <div className="bg-[#ECE9EB] h-screen w-full rounded-lg items-center mx-auto container justify-center"> */}
       <div className="flex w-full">
-        <ToastContainer />
+        <EventSuccess isOpen={isModalOpen} closeModal={closeModal}/>
         <div className="hidden md:block w-1/3 bg-center bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
           {/* <img
             src={tickety}
@@ -95,7 +92,7 @@ const CreateEvent = () => {
                 type="file"
                 ref={inputRef}
                 onChange={handleFileChange}
-                accept=".jpg .jpeg .png"
+                // accept=".jpg .jpeg .png"
               />
               <button
                 className="bg-white border-[#806B77] border-2 p-5 rounded-lg"
