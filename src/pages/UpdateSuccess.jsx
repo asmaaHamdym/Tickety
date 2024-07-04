@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import checkIcon from '../assets/check-icon.png'
 import { Link } from 'react-router-dom';
 
 
-const UpdateSuccess = () => {
+const UpdateSuccess = ({ isOpen, closeModal }) => {
   if (!isOpen) return null;
   
   useEffect(() => {
