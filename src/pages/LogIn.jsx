@@ -78,7 +78,8 @@ export const LogIn = () => {
               src={tickety}
               alt="Logo Icon"
               className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
-              onClick={() => navigate("/")}/>
+              onClick={() => navigate("/")}
+            />
           </div>
           
         </div>
