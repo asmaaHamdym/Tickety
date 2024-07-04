@@ -77,15 +77,14 @@ export const CreateAccount = () => {
   return (
     <div>
       <div className="flex">
-        <div className="w-1/3 hidden md:block h-screen  bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
+        <div className="w-1/3 hidden md:block h-screen bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
           <div className="flex">
               <Link to="/login"><FaArrowAltCircleLeft className='arrow-icon mt-8 ml-8 cursor-pointer' fill="white" size={45}/></Link>
               <img
                 src={tickety}
                 alt="Logo Icon"
                 className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
-                onClick={() => navigate("/")}
-            > </img>
+                onClick={() => navigate("/")}/>
           </div>
         </div>
         <div className="md:w-[65%] w-full py-6 px-8">
