@@ -37,6 +37,11 @@ const ManageEvent = () => {
   });
   
   const inputRef = useRef(null);
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false)
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -62,9 +67,7 @@ const ManageEvent = () => {
     } catch (error) {
       console.error('An error occurred:', error);
     }
-    toast(<UpdateSuccess/> , {
-      position: "top-center"
-    })
+    openModal()
    
   };
 
@@ -147,7 +150,6 @@ const ManageEvent = () => {
                 <div className="mb-2">
                   <label htmlFor="location" className="block text-[#212D3A] text-sm mb-1 font-medium">Location</label>
                   <ReactFlagsSelect selected={formData.location} onSelect={handleSelect} name="location" id='location' className="bg-[#eaecee] border-2" placeholder="Enter location"/>
-                  {/* <input type="text" id="location" name="location" className="mt-1 px-3 py-2 bg-white border shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]"/>   */}
                 </div>
 
                 <div className="mb-2">

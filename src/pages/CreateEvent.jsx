@@ -23,7 +23,7 @@ const CreateEvent = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false)
+  const closeModal = () => setModalOpen(false);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];

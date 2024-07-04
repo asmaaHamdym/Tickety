@@ -1,11 +1,10 @@
+import { useState, useEffect, useRef } from "react";
 import tickety from "../assets/tickety.png";
 import googleImg from "../assets/google.png";
 import togglePassword from "../assets/tooglePassword.png";
 import eventImage from "../assets/events-image.png";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { CheckLogin } from "../api/requests.js";
 
 export const LogIn = () => {
@@ -74,7 +73,7 @@ export const LogIn = () => {
       <div className="flex w-full">
         <div className="w-1/3 hidden md:block h-screen  bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
           <div className="flex">
-            <Link to="/"><FaArrowAltCircleLeft className='arrow-icon mt-8 ml-8 cursor-pointer' fill="white" size={45}/></Link>
+            <NavLink to="/"><FaArrowAltCircleLeft className='arrow-icon mt-8 ml-8 cursor-pointer' fill="white" size={45}/></NavLink>
             <img
               src={tickety}
               alt="Logo Icon"
