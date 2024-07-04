@@ -9,12 +9,12 @@ const Footer = () => {
             <div className="w-24 pb-4">
               <img src={tickety} alt="Logo Icon"></img>
             </div>
-            <p className="max-w-xs font-raleway font-lg text-base leading-5 pb-4">
+            <p className="max-w-xs font-raleway font-lg text-base md:leading-5 pb-4">
               Tickety is an e booking app that aims to make organizing events
               easy and streamlined for organizers and event attendees.
             </p>
             <h1 className="text-2xl font-bold py-4">Follow us on</h1>
-            <div className="flex gab-4 justify-between pb-8">
+            <div className="flex justify-evenly md:justify-between pb-8">
               <a href="https://www.instagram.com/" target="_blanke">
                 <svg
                   width="24"
@@ -81,22 +81,22 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <div className="flex flex-col">
-            <h1 className="text-3xl font-bold pb-8">Home</h1>
+          <div className="flex flex-col px-2">
+            <h1 className="md:text-3xl font-bold pb-8">Home</h1>
             <h4 className="pb-6">Gallery</h4>
             <h4 className="pb-6">Blog post</h4>
             <h4 className="pb-6">About us</h4>
             <h4 className="pb-6">FAQ</h4>
           </div>
           <div className="flex flex-col">
-            <h1 className="text-3xl font-bold pb-8">Services</h1>
+            <h1 className="md:text-3xl font-bold pb-8">Services</h1>
             <h4 className="pb-6">Event Managment</h4>
             <h4 className="pb-6">Event planning</h4>
             <h4 className="pb-6">Analytics</h4>
             <h4 className="pb-6">Feedback & surveys</h4>
           </div>
           <div className="flex flex-col">
-            <h1 className="text-3xl font-bold pb-8">Events</h1>
+            <h1 className="md:text-3xl font-bold pb-8">Events</h1>
             <h4 className="pb-6">Corporate</h4>
             <h4 className="pb-6">Entertainment</h4>
             <h4 className="pb-6">Reunions</h4>
@@ -152,7 +152,7 @@ const Footer = () => {
                   fill="white"
                 />
               </svg>
-              <h4 className="item">213 St Louis Avenue, USA</h4>
+              <h4 className="item mb-4">213 St Louis Avenue, USA</h4>
             </div>
           </div>
         </div>

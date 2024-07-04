@@ -100,9 +100,9 @@ const ManageEvent = () => {
         <div className='md:w-3/4 w-full items-center mx-auto'>
           <div className=''>
 
-            <div className='py-6 px-12'>
+            <div className='py-6 md:px-12 px-6'>
 
-              <div className='mt-6 mb-2'>
+              <div className='md:mt-6 mb-2'>
                 <p className='mb-1 text-[#212D3A] text-sm'>Upload event image</p>
 
                 <div className='p-10 flex justify-center bg-cover bg-center' style={{ backgroundImage: `url(${uploadImage})`}}>
