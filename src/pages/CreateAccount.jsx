@@ -22,9 +22,6 @@ export const CreateAccount = () => {
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
   const navigate = useNavigate();
-  useEffect(() => {
-    CheckSignup(formData);
-  }, [fromValidated]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -49,12 +46,13 @@ export const CreateAccount = () => {
       [field]: `${field} is required`,
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     const emailRegex = new RegExp(
       `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
     );
 
-    e.preventDefault();
     for (const [key, value] of Object.entries(formData)) {
       if (!value) {
         validateForm(key);
@@ -71,7 +69,14 @@ export const CreateAccount = () => {
     }
     console.log(formData);
     setFromValidated(true);
-    navigate("/create-event");
+
+    const result = await CheckSignup(formData)
+    if (result === "success") {
+      alert("success")
+      // navigate("/create-event")/;
+    } else {
+      alert("error")
+    }
   };
 
   return (
@@ -79,7 +84,7 @@ export const CreateAccount = () => {
       <div className="flex">
         <div className="w-1/3 hidden md:block h-screen bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
           <div className="flex">
-              <Link to="/login"><FaArrowAltCircleLeft className='arrow-icon mt-8 ml-8 cursor-pointer' fill="white" size={45}/></Link>
+              <Link onClick={() => navigate(-1)}><FaArrowAltCircleLeft className='arrow-icon mt-8 ml-8 cursor-pointer' fill="white" size={45}/></Link>
               <img
                 src={tickety}
                 alt="Logo Icon"

@@ -1,12 +1,14 @@
 import { useState, useRef } from "react";
 import ReactFlagsSelect from "react-flags-select";
+import tickety from "../assets/tickety.png";
 import { RiUploadCloudFill } from "react-icons/ri";
-import Navbar from "./Navbar";
 import eventImage from "../assets/events-image.png";
 import uploadImage from "../assets/upload.png";
 import Input from "../components/Input";
 import { createEvent } from "../api/CreateEvent";
 import EventSuccess from "./EventSuccess";
+import { Link, useNavigate } from "react-router-dom";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 const CreateEvent = () => {
   const [fileName, setFileName] = useState("");
@@ -20,6 +22,7 @@ const CreateEvent = () => {
     RSVP: "",
   });
   const inputRef = useRef(null);
+  const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
 
   const openModal = () => setModalOpen(true);
@@ -57,17 +60,20 @@ const CreateEvent = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       {/* <div className="bg-[#ECE9EB] h-screen w-full rounded-lg items-center mx-auto container justify-center"> */}
       <div className="flex w-full">
         <EventSuccess isOpen={isModalOpen} closeModal={closeModal}/>
         <div className="hidden md:block w-1/3 bg-center bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
-          {/* <img
-            src={tickety}
-            alt="Logo Icon"
-            className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
-            onClick={() => navigate("/")}
-          /> */}
+          <div className="flex">
+            <Link onClick={() => navigate(-1)}><FaArrowAltCircleLeft className='arrow-icon mt-8 ml-8 cursor-pointer' fill="white" size={45}/></Link>
+            <img
+              src={tickety}
+              alt="Logo Icon"
+              className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
+              onClick={() => navigate("/")}
+            />
+          </div>
         </div>
 
         <div className="md:w-[65%] w-full py-6 px-3">
@@ -81,7 +87,7 @@ const CreateEvent = () => {
           </div>
 
           <div className="mt-6 mb-2">
-            <p className="mb-1 text-[#212D3A] text-sm">Upload event image</p>
+            <p className="mb-1 text-[#212D3A] text-base">Upload event image</p>
 
             <div
               className="p-10 flex justify-center bg-cover bg-center"

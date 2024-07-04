@@ -1,4 +1,4 @@
-const url = "https://event-management-app-z5bk.onrender.com";
+const api = import.meta.env.VITE_APP_API_URL;
 
 export const CheckLogin = async (formData) => {
   try {
@@ -19,9 +19,10 @@ export const CheckLogin = async (formData) => {
     return error;
   }
 };
+
 export const CheckSignup = async (formData) => {
   try {
-    const response = fetch(`${url}/auth/register`, {
+    const response = await fetch(`${url}/auth/register`, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
@@ -29,7 +30,7 @@ export const CheckSignup = async (formData) => {
       },
     });
 
-    if ((await response).status === 200) {
+    if (response.status === 200) {
       return "success";
     }
 
