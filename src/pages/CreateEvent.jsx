@@ -67,7 +67,7 @@ const CreateEvent = () => {
             alt="Logo Icon"
             className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
             onClick={() => navigate("/")}
-          ></img> */}
+          /> */}
         </div>
 
         <div className="md:w-[65%] w-full py-6 px-3">
@@ -100,7 +100,7 @@ const CreateEvent = () => {
               >
                 <RiUploadCloudFill className="mx-auto upload-icon" size={20} />
                 <p className="text-[#412234] flex justify-center text-sm font-semibold">
-                  Upload Photos <br></br>and Video
+                  Upload Photos <br/>and Video
                 </p>
               </button>
             </div>

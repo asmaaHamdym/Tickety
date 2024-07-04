@@ -18,7 +18,7 @@ const Navbar = () => {
           className="hover:cursor-pointer"
           alt="Logo Icon"
           onClick={() => navigate("/")}
-        ></img>
+        />
       </div>
 
       {/* Desktop Menu */}

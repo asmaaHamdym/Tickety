@@ -15,7 +15,7 @@ const AboutUs = () => {
           </h3>
           <p className="text-sm text-[#586675] mb-10">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste
-            quaerat, quisquam labore minima excepturi, <br></br>ducimus earum
+            quaerat, quisquam labore minima excepturi, <br/>ducimus earum
             maxime consectetur, enim unde nesciunt.{" "}
           </p>
         </div>
@@ -32,14 +32,14 @@ const AboutUs = () => {
           <div className="mt-4 px-10">
             <div className="flex gap-10 border border-[#BDD9BF] rounded-md p-4 mb-10">
               <div>
-                <img src={noteIcon} alt="Note Icon" className="mt-2"></img>
+                <img src={noteIcon} alt="Note Icon" className="mt-2"/>
               </div>
               <div>
                 <p className="text-sm text-[#212D3A] font-semibold">
                   Create your personal event
                 </p>
                 <p className="text-sm text-[#586675] px-18">
-                  Organize a seamlesss experience for your customers <br></br>at
+                  Organize a seamlesss experience for your customers <br/>at
                   your event like never before.
                 </p>
               </div>
@@ -54,7 +54,7 @@ const AboutUs = () => {
                   Reach more Audience
                 </p>
                 <p className="text-sm text-[#586675] px-18">
-                  Reach new customersand get more audience <br></br>to
+                  Reach new customersand get more audience <br/>to
                   participate at your event.
                 </p>
               </div>
@@ -62,14 +62,14 @@ const AboutUs = () => {
 
             <div className="flex gap-10 border border-[#BDD9BF] rounded-md p-4 mb-20">
               <div>
-                <img src={ticketIcon} alt="Ticket Icon" className="mt-2"></img>
+                <img src={ticketIcon} alt="Ticket Icon" className="mt-2"/>
               </div>
               <div>
                 <p className="text-sm text-[#212D3A] font-semibold">
                   Book a Ticket
                 </p>
                 <p className="text-sm text-[#586675] px-18">
-                  Get a ticket and RSVP for your favourite event<br></br>with
+                  Get a ticket and RSVP for your favourite event<br/>with
                   ease.
                 </p>
               </div>

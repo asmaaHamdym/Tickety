@@ -114,7 +114,7 @@ const ManageEvent = () => {
                   <input style={{ display: 'none' }} type="file" ref= {inputRef} onChange={handleFileChange} accept =".jpg .jpeg .png"/>
                   <button className='bg-white border-[#806B77] border-2 p-5 rounded-lg' onClick={() => inputRef.current.click()}>
                     <RiUploadCloudFill className='mx-auto upload-icon' size={20} />
-                    <p className='text-[#412234] flex justify-center text-sm font-semibold'>Upload Photos <br></br>and Video</p>
+                    <p className='text-[#412234] flex justify-center text-sm font-semibold'>Upload Photos <br/>and Video</p>
                   </button>
                 </div>
                 {fileName && (

@@ -28,10 +28,10 @@ export const HomePage = () => {
             <div className="text-white md:py-8 py-20">
               <div className="md:mb-28 mb-4 text-center md:text-left">
                 <h1 className="md:text-6xl text-5xl font-bold mb-6">
-                  Let's help you create a <br></br>Memorable event
+                  Let's help you create a <br/>Memorable event
                 </h1>
                 <p className="text-xl leading-8">
-                  Experience seamless planning and extraordinary<br></br>{" "}
+                  Experience seamless planning and extraordinary<br/>{" "}
                   celebrations with our expert event management team
                 </p>
               </div>
@@ -53,7 +53,7 @@ export const HomePage = () => {
               </h3>
               <p className="text-sm text-[#586675] mb-10">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste
-                quaerat, quisquam labore minima excepturi, <br></br>ducimus
+                quaerat, quisquam labore minima excepturi, <br/>ducimus
                 earum maxime consectetur, enim unde nesciunt.{" "}
               </p>
             </div>
@@ -70,7 +70,7 @@ export const HomePage = () => {
               <div className="mt-4 px-10">
                 <div className="flex gap-10 border border-[#BDD9BF] rounded-md p-4 mb-10">
                   <div>
-                    <img src={noteIcon} alt="Note Icon" className="mt-2"></img>
+                    <img src={noteIcon} alt="Note Icon" className="mt-2"/>
                   </div>
                   <div>
                     <p className="text-sm text-[#212D3A] font-semibold">
@@ -78,7 +78,7 @@ export const HomePage = () => {
                     </p>
                     <p className="text-sm text-[#586675] px-18">
                       Organize a seamlesss experience for your customers{" "}
-                      <br></br>at your event like never before.
+                      <br/>at your event like never before.
                     </p>
                   </div>
                 </div>
@@ -92,7 +92,7 @@ export const HomePage = () => {
                       Reach more Audience
                     </p>
                     <p className="text-sm text-[#586675] px-18">
-                      Reach new customersand get more audience <br></br>to
+                      Reach new customersand get more audience <br/>to
                       participate at your event.
                     </p>
                   </div>
@@ -104,14 +104,14 @@ export const HomePage = () => {
                       src={ticketIcon}
                       alt="Ticket Icon"
                       className="mt-2"
-                    ></img>
+                    />
                   </div>
                   <div>
                     <p className="text-sm text-[#212D3A] font-semibold">
                       Book a Ticket
                     </p>
                     <p className="text-sm text-[#586675] px-18">
-                      Get a ticket and RSVP for your favourite event<br></br>
+                      Get a ticket and RSVP for your favourite event<br/>
                       with ease.
                     </p>
                   </div>
