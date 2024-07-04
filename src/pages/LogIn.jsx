@@ -19,6 +19,7 @@ export const LogIn = () => {
   const [fromValidated, setFromValidated] = useState(false);
   const passwordRef = useRef(null);
   const navigate = useNavigate();
+  
   useEffect(() => {
     CheckLogin(formData);
   }, [formData, fromValidated]);

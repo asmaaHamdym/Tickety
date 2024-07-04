@@ -3,10 +3,15 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import tickety from "../assets/tickety-red.png";
 import { Link } from "react-router-dom";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../store/auth-context";
+import DropDown from "../components/DropDown";
+import Avatar from "../components/Avatar";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const navigate = useNavigate();
+
+  const {user} = useAuthContext();
 
   const handleClick = () => setNav(!nav);
 
@@ -41,12 +46,20 @@ const Navbar = () => {
           <button className='px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'> Contact Us</button>
         </div>
        */}
-
-        <div>
-          <button className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
-            <Link to="/login">Create your next Event</Link>
-          </button>
-        </div>
+       
+        {user ? (
+          <>
+            <DropDown/>
+            <Avatar/>
+          </>
+        ):(
+          <div>
+            <button className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
+              <Link to="/login">Login</Link>
+            </button>
+          </div>
+        )}
+          
       </div>
 
       {/* Hamburger Menu */}
