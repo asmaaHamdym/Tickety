@@ -21,7 +21,7 @@ export const CreateAccount = () => {
     terms: "",
   });
   const [fromValidated, setFromValidated] = useState(false);
-  const [isTermsChecked, setIsTermsChecked] = useState();
+  const [isTermsChecked, setIsTermsChecked] = useState(false);
 
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
@@ -82,6 +82,7 @@ export const CreateAccount = () => {
         ...errors,
         terms: "You must accept the terms and conditions",
       });
+      return;
     }
 
     setFromValidated(true);
@@ -243,10 +244,8 @@ export const CreateAccount = () => {
                   className="rounded-md text-[#412234]"
                   id="checkbox"
                   required
-                  onChange={(e) => {
-                    setIsTermsChecked(e.target.checked);
-                    console.log(e.target.checked);
-                    console.log(isTermsChecked);
+                  onChange={() => {
+                    setIsTermsChecked(!isTermsChecked);
                   }}
                 />
                 <label htmlFor="checkbox" className="pl-3 s">
@@ -256,9 +255,7 @@ export const CreateAccount = () => {
                   <span className="font-semibold"> Privacy Policy</span>
                 </label>
 
-                <div className="text-[#E33629]">
-                  Please accept the terms and conditions
-                </div>
+                <div className="text-[#E33629]">{errors.terms} </div>
               </div>
             </div>
 
