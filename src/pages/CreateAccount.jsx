@@ -10,11 +10,12 @@ import { CheckSignup } from "../api/requests.js";
 
 export const CreateAccount = () => {
   const [formData, setFormData] = useState({
-    full_name: "",
+    name: "",
     email: "",
     password: "",
   });
   const [errors, setErrors] = useState({
+    name: "",
     email: "",
     password: "",
   });
@@ -48,7 +49,6 @@ export const CreateAccount = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const emailRegex = new RegExp(
       `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
     );
@@ -67,29 +67,41 @@ export const CreateAccount = () => {
         }
       }
     }
-    console.log(formData);
-    setFromValidated(true);
 
-    const result = await CheckSignup(formData)
-    if (result === "success") {
-      alert("success")
-      // navigate("/create-event")/;
-    } else {
-      alert("error")
+    setFromValidated(true);
+    if (fromValidated) {
+      const result = await CheckSignup(formData);
+      console.log(result);
+      if (result === "success") {
+        alert("success");
+        // navigate("/create-event")/;
+      } else {
+        alert("error");
+      }
     }
   };
 
   return (
     <div>
       <div className="flex">
-        <div className="w-1/3 hidden md:block h-screen bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
+        <div
+          className="w-1/3 hidden md:block h-screen bg-cover"
+          style={{ backgroundImage: `url(${eventImage})` }}
+        >
           <div className="flex">
-              <Link onClick={() => navigate(-1)}><FaArrowAltCircleLeft className='arrow-icon mt-8 ml-8 cursor-pointer' fill="white" size={45}/></Link>
-              <img
-                src={tickety}
-                alt="Logo Icon"
-                className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
-                onClick={() => navigate("/")}/>
+            <Link onClick={() => navigate(-1)}>
+              <FaArrowAltCircleLeft
+                className="arrow-icon mt-8 ml-8 cursor-pointer"
+                fill="white"
+                size={45}
+              />
+            </Link>
+            <img
+              src={tickety}
+              alt="Logo Icon"
+              className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
+              onClick={() => navigate("/")}
+            />
           </div>
         </div>
         <div className="md:w-[65%] w-full py-6 px-8">
@@ -114,7 +126,7 @@ export const CreateAccount = () => {
                 type="text"
                 placeholder="Enter your full name"
                 onChange={handleChange}
-                id="full_name"
+                id="name"
                 name="name"
                 value={formData.name}
                 className="border-2 p-4 w-full rounded-md"
@@ -172,7 +184,6 @@ export const CreateAccount = () => {
                 />
               </button>
             </div>
-
             <span className="text-[#E33629]">{errors.password}</span>
             <label
               htmlFor="confirmPassword"
@@ -216,6 +227,7 @@ export const CreateAccount = () => {
                   type="checkbox"
                   className="rounded-md text-[#412234]"
                   id="checkbox"
+                  required
                 />
                 <label htmlFor="checkbox" className="pl-3 s">
                   By checking this box, you agree to the{" "}
@@ -229,6 +241,7 @@ export const CreateAccount = () => {
             <button
               type="submit"
               className="mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center"
+              onClick={handleSubmit}
             >
               Create an Account
             </button>
