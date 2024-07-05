@@ -10,7 +10,7 @@ import { CheckSignup } from "../api/requests.js";
 
 export const CreateAccount = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    full_name: "",
     email: "",
     password: "",
   });
@@ -26,7 +26,6 @@ export const CreateAccount = () => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    console.log(formData);
 
     setFormData({
       ...formData,
@@ -71,12 +70,11 @@ export const CreateAccount = () => {
     setFromValidated(true);
     if (fromValidated) {
       const result = await CheckSignup(formData);
-      console.log(result);
+
       if (result === "success") {
-        alert("success");
-        // navigate("/create-event")/;
+        navigate("/login");
       } else {
-        alert("error");
+        console.log("error");
       }
     }
   };
@@ -126,9 +124,9 @@ export const CreateAccount = () => {
                 type="text"
                 placeholder="Enter your full name"
                 onChange={handleChange}
-                id="name"
-                name="name"
-                value={formData.name}
+                id="full_name"
+                name="full_name"
+                value={formData.full_name}
                 className="border-2 p-4 w-full rounded-md"
               />
               <span className="text-[#E33629]">{errors.name}</span>

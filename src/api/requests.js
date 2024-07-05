@@ -2,12 +2,13 @@ const apiURL = import.meta.env.VITE_APP_API_URL;
 
 export const CheckLogin = async (formData) => {
   try {
-    const response = fetch(`${apiURL}/auth/login`, {
+    console.log(formData);
+    const response = fetch(`${apiURL}auth/login`, {
       method: "POST",
       body: JSON.stringify(formData),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
+      // headers: {
+      //   "Content-type": "application/json; charset=UTF-8",
+      // },
     });
 
     if ((await response).status === 200) {
@@ -22,7 +23,7 @@ export const CheckLogin = async (formData) => {
 
 export const CheckSignup = async (formData) => {
   try {
-    const response = await fetch(`${apiURL}/auth/register`, {
+    const response = await fetch(`${apiURL}auth/register`, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
