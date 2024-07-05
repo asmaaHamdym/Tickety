@@ -4,7 +4,7 @@ import googleImg from "../assets/google.png";
 import eventImage from "../assets/events-image.png";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CheckSignup } from "../api/requests.js";
 
@@ -18,10 +18,12 @@ export const CreateAccount = () => {
     name: "",
     email: "",
     password: "",
+    termsChecked: "",
   });
   const [fromValidated, setFromValidated] = useState(false);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
+  const termsCheckRef = useRef(null);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -66,6 +68,13 @@ export const CreateAccount = () => {
         }
       }
     }
+    if (formData.password !== formData.confirmPassword) { 
+      setErrors({
+        ...errors,
+        confirmPassword: "Password does not match",
+        });
+        return;
+    
 
     setFromValidated(true);
     if (fromValidated) {
@@ -226,6 +235,7 @@ export const CreateAccount = () => {
                   className="rounded-md text-[#412234]"
                   id="checkbox"
                   required
+                  ref={termsCheckRef}
                 />
                 <label htmlFor="checkbox" className="pl-3 s">
                   By checking this box, you agree to the{" "}
@@ -233,6 +243,10 @@ export const CreateAccount = () => {
                   and
                   <span className="font-semibold"> Privacy Policy</span>
                 </label>
+
+                <span className="text-[#E33629]">
+                  Please accept the terms and conditions
+                </span>
               </div>
             </div>
 
