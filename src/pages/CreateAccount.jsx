@@ -18,12 +18,14 @@ export const CreateAccount = () => {
     name: "",
     email: "",
     password: "",
-    termsChecked: "",
+    terms: "",
   });
   const [fromValidated, setFromValidated] = useState(false);
+  const [isTermsChecked, setIsTermsChecked] = useState();
+
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
-  const termsCheckRef = useRef(null);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -68,13 +70,19 @@ export const CreateAccount = () => {
         }
       }
     }
-    if (formData.password !== formData.confirmPassword) { 
+    // if (formData.password !== formData.confirmPassword) {
+    //   setErrors({
+    //     ...errors,
+    //     confirmPassword: "Password does not match",
+    //   });
+    //   return;
+    // }
+    if (!isTermsChecked) {
       setErrors({
         ...errors,
-        confirmPassword: "Password does not match",
-        });
-        return;
-    
+        terms: "You must accept the terms and conditions",
+      });
+    }
 
     setFromValidated(true);
     if (fromValidated) {
@@ -235,7 +243,11 @@ export const CreateAccount = () => {
                   className="rounded-md text-[#412234]"
                   id="checkbox"
                   required
-                  ref={termsCheckRef}
+                  onChange={(e) => {
+                    setIsTermsChecked(e.target.checked);
+                    console.log(e.target.checked);
+                    console.log(isTermsChecked);
+                  }}
                 />
                 <label htmlFor="checkbox" className="pl-3 s">
                   By checking this box, you agree to the{" "}
@@ -244,9 +256,9 @@ export const CreateAccount = () => {
                   <span className="font-semibold"> Privacy Policy</span>
                 </label>
 
-                <span className="text-[#E33629]">
+                <div className="text-[#E33629]">
                   Please accept the terms and conditions
-                </span>
+                </div>
               </div>
             </div>
 
