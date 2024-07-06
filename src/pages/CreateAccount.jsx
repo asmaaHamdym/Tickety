@@ -87,6 +87,16 @@ export const CreateAccount = () => {
       return;
     }
 
+    // if (fromValidated) {
+    //   const result = await CheckSignup(formData);
+
+    //   if (result === "success") {
+    //     navigate("/login");
+    //   } else {
+    //     console.log("error");
+    //   }
+    // }
+    
     const result = await CheckSignup(formData)
     console.log("result", result)
     if (result?.isSuccess) {
@@ -94,16 +104,9 @@ export const CreateAccount = () => {
       // navigate("/create-event")/;
     } else {
       alert("error")
-    setFromValidated(true);
-    if (fromValidated) {
-      const result = await CheckSignup(formData);
-
-      if (result === "success") {
-        navigate("/login");
-      } else {
-        console.log("error");
-      }
+      setFromValidated(true);
     }
+    
   };
 
   return (
@@ -298,4 +301,5 @@ export const CreateAccount = () => {
       </div>
     </div>
   );
-};
+}
+

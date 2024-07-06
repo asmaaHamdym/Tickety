@@ -36,12 +36,14 @@ export const LogIn = () => {
       }
     }
   };
+
   const validateForm = (field) => {
     setErrors({
       ...errors,
       [field]: `${field} is required`,
     });
   };
+
   const handleSubmit = async (e) => {
     const emailRegex = new RegExp(
       `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
@@ -63,6 +65,11 @@ export const LogIn = () => {
       }
     }
     setFromValidated(true);
+    
+    // if (fromValidated) {
+    //   let res = CheckLogin(formData);
+    //   console.log(res);
+    // }
     // navigate("/create-event");
 
     const result = await CheckLogin(formData)
@@ -73,11 +80,7 @@ export const LogIn = () => {
     } else {
       alert("error")
     }
-    if (fromValidated) {
-      let res = CheckLogin(formData);
-      console.log(res);
-    }
-    navigate("/create-event");
+    
   };
   return (
     <div>
@@ -196,7 +199,7 @@ export const LogIn = () => {
           </form>
           <div className="flex justify-center">
             <p>
-              Don’t have an account?
+              Don&apos;t have an account?
               <Link to="/create-account" className="ml-2 font-semibold">
                 Create an account
               </Link>
