@@ -73,13 +73,27 @@ export const LogIn = () => {
     } else {
       alert("error")
     }
+    if (fromValidated) {
+      let res = CheckLogin(formData);
+      console.log(res);
+    }
+    navigate("/create-event");
   };
   return (
     <div>
       <div className="flex w-full">
-        <div className="w-1/3 hidden md:block h-screen bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
+        <div
+          className="w-1/3 hidden md:block h-screen bg-cover"
+          style={{ backgroundImage: `url(${eventImage})` }}
+        >
           <div className="flex">
-            <Link onClick={() => navigate(-1)}><FaArrowAltCircleLeft className='arrow-icon mt-8 ml-8 cursor-pointer' fill="white" size={45}/></Link>
+            <Link onClick={() => navigate(-1)}>
+              <FaArrowAltCircleLeft
+                className="arrow-icon mt-8 ml-8 cursor-pointer"
+                fill="white"
+                size={45}
+              />
+            </Link>
             <img
               src={tickety}
               alt="Logo Icon"
@@ -87,7 +101,6 @@ export const LogIn = () => {
               onClick={() => navigate("/")}
             />
           </div>
-          
         </div>
         <div className="md:w-[65%] w-full py-6 px-8">
           <form className="mt-3" onSubmit={handleSubmit}>

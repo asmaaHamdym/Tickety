@@ -4,7 +4,7 @@ import googleImg from "../assets/google.png";
 import eventImage from "../assets/events-image.png";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CheckSignup } from "../api/requests.js";
 
@@ -15,17 +15,21 @@ export const CreateAccount = () => {
     password: "",
   });
   const [errors, setErrors] = useState({
+    name: "",
     email: "",
     password: "",
+    terms: "",
   });
   const [fromValidated, setFromValidated] = useState(false);
+  const [isTermsChecked, setIsTermsChecked] = useState(false);
+
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    console.log(formData);
 
     setFormData({
       ...formData,
@@ -50,7 +54,6 @@ export const CreateAccount = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const emailRegex = new RegExp(
       `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
     );
@@ -69,8 +72,20 @@ export const CreateAccount = () => {
         }
       }
     }
-    console.log(formData);
-    setFromValidated(true);
+    // if (formData.password !== formData.confirmPassword) {
+    //   setErrors({
+    //     ...errors,
+    //     confirmPassword: "Password does not match",
+    //   });
+    //   return;
+    // }
+    if (!isTermsChecked) {
+      setErrors({
+        ...errors,
+        terms: "You must accept the terms and conditions",
+      });
+      return;
+    }
 
     const result = await CheckSignup(formData)
     console.log("result", result)
@@ -79,20 +94,39 @@ export const CreateAccount = () => {
       // navigate("/create-event")/;
     } else {
       alert("error")
+    setFromValidated(true);
+    if (fromValidated) {
+      const result = await CheckSignup(formData);
+
+      if (result === "success") {
+        navigate("/login");
+      } else {
+        console.log("error");
+      }
     }
   };
 
   return (
     <div>
       <div className="flex">
-        <div className="w-1/3 hidden md:block h-screen bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
+        <div
+          className="w-1/3 hidden md:block h-screen bg-cover"
+          style={{ backgroundImage: `url(${eventImage})` }}
+        >
           <div className="flex">
-              <Link onClick={() => navigate(-1)}><FaArrowAltCircleLeft className='arrow-icon mt-8 ml-8 cursor-pointer' fill="white" size={45}/></Link>
-              <img
-                src={tickety}
-                alt="Logo Icon"
-                className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
-                onClick={() => navigate("/")}/>
+            <Link onClick={() => navigate(-1)}>
+              <FaArrowAltCircleLeft
+                className="arrow-icon mt-8 ml-8 cursor-pointer"
+                fill="white"
+                size={45}
+              />
+            </Link>
+            <img
+              src={tickety}
+              alt="Logo Icon"
+              className="px-2 ml-8 mt-8 w-40 hover:cursor-pointer"
+              onClick={() => navigate("/")}
+            />
           </div>
         </div>
         <div className="md:w-[65%] w-full py-6 px-8">
@@ -118,8 +152,8 @@ export const CreateAccount = () => {
                 placeholder="Enter your full name"
                 onChange={handleChange}
                 id="full_name"
-                name="name"
-                value={formData.name}
+                name="full_name"
+                value={formData.full_name}
                 className="border-2 p-4 w-full rounded-md"
               />
               <span className="text-[#E33629]">{errors.name}</span>
@@ -175,7 +209,6 @@ export const CreateAccount = () => {
                 />
               </button>
             </div>
-
             <span className="text-[#E33629]">{errors.password}</span>
             <label
               htmlFor="confirmPassword"
@@ -219,6 +252,10 @@ export const CreateAccount = () => {
                   type="checkbox"
                   className="rounded-md text-[#412234]"
                   id="checkbox"
+                  required
+                  onChange={() => {
+                    setIsTermsChecked(!isTermsChecked);
+                  }}
                 />
                 <label htmlFor="checkbox" className="pl-3 s">
                   By checking this box, you agree to the{" "}
@@ -226,12 +263,15 @@ export const CreateAccount = () => {
                   and
                   <span className="font-semibold"> Privacy Policy</span>
                 </label>
+
+                <div className="text-[#E33629]">{errors.terms} </div>
               </div>
             </div>
 
             <button
               type="submit"
               className="mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center"
+              onClick={handleSubmit}
             >
               Create an Account
             </button>
