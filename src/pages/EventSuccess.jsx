@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 
 
 const EventSuccess = ({ isOpen, closeModal }) => {
-  if (!isOpen) return null;
+  if (!isOpen) return <></>;
   
   useEffect(() => {
     document.body.addEventListener("click", () => {
       closeModal()
     })
-  })
+  }, [])
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
       <div className="p-4 shadow-lg max-w-md w-full border-2 border-[#412234] bg-white mx-auto rounded-md text-center">

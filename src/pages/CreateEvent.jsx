@@ -60,7 +60,6 @@ const CreateEvent = () => {
 
   return (
     <>
-      {/* <Navbar /> */}
       {/* <div className="bg-[#ECE9EB] h-screen w-full rounded-lg items-center mx-auto container justify-center"> */}
       <div className="flex w-full">
         <EventSuccess isOpen={isModalOpen} closeModal={closeModal}/>

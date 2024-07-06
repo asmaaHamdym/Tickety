@@ -71,7 +71,8 @@ export const CreateAccount = () => {
     setFromValidated(true);
 
     const result = await CheckSignup(formData)
-    if (result === "success") {
+    console.log("result", result)
+    if (result?.isSuccess) {
       alert("success")
       // navigate("/create-event")/;
     } else {

@@ -37,7 +37,7 @@ export const HomePage = () => {
               </div>
 
               <div className="flex justify-center md:justify-start">
-                <button className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
+                <button className="p-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
                   <Link to="/login">Create your next Event</Link>
                 </button>
               </div>

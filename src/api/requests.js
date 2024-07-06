@@ -2,7 +2,7 @@ const api = import.meta.env.VITE_APP_API_URL;
 
 export const CheckLogin = async (formData) => {
   try {
-    const response = fetch(`${url}/auth/login`, {
+    const response = await fetch(`${api}/auth/login`, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
@@ -10,19 +10,30 @@ export const CheckLogin = async (formData) => {
       },
     });
 
-    if ((await response).status === 200) {
-      return "success";
+    const json = await response.json()
+
+    if (response.status === 200) {
+      return ({
+        isSuccess: true,
+        data: json.data
+      });
+
+      // return "success";
     }
 
-    return response;
+    // return response;
   } catch (error) {
-    return error;
+    return ({
+      isSuccess: false,
+      data: error
+    });
+    // return error;
   }
 };
 
 export const CheckSignup = async (formData) => {
   try {
-    const response = await fetch(`${url}/auth/register`, {
+    const response = await fetch(`${api}/auth/register`, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
@@ -30,15 +41,27 @@ export const CheckSignup = async (formData) => {
       },
     });
 
+    const json = await response.json()
+
     if (response.status === 200) {
-      return "success";
+      return ({
+        isSuccess: true,
+        data: json.data
+      });
+
+      // return response;
     }
 
-    return response;
+    
   } catch (error) {
-    return error;
+    return ({
+      isSuccess: false,
+      data: error
+    });
   }
 };
+
+
 export const getEvents = async () => {
   try {
     const response = await fetch(url, {});

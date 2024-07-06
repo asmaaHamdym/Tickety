@@ -19,10 +19,6 @@ export const LogIn = () => {
   const [fromValidated, setFromValidated] = useState(false);
   const passwordRef = useRef(null);
   const navigate = useNavigate();
-  
-  useEffect(() => {
-    CheckLogin(formData);
-  }, [formData, fromValidated]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -46,7 +42,7 @@ export const LogIn = () => {
       [field]: `${field} is required`,
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     const emailRegex = new RegExp(
       `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
     );
@@ -67,7 +63,16 @@ export const LogIn = () => {
       }
     }
     setFromValidated(true);
-    navigate("/create-event");
+    // navigate("/create-event");
+
+    const result = await CheckLogin(formData)
+    console.log("login result", result)
+    if (result?.isSuccess) {
+      alert("success")
+      // navigate("/create-event")/;
+    } else {
+      alert("error")
+    }
   };
   return (
     <div>
