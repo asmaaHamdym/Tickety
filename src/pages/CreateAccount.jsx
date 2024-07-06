@@ -40,12 +40,14 @@ export const CreateAccount = () => {
       }
     }
   };
+  
   const validateForm = (field) => {
     setErrors({
       ...errors,
       [field]: `${field} is required`,
     });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
