@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import Footer from "../components/Footer";
-import { getEvents } from "../api/requests.js";
+import { getEvents } from "../api/getEvents.js";
 import Navbar from "./Navbar.jsx";
 
 import eventImgOne from "../assets/events-img-one.png";
