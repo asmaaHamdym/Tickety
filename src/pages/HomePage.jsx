@@ -12,8 +12,11 @@ import ticketIcon from "../assets/ticket-icon.png";
 import eventImgOne from "../assets/events-img-one.png";
 import eventImgTwo from "../assets/events-img-two.png";
 import eventImgThree from "../assets/events-img-three.png";
+import { useAuthContext } from "../store/auth-context";
 
 export const HomePage = () => {
+  const { user } = useAuthContext();
+
   return (
     <>
       <div className="h-screen">
@@ -38,7 +41,7 @@ export const HomePage = () => {
 
               <div className="flex justify-center md:justify-start">
                 <button className="p-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
-                  <Link to="/login">Create your next Event</Link>
+                  <Link to={user ? "/create-event" : "/login"}>Create your next Event</Link>
                 </button>
               </div>
             </div>

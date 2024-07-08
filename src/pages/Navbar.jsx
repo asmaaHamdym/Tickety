@@ -42,36 +42,34 @@ const Navbar = () => {
       </nav>
       
       <div className="flex">
-        {/* <div className='mr-8'>
-          <button className='px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'> Contact Us</button>
+        <div className="flex">
+          {user ? (
+            <>
+              <Avatar imageUrl={""} name={user.full_name} />
+              <DropDown/>
+            </>
+          ):(
+            <div>
+              <button className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
+                <Link to="/login">Login</Link>
+              </button>
+            </div>
+          )}
+            
         </div>
-       */}
-       
-        {user ? (
-          <>
-            <Avatar imageUrl={""} name={user.full_name} />
-            <DropDown/>
-          </>
-        ):(
-          <div>
-            <button className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
-              <Link to="/login">Login</Link>
-            </button>
-          </div>
-        )}
-          
-      </div>
 
-      {/* Hamburger Menu */}
-      <div
-        onClick={handleClick}
-        className="md:hidden z-10 px-2 cursor-pointer pr-8"
-      >
-        {!nav ? (
-          <FaBars size={35} className="arrow-icon" />
-        ) : (
-          <FaTimes size={35} />
-        )}
+        {/* Hamburger Menu */}
+        <div
+          onClick={handleClick}
+          className="md:hidden z-10 px-2 cursor-pointer pr-8"
+        >
+          {!nav ? (
+            <FaBars size={35} className="arrow-icon" />
+          ) : (
+            <FaTimes size={35} />
+          )}
+        </div>
+
       </div>
 
       {/* Hamburger Menu Items */}
