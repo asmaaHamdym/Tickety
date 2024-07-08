@@ -6,7 +6,9 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { CheckSignup } from "../api/requests.js";
+import axios from "axios";
+
+const api = import.meta.env.VITE_APP_API_URL;
 
 export const CreateAccount = () => {
   const [formData, setFormData] = useState({
@@ -16,14 +18,17 @@ export const CreateAccount = () => {
   });
   
   const [errors, setErrors] = useState({
-    name: "",
+    full_name: "",
     email: "",
     password: "",
     terms: "",
   });
   const [fromValidated, setFromValidated] = useState(false);
   const [isTermsChecked, setIsTermsChecked] = useState(false);
-  console.log(errors)
+
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const [loginError, setLoginError] = useState("")
+
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
 
@@ -45,6 +50,7 @@ export const CreateAccount = () => {
       }
     }
   };
+
   
   const validateForm = (field) => {
     setErrors({
@@ -53,7 +59,7 @@ export const CreateAccount = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const emailRegex = new RegExp(
       `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
@@ -87,34 +93,46 @@ export const CreateAccount = () => {
       });
       return;
     }
+    setFromValidated(true);
 
-    // if (fromValidated) {
-    //   const result = await CheckSignup(formData);
+    setIsLoginLoading(true);
 
-    //   if (result === "success") {
-    //     navigate("/login");
-    //   } else {
-    //     console.log("error");
-    //   }
-    // }
-    
-    const result = await CheckSignup(formData)
-    console.log("result", result)
-    if (result?.isSuccess) {
-      alert("success")
-      // navigate("/create-event")/;
-    } else {
-      alert("error")
-      setFromValidated(true);
+    const formDataToSubmit = {
+      full_name: formData.full_name,
+      email: formData.email,
+      password: formData.password
     }
+
+
+    axios.post(`${api}/auth/register`,  formDataToSubmit)
+      .then(res => {
+        setIsLoginLoading(false)
+        navigate("/login");
+      })
+      .catch(err => {
+        console.log(err.response.data.error);
+        setIsLoginLoading(false)
+        setLoginError(err.response.data.error)
+      })
+
+      // const result = await CheckSignup(formData)
+      // console.log("result", result)
+      // if (result?.isSuccess) {
+      //   alert("success")
+      //   // navigate("/login")/;
+      // } else {
+      //   alert("error")
+      //   setFromValidated(true);
+      // }
     
   };
+    
 
   return (
-    <div>
+    <div className="h-screen overflow-y-hidden">
       <div className="flex">
         <div
-          className="w-1/3 hidden md:block h-screen bg-cover"
+          className="w-1/3 hidden md:block h-screen bg-cover bg-center"
           style={{ backgroundImage: `url(${eventImage})` }}
         >
           <div className="flex">
@@ -133,7 +151,7 @@ export const CreateAccount = () => {
             />
           </div>
         </div>
-        <div className="md:w-[65%] w-full py-6 px-8">
+        <div className="md:w-[65%] w-full py-6 px-8 h-screen overflow-y-auto">
           <form className="mt-3" onSubmit={handleSubmit}>
             <div className="py-6 ">
               <h1 className="text-[#131B22] text-lg font-bold">
@@ -144,6 +162,7 @@ export const CreateAccount = () => {
                 Kindly input your details below to create your account
               </p>
             </div>
+            <span className="my-4 text-[#E33629]">{loginError}</span>
             <div className="mb-4">
               <label
                 htmlFor="name"
@@ -224,7 +243,7 @@ export const CreateAccount = () => {
               <input
                 type="password"
                 placeholder="Create your password"
-                id="confiemPassword"
+                id="confirmPassword"
                 name="confirmPassword"
                 minLength={8}
                 className="border-2 p-4 w-full rounded-md"
@@ -275,10 +294,11 @@ export const CreateAccount = () => {
 
             <button
               type="submit"
-              className="mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center"
+              className={`mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center ${isLoginLoading ? "cursor-not-allowed" : "cursor-pointer"}`}
               onClick={handleSubmit}
+              disabled={isLoginLoading}
             >
-              Create an Account
+              {isLoginLoading ? "Loading...." : "Create an Account"}
             </button>
 
             <div className="pb-12">
