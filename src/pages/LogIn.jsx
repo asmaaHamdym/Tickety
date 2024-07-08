@@ -73,12 +73,6 @@ export const LogIn = () => {
       }
     }
     setFromValidated(true);
-    
-    // if (fromValidated) {
-    //   let res = CheckLogin(formData);
-    //   console.log(res);
-    // }
-    // navigate("/create-event");
 
     setLoginLoading(true)
 
@@ -107,10 +101,10 @@ export const LogIn = () => {
     
   };
   return (
-    <div>
-      <div className="flex w-full">
+    <div className="h-screen overflow-y-hidden">
+      <div className="flex">
         <div
-          className="w-1/3 hidden md:block h-screen bg-cover"
+          className="w-1/3 hidden md:block h-screen bg-cover bg-center"
           style={{ backgroundImage: `url(${eventImage})` }}
         >
           <div className="flex">
@@ -129,7 +123,7 @@ export const LogIn = () => {
             />
           </div>
         </div>
-        <div className="md:w-[65%] w-full py-6 px-8">
+        <div className="md:w-[65%] w-full py-6 px-8 h-screen overflow-y-auto">
           <form className="mt-3" onSubmit={handleSubmit}>
             <div className="py-6 ">
               <h1 className="text-[#131B22] text-lg font-bold">
@@ -190,7 +184,8 @@ export const LogIn = () => {
               </button>
             </div>
             <span className="text-[#E33629] m-4">{errors.password}</span>
-
+            
+           
             <div className="flex justify-between pb-12">
               <div className="mt-8">
                 <input
@@ -198,11 +193,11 @@ export const LogIn = () => {
                   className="rounded-md text-[#412234]"
                   id="checkbox"
                 />
-                <label htmlFor="checkbox" className="pl-3 s">
+                <label htmlFor="checkbox" className="pl-3">
                   Keep me Logged in
                 </label>
               </div>
-              <p className="font-semibold">Forgot Password?</p>
+              <p className="font-semibold">Forgot Password?</p> 
             </div>
 
             <button
@@ -210,7 +205,7 @@ export const LogIn = () => {
               className={`mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center ${isLoginLoading ? "cursor-not-allowed" : "cursor-pointer"}`}
               disabled={isLoginLoading}
             >
-              {isLoginLoading ? "loading..." : "Log into Account"}
+              {isLoginLoading ? "Loading..." : "Log into Account"}
             </button>
 
             <div className="pb-12">
