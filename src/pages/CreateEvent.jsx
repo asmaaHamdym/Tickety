@@ -9,6 +9,7 @@ import { createEvent } from "../api/CreateEvent";
 import EventSuccess from "./EventSuccess";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
+import Navbar from "./Navbar";
 
 const CreateEvent = () => {
   const [fileName, setFileName] = useState("");
@@ -60,6 +61,7 @@ const CreateEvent = () => {
 
   return (
     <>
+      <Navbar />
       {/* <div className="bg-[#ECE9EB] h-screen w-full rounded-lg items-center mx-auto container justify-center"> */}
       <div className="flex w-full">
         <EventSuccess isOpen={isModalOpen} closeModal={closeModal}/>

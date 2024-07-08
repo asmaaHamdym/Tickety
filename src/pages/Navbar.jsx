@@ -11,7 +11,7 @@ const Navbar = () => {
   const [nav, setNav] = useState(false);
   const navigate = useNavigate();
 
-  const {user} = useAuthContext();
+  const { user } = useAuthContext();
 
   const handleClick = () => setNav(!nav);
 
@@ -41,7 +41,7 @@ const Navbar = () => {
         </ul>
       </nav>
       
-      <div className="hidden md:flex">
+      <div className="flex">
         {/* <div className='mr-8'>
           <button className='px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'> Contact Us</button>
         </div>
@@ -49,8 +49,8 @@ const Navbar = () => {
        
         {user ? (
           <>
+            <Avatar imageUrl={""} name={user.full_name} />
             <DropDown/>
-            <Avatar/>
           </>
         ):(
           <div>
