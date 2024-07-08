@@ -14,6 +14,7 @@ export const CreateAccount = () => {
     email: "",
     password: "",
   });
+  
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -22,7 +23,7 @@ export const CreateAccount = () => {
   });
   const [fromValidated, setFromValidated] = useState(false);
   const [isTermsChecked, setIsTermsChecked] = useState(false);
-
+  console.log(errors)
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
 
@@ -70,15 +71,15 @@ export const CreateAccount = () => {
           });
           return;
         }
+      } else if(formData.password !== formData.confirmPassword){
+        setErrors({
+          ...errors,
+          confirmPassword: "Password does not match",
+        });
+        return;
       }
     }
-    // if (formData.password !== formData.confirmPassword) {
-    //   setErrors({
-    //     ...errors,
-    //     confirmPassword: "Password does not match",
-    //   });
-    //   return;
-    // }
+    
     if (!isTermsChecked) {
       setErrors({
         ...errors,
@@ -227,7 +228,7 @@ export const CreateAccount = () => {
                 name="confirmPassword"
                 minLength={8}
                 className="border-2 p-4 w-full rounded-md"
-                // onChange={handleChange}
+                onChange={handleChange}
                 ref={confirmPasswordRef}
               />
               <button
@@ -256,6 +257,7 @@ export const CreateAccount = () => {
                   className="rounded-md text-[#412234]"
                   id="checkbox"
                   required
+                  value={isTermsChecked}
                   onChange={() => {
                     setIsTermsChecked(!isTermsChecked);
                   }}

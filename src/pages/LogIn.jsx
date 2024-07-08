@@ -1,11 +1,14 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import tickety from "../assets/tickety.png";
 import googleImg from "../assets/google.png";
 import togglePassword from "../assets/tooglePassword.png";
 import eventImage from "../assets/events-image.png";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { CheckLogin } from "../api/requests.js";
+import axios from "axios"
+import { useAuthContext } from "../store/auth-context";
+
+const api = import.meta.env.VITE_APP_API_URL;
 
 export const LogIn = () => {
   const [formData, setFormData] = useState({
@@ -17,8 +20,13 @@ export const LogIn = () => {
     password: "",
   });
   const [fromValidated, setFromValidated] = useState(false);
+  const [isLoginLoading, setLoginLoading] = useState(false);
+  const [loginError, setLoginError] = useState("");
+
   const passwordRef = useRef(null);
   const navigate = useNavigate();
+
+  const { handleUser, handleToken, handleTokenExpiresAt } = useAuthContext()
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -44,7 +52,7 @@ export const LogIn = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     const emailRegex = new RegExp(
       `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
     );
@@ -72,14 +80,30 @@ export const LogIn = () => {
     // }
     // navigate("/create-event");
 
-    const result = await CheckLogin(formData)
-    console.log("login result", result)
-    if (result?.isSuccess) {
-      alert("success")
-      // navigate("/create-event")/;
-    } else {
-      alert("error")
-    }
+    setLoginLoading(true)
+
+    axios.post(`${api}/auth/login`,  formData)
+      .then(res => {
+        setLoginLoading(false)
+        handleUser(res.data.data.user)
+        handleToken(res.data.data.jwt.token)
+        handleTokenExpiresAt(res.data.data.jwt.expires_at)
+        navigate("/create-event");
+      })
+      .catch(err => {
+        console.log(err.response.data.error);
+        setLoginLoading(false)
+        setLoginError(err.response.data.error)
+      })
+
+    // const result = await CheckLogin(formData)
+    // console.log("login result", result)
+    // if (result?.isSuccess) {
+    //   alert("success")
+    //   // navigate("/create-event")/;
+    // } else {
+    //   alert("error")
+    // }
     
   };
   return (
@@ -116,6 +140,7 @@ export const LogIn = () => {
                 Kindly input your details below to log in to your account
               </p>
             </div>
+            <span className="my-4 text-[#E33629]">{loginError}</span>
             <div className="mb-2">
               <label
                 htmlFor="email"
@@ -182,9 +207,10 @@ export const LogIn = () => {
 
             <button
               type="submit"
-              className="mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center"
+              className={`mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center ${isLoginLoading ? "cursor-not-allowed" : "cursor-pointer"}`}
+              disabled={isLoginLoading}
             >
-              Log into Account
+              {isLoginLoading ? "loading..." : "Log into Account"}
             </button>
 
             <div className="pb-12">
