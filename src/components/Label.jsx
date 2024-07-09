@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Input = (props) => {
+const Label = (props) => {
   return (
-    <label htmlFor={props.htmlFor} className={props.className}> {props.children} </label>
+    <label htmlFor={props.htmlFor} className="block text-[#212D3A] text-sm mb-1 font-medium"> {props.children} </label>
   )
 }
-export default Input;
+export default Label;

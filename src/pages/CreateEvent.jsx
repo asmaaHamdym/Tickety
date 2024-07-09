@@ -10,6 +10,7 @@ import EventSuccess from "./EventSuccess";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { useForm, Controller} from 'react-hook-form';
+import Label from "../components/Label";
 
 const CreateEvent = () => {
   const [fileName, setFileName] = useState("");
@@ -131,13 +132,7 @@ const CreateEvent = () => {
 
           <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
             <div className="mb-3">
-              <Label>Event Name</Label>
-              <label
-                htmlFor="event name"
-                className="block text-[#212D3A] text-sm mb-1 font-medium"
-              >
-                Event Name
-              </label>
+              <Label htmlFor="event name">Event Name</Label>
               <Input
                 type="text"
                 id="name"
@@ -153,12 +148,7 @@ const CreateEvent = () => {
             </div>
 
             <div className="mb-3">
-              <label
-                htmlFor="event description"
-                className="block text-[#212D3A] text-sm mb-1 font-medium"
-              >
-                About the event
-              </label>
+              <Label htmlFor="event description">About the event</Label>
               <textarea
                 type="text"
                 id="description"
@@ -175,12 +165,7 @@ const CreateEvent = () => {
             </div>
 
             <div className="mb-3">
-              <label
-                htmlFor="options"
-                className="block text-[#212D3A] text-sm mb-1 font-medium"
-              >
-                Event Category
-              </label>
+              <Label htmlFor="options">Event Category</Label>
               <select
                 id="category"
                 name="category"
@@ -214,12 +199,7 @@ const CreateEvent = () => {
             </div>
 
             <div className="mb-3">
-              <label
-                htmlFor="location"
-                className="block text-[#212D3A] text-sm mb-1 font-medium"
-              >
-                Location
-              </label>
+             <Label htmlFor="location"> Location </Label>
               <Controller
                 name="location"
                 id="location"
@@ -238,12 +218,7 @@ const CreateEvent = () => {
             </div>
 
             <div className="mb-3">
-              <label
-                htmlFor="date"
-                className="block text-[#212D3A] text-sm mb-1 font-medium"
-              >
-                Event Date
-              </label>
+              <Label htmlFor="date">Event Date</Label>
               <Input
                 type="date"
                 id="date"
@@ -260,12 +235,7 @@ const CreateEvent = () => {
             </div>
 
             <div className="mb-3">
-              <label
-                htmlFor="time"
-                className="block text-[#212D3A] text-sm mb-1 font-medium"
-              >
-                Start Time
-              </label>
+              <Label htmlFor="time">Start Time</Label>
               <Input
                 type="time"
                 id="time"
@@ -282,12 +252,7 @@ const CreateEvent = () => {
             </div>
 
             <div className="mb-3">
-              <label
-                htmlFor="RSVP"
-                className="block text-[#212D3A] text-sm mb-1 font-medium"
-              >
-                RSVP
-              </label>
+              <Label htmlFor="RSVP">RSVP</Label>
               <Input
                 type="number"
                 id="RSVP"
