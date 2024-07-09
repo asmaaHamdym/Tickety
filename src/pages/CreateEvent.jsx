@@ -11,9 +11,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { useForm, Controller} from 'react-hook-form';
 import Label from "../components/Label";
+import axios from "axios";
+
+const api = import.meta.env.VITE_APP_API_URL;
 
 const CreateEvent = () => {
   const [fileName, setFileName] = useState("");
+  const [isModalOpen, setModalOpen] = useState(true);
+  const [loginError, setLoginError] = useState("");
+  const [loginIsLoading, setLoginIsLoading] = useState(false);
 
   const {
     register,
@@ -31,7 +37,6 @@ const CreateEvent = () => {
 
   const inputRef = useRef(null);
   const navigate = useNavigate();
-  const [isModalOpen, setModalOpen] = useState(false);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
@@ -43,31 +48,28 @@ const CreateEvent = () => {
     }
   };
 
-  // const handleSelect = (code) => {
-  //   setFormData({ ...formData, location: code });
-  // };
-  
-  // const handleChange = (e) => {
-  //   const { id, value } = e.target;
-  //   setFormData({ ...formData, [id]: value });
-
-  // };
-  // console.log(formData)
-  // console.log({...register("description")})
-
   const onSubmit = (data) => {
-    // e.preventDefault();
-    console.log(data)
-
     // try {
-    //   const response = await createEvent(formData);
+    //   const response = await createEvent(data);
     //   if (response) {
-    //     console.log("Event created successfully:", response);
+    //     openModal();
     //   }
     // } catch (error) {
     //   console.error("An error occurred:", error);
     // }
-    // openModal()
+    setLoginIsLoading(true);
+
+    axios.post(api, data)
+      .then(res => {
+        setLoginIsLoading(false);
+        openModal();
+      })
+      .catch(err => {
+        console.log(err.response.data.error);
+        setLoginIsLoading(false);
+        setLoginError(err.response.data.error)
+      })
+
   };
 
   return (
@@ -99,6 +101,7 @@ const CreateEvent = () => {
 
           <div className="mt-6 mb-3">
             <p className="mb-1 text-[#212D3A] text-base">Upload event image</p>
+            <span className="my-2 text-[#E33629]">{loginError}</span>
 
             <div
               className="p-10 flex justify-center bg-cover bg-center"
@@ -139,8 +142,6 @@ const CreateEvent = () => {
                 name="name"
                 register={register}
                 required
-                // value={formData.name}
-                // onChange={handleChange}
                 placeholder="Enter event name"
               />
               {errors.name && <p className=" text-[#E33629] text-sm">Event name is required</p>}
@@ -155,8 +156,6 @@ const CreateEvent = () => {
                 {...register("description", {
                   required: "Event description is required"
                 })}
-                // value={formData.description}
-                // onChange={handleChange}
                 className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]"
                 placeholder="Describe your event"
               />
@@ -171,8 +170,6 @@ const CreateEvent = () => {
                 {...register("category", {
                   required: "Select an event category"
                 })}
-                // value={formData.category}
-                // onChange={handleChange}
                 className="w-full px-3 py-3 text-sm bg-[#eaecee] border-2  border-[#C4BAC0] rounded-md shadow-sm focus:outline-none focus:border-sky-500"
               >
                 <option disabled value="">
@@ -225,8 +222,6 @@ const CreateEvent = () => {
                 register={register}
                 required
                 placeholder="Enter event date"
-                // value={formData.date}
-                // onChange={handleChange}
                 className="date-input"
               />
               {errors.date && <p className=" text-[#E33629] text-sm">Event date is required</p>}
@@ -241,8 +236,6 @@ const CreateEvent = () => {
                 register={register}
                 required
                 placeholder="Enter event time"
-                // value={formData.time}
-                // onChange={handleChange}
                 className="time-input"
               />
               {errors.time && <p className=" text-[#E33629] text-sm">Event time is required</p>}
@@ -256,8 +249,6 @@ const CreateEvent = () => {
                 name="RSVP"
                 register={register}
                 required
-                // value={formData.RSVP}
-                // onChange={handleChange}
                 placeholder="Enter RSVP Number"
               />
               {errors.RSVP && <p className=" text-[#E33629] text-sm">RSVP is required</p>}
@@ -265,7 +256,7 @@ const CreateEvent = () => {
 
             <div className="mt-4">
               <button type= "submit" className="px-4 py-2 w-full bg-[#412234] text-white font-semibold rounded shadow-md">
-                Continue
+                {loginIsLoading ? "Loading..." : "Continue"}
               </button>
             </div>
           </form>

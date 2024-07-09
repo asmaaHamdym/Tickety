@@ -14,7 +14,7 @@ const EventSuccess = ({ isOpen, closeModal }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
-      <div className="p-4 shadow-lg max-w-md w-full border-2 border-[#412234] bg-white mx-auto rounded-md text-center">
+      <div className="p-4 shadow-lg w-3/4 md:w-[350px] border-2 border-[#412234] bg-white mx-auto rounded-md text-center">
         <h2 className="text-xl mb-4 text-[#131B22] font-semibold ">Event created successfully!</h2>
         <img src={checkIcon} alt ='Reach Icon' className='mt-2 mx-auto'/>
         <p className='text-sm text-[#2E4052] mt-2'>Your event has been successfully created!<br/> Attendees can now view details and RSVP.</p>
