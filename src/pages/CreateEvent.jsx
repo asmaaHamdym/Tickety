@@ -9,18 +9,25 @@ import { createEvent } from "../api/CreateEvent";
 import EventSuccess from "./EventSuccess";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
+import { useForm, Controller} from 'react-hook-form';
 
 const CreateEvent = () => {
   const [fileName, setFileName] = useState("");
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    category: "",
-    location: "",
-    date: "",
-    time: "",
-    RSVP: "",
-  });
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors }
+  } = useForm(
+    {
+      defaultValues:{
+        category: '',
+        location: ''
+      }
+    }
+  );
+
   const inputRef = useRef(null);
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
@@ -35,27 +42,31 @@ const CreateEvent = () => {
     }
   };
 
-  const handleSelect = (code) => {
-    setFormData({ ...formData, location: code });
-  };
+  // const handleSelect = (code) => {
+  //   setFormData({ ...formData, location: code });
+  // };
+  
+  // const handleChange = (e) => {
+  //   const { id, value } = e.target;
+  //   setFormData({ ...formData, [id]: value });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // };
+  // console.log(formData)
+  // console.log({...register("description")})
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
+    // e.preventDefault();
+    console.log(data)
 
-    try {
-      const response = await createEvent(formData);
-      if (response) {
-        console.log("Event created successfully:", response);
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-    openModal()
+    // try {
+    //   const response = await createEvent(formData);
+    //   if (response) {
+    //     console.log("Event created successfully:", response);
+    //   }
+    // } catch (error) {
+    //   console.error("An error occurred:", error);
+    // }
+    // openModal()
   };
 
   return (
@@ -85,7 +96,7 @@ const CreateEvent = () => {
             </p>
           </div>
 
-          <div className="mt-6 mb-2">
+          <div className="mt-6 mb-3">
             <p className="mb-1 text-[#212D3A] text-base">Upload event image</p>
 
             <div
@@ -111,15 +122,16 @@ const CreateEvent = () => {
             </div>
             {fileName && (
               <div className="mt-1">
-                <h2 className="text-base font-semibold mb-2 border border-[#806B77] w-max p-1 bg-[#806B77] rounded-lg">
+                <h2 className="text-base font-semibold mb-3 border border-[#806B77] w-max p-1 bg-[#806B77] rounded-lg">
                   {fileName}
                 </h2>
               </div>
             )}
           </div>
 
-          <form onSubmit={handleSubmit} className="mt-4">
-            <div className="mb-2">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
+            <div className="mb-3">
+              <Label>Event Name</Label>
               <label
                 htmlFor="event name"
                 className="block text-[#212D3A] text-sm mb-1 font-medium"
@@ -130,13 +142,17 @@ const CreateEvent = () => {
                 type="text"
                 id="name"
                 name="name"
-                value={formData.name}
-                onChange={handleChange}
+                {...register("name", {
+                  required: "Event name is required"
+                })}
+                // value={formData.name}
+                // onChange={handleChange}
                 placeholder="Enter event name"
               />
+              {errors.name && <p className=" text-[#E33629]">{errors.name.message}</p>}
             </div>
 
-            <div className="mb-2">
+            <div className="mb-3">
               <label
                 htmlFor="event description"
                 className="block text-[#212D3A] text-sm mb-1 font-medium"
@@ -147,14 +163,18 @@ const CreateEvent = () => {
                 type="text"
                 id="description"
                 name="description"
-                value={formData.description}
-                onChange={handleChange}
+                {...register("description", {
+                  required: "Event description is required"
+                })}
+                // value={formData.description}
+                // onChange={handleChange}
                 className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]"
                 placeholder="Describe your event"
               />
+              {errors.description && <p className=" text-[#E33629]">{errors.description.message}</p>}
             </div>
 
-            <div className="mb-2">
+            <div className="mb-3">
               <label
                 htmlFor="options"
                 className="block text-[#212D3A] text-sm mb-1 font-medium"
@@ -164,8 +184,11 @@ const CreateEvent = () => {
               <select
                 id="category"
                 name="category"
-                value={formData.category}
-                onChange={handleChange}
+                {...register("category", {
+                  required: "Select an event category"
+                })}
+                // value={formData.category}
+                // onChange={handleChange}
                 className="w-full px-3 py-3 text-sm bg-[#eaecee] border-2  border-[#C4BAC0] rounded-md shadow-sm focus:outline-none focus:border-sky-500"
               >
                 <option disabled value="">
@@ -187,26 +210,34 @@ const CreateEvent = () => {
                   Others
                 </option>
               </select>
+              {errors.category && <p className=" text-[#E33629]">{errors.category.message}</p>}
             </div>
 
-            <div className="mb-2">
+            <div className="mb-3">
               <label
                 htmlFor="location"
                 className="block text-[#212D3A] text-sm mb-1 font-medium"
               >
                 Location
               </label>
-              <ReactFlagsSelect
-                selected={formData.location}
-                onSelect={handleSelect}
+              <Controller
                 name="location"
                 id="location"
-                className="bg-[#eaecee] border-2"
-                placeholder="Enter location"
-              />
+                control={control}
+                rules={{required: true}}
+                render={({ field }) => (
+                  <ReactFlagsSelect
+                    {...field}
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    className="bg-[#eaecee] border-2"
+                    placeholder="Enter location"
+                  />
+                )}/>
+                {errors.location && <span className="text-red-600">Location is required</span>}
             </div>
 
-            <div className="mb-2">
+            <div className="mb-3">
               <label
                 htmlFor="date"
                 className="block text-[#212D3A] text-sm mb-1 font-medium"
@@ -217,16 +248,20 @@ const CreateEvent = () => {
                 type="date"
                 id="date"
                 name="date"
+                {...register("date", {
+                  required: "Event date is required"
+                })}
                 placeholder="Enter event date"
-                value={formData.date}
-                onChange={handleChange}
+                // value={formData.date}
+                // onChange={handleChange}
                 className="date-input"
               />
+              {errors.date && <p className=" text-[#E33629]">{errors.date.message}</p>}
             </div>
 
-            <div className="mb-2">
+            <div className="mb-3">
               <label
-                htmlFor="dtime"
+                htmlFor="time"
                 className="block text-[#212D3A] text-sm mb-1 font-medium"
               >
                 Start Time
@@ -235,32 +270,40 @@ const CreateEvent = () => {
                 type="time"
                 id="time"
                 name="time"
+                {...register("time", {
+                  required: "Event time is required"
+                })}
                 placeholder="Enter event time"
-                value={formData.time}
-                onChange={handleChange}
+                // value={formData.time}
+                // onChange={handleChange}
                 className="time-input"
               />
+              {errors.time && <p className=" text-[#E33629]">{errors.time.message}</p>}
             </div>
 
-            <div className="mb-2">
+            <div className="mb-3">
               <label
-                htmlFor="rsvp"
+                htmlFor="RSVP"
                 className="block text-[#212D3A] text-sm mb-1 font-medium"
               >
                 RSVP
               </label>
               <Input
                 type="number"
-                id="rsvp"
+                id="RSVP"
                 name="RSVP"
-                value={formData.RSVP}
-                onChange={handleChange}
+                {...register("RSVP", {
+                  required: "Rsvp is required"
+                })}
+                // value={formData.RSVP}
+                // onChange={handleChange}
                 placeholder="Enter RSVP Number"
               />
+              {errors.RSVP && <p className=" text-[#E33629]">{errors.RSVP.message}</p>}
             </div>
 
             <div className="mt-4">
-              <button className="px-4 py-2 w-full bg-[#412234] text-white font-semibold rounded shadow-md">
+              <button type= "submit" className="px-4 py-2 w-full bg-[#412234] text-white font-semibold rounded shadow-md">
                 Continue
               </button>
             </div>
