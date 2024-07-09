@@ -23,7 +23,7 @@ const CreateEvent = () => {
   } = useForm(
     {
       defaultValues:{
-        category: '',
+        category:'',
         location: ''
       }
     }
@@ -137,14 +137,13 @@ const CreateEvent = () => {
                 type="text"
                 id="name"
                 name="name"
-                {...register("name", {
-                  required: "Event name is required"
-                })}
+                register={register}
+                required
                 // value={formData.name}
                 // onChange={handleChange}
                 placeholder="Enter event name"
               />
-              {errors.name && <p className=" text-[#E33629]">{errors.name.message}</p>}
+              {errors.name && <p className=" text-[#E33629] text-sm">Event name is required</p>}
             </div>
 
             <div className="mb-3">
@@ -161,7 +160,7 @@ const CreateEvent = () => {
                 className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]"
                 placeholder="Describe your event"
               />
-              {errors.description && <p className=" text-[#E33629]">{errors.description.message}</p>}
+              {errors.description && <p className=" text-[#E33629] text-sm">{errors.description.message}</p>}
             </div>
 
             <div className="mb-3">
@@ -195,7 +194,7 @@ const CreateEvent = () => {
                   Others
                 </option>
               </select>
-              {errors.category && <p className=" text-[#E33629]">{errors.category.message}</p>}
+              {errors.category && <p className=" text-[#E33629] text-sm">{errors.category.message}</p>}
             </div>
 
             <div className="mb-3">
@@ -214,7 +213,7 @@ const CreateEvent = () => {
                     placeholder="Enter location"
                   />
                 )}/>
-                {errors.location && <span className="text-red-600">Location is required</span>}
+                {errors.location && <p className="text-[#E33629] text-sm">Location is required</p>}
             </div>
 
             <div className="mb-3">
@@ -223,15 +222,14 @@ const CreateEvent = () => {
                 type="date"
                 id="date"
                 name="date"
-                {...register("date", {
-                  required: "Event date is required"
-                })}
+                register={register}
+                required
                 placeholder="Enter event date"
                 // value={formData.date}
                 // onChange={handleChange}
                 className="date-input"
               />
-              {errors.date && <p className=" text-[#E33629]">{errors.date.message}</p>}
+              {errors.date && <p className=" text-[#E33629] text-sm">Event date is required</p>}
             </div>
 
             <div className="mb-3">
@@ -240,15 +238,14 @@ const CreateEvent = () => {
                 type="time"
                 id="time"
                 name="time"
-                {...register("time", {
-                  required: "Event time is required"
-                })}
+                register={register}
+                required
                 placeholder="Enter event time"
                 // value={formData.time}
                 // onChange={handleChange}
                 className="time-input"
               />
-              {errors.time && <p className=" text-[#E33629]">{errors.time.message}</p>}
+              {errors.time && <p className=" text-[#E33629] text-sm">Event time is required</p>}
             </div>
 
             <div className="mb-3">
@@ -257,14 +254,13 @@ const CreateEvent = () => {
                 type="number"
                 id="RSVP"
                 name="RSVP"
-                {...register("RSVP", {
-                  required: "Rsvp is required"
-                })}
+                register={register}
+                required
                 // value={formData.RSVP}
                 // onChange={handleChange}
                 placeholder="Enter RSVP Number"
               />
-              {errors.RSVP && <p className=" text-[#E33629]">{errors.RSVP.message}</p>}
+              {errors.RSVP && <p className=" text-[#E33629] text-sm">RSVP is required</p>}
             </div>
 
             <div className="mt-4">
