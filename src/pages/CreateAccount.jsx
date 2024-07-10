@@ -15,8 +15,9 @@ export const CreateAccount = () => {
     full_name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
-  
+
   const [errors, setErrors] = useState({
     full_name: "",
     email: "",
@@ -27,7 +28,7 @@ export const CreateAccount = () => {
   const [isTermsChecked, setIsTermsChecked] = useState(false);
 
   const [isLoginLoading, setIsLoginLoading] = useState(false);
-  const [loginError, setLoginError] = useState("")
+  const [loginError, setLoginError] = useState("");
 
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
@@ -51,8 +52,7 @@ export const CreateAccount = () => {
     }
   };
 
-  
-  const validateForm = (field) => {
+  const validateFormFields = (field) => {
     setErrors({
       ...errors,
       [field]: `${field} is required`,
@@ -67,7 +67,7 @@ export const CreateAccount = () => {
 
     for (const [key, value] of Object.entries(formData)) {
       if (!value) {
-        validateForm(key);
+        validateFormFields(key);
         return;
       } else if (key === "email") {
         if (!emailRegex.test(value)) {
@@ -77,7 +77,7 @@ export const CreateAccount = () => {
           });
           return;
         }
-      } else if(formData.password !== formData.confirmPassword){
+      } else if (formData.password !== formData.confirmPassword) {
         setErrors({
           ...errors,
           confirmPassword: "Password does not match",
@@ -85,7 +85,7 @@ export const CreateAccount = () => {
         return;
       }
     }
-    
+
     if (!isTermsChecked) {
       setErrors({
         ...errors,
@@ -96,37 +96,24 @@ export const CreateAccount = () => {
     setFromValidated(true);
 
     setIsLoginLoading(true);
-
     const formDataToSubmit = {
       full_name: formData.full_name,
       email: formData.email,
-      password: formData.password
-    }
+      password: formData.password,
+    };
 
-
-    axios.post(`${api}/auth/register`,  formDataToSubmit)
-      .then(res => {
-        setIsLoginLoading(false)
+    axios
+      .post(`${api}/auth/register`, formDataToSubmit)
+      .then((res) => {
+        setIsLoginLoading(false);
         navigate("/login");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response.data.error);
-        setIsLoginLoading(false)
-        setLoginError(err.response.data.error)
-      })
-
-      // const result = await CheckSignup(formData)
-      // console.log("result", result)
-      // if (result?.isSuccess) {
-      //   alert("success")
-      //   // navigate("/login")/;
-      // } else {
-      //   alert("error")
-      //   setFromValidated(true);
-      // }
-    
+        setIsLoginLoading(false);
+        setLoginError(err.response.data.error);
+      });
   };
-    
 
   return (
     <div className="h-screen overflow-y-hidden">
@@ -179,7 +166,7 @@ export const CreateAccount = () => {
                 value={formData.full_name}
                 className="border-2 p-4 w-full rounded-md"
               />
-              <span className="text-[#E33629]">{errors.name}</span>
+              <span className="text-[#E33629]">{errors.full_name}</span>
             </div>
             <div className="mb-2">
               <label
@@ -294,7 +281,9 @@ export const CreateAccount = () => {
 
             <button
               type="submit"
-              className={`mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center ${isLoginLoading ? "cursor-not-allowed" : "cursor-pointer"}`}
+              className={`mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center ${
+                isLoginLoading ? "cursor-not-allowed" : "cursor-pointer"
+              }`}
               onClick={handleSubmit}
               disabled={isLoginLoading}
             >
@@ -323,5 +312,4 @@ export const CreateAccount = () => {
       </div>
     </div>
   );
-}
-
+};
