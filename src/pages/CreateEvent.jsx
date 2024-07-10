@@ -205,7 +205,7 @@ const CreateEvent = () => {
                     {...field}
                     selected={field.value}
                     onSelect={field.onChange}
-                    className="bg-[#eaecee] border-2"
+                    className="bg-[#eaecee] react-flag-hide-padding-bottom"
                     placeholder="Enter location"
                   />
                 )}

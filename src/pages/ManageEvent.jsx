@@ -74,24 +74,24 @@ const ManageEvent = () => {
   return (
     <div>
       <Navbar/>
-      <div className='bg-[#c297af]'> 
+      <div className='bg-[#806B77]'> 
         <div className='flex justify-between md:px-40 px-6 py-6'>
           <div className='flex'>
-            <Link to="/events"><FaArrowAltCircleLeft className='arrow-icon mr-4 cursor-pointer' size={30}/></Link>
-            <div className='font-bold text-lg'>My Events</div>
+            <Link to="/events"><FaArrowAltCircleLeft className='arrow-icon mr-4 cursor-pointer' size={40}/></Link>
+            <div className='font-bold text-2xl'>My Events</div>
           </div>
           
           <div>
-            <Link to="/rsvp"><button className= 'px-8 py-2 bg-[#412234] text-white font-semibold rounded shadow-md'>View RSVP</button></Link>
+            <Link to="/rsvp"><button className= 'px-10 py-2 bg-[#412234] text-white font-semibold rounded shadow-md'>View RSVP</button></Link>
           </div>
         </div>
         
         <div className='md:w-3/4 w-full items-center mx-auto'>
-          <div className=''>
+          <div className='py-6 md:px-28 px-8 bg-white mx-4 md:mx-0 '>
 
-            <div className='py-6 md:px-12 px-6'>
+            <div className='md:w-5/6 mx-auto'>
 
-              <div className='md:mt-6 mb-2'>
+              <div className='md:mt-6 mb-2 '>
                 <p className='mb-1 text-[#212D3A] text-sm'>Upload event image</p>
 
                 <div className='p-10 flex justify-center bg-cover bg-center' style={{ backgroundImage: `url(${uploadImage})`}}>
@@ -182,7 +182,7 @@ const ManageEvent = () => {
                         {...field}
                         selected={field.value}
                         onSelect={field.onChange}
-                        className="bg-[#eaecee] border-2"
+                        className="bg-[#eaecee] react-flag-hide-padding-bottom"
                         placeholder="Enter location"
                       />
                     )}
