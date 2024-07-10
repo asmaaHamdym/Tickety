@@ -1,5 +1,6 @@
 import "../styles/Card.css";
 import locationIcon from "../assets/location.png";
+import { Link } from "react-router-dom";
 
 export const Card = ({
   eventName,
@@ -10,6 +11,7 @@ export const Card = ({
   location,
   time,
   date,
+  eventId
 }) => {
   return (
     <div className="events-grid">
@@ -32,10 +34,16 @@ export const Card = ({
               <p className="">{date}</p>
             </div>
           </div>
-          
+
           <p className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0">
             {rsvps} RSVP
           </p>
+          <Link to={`/manage-event/${eventId}`}>
+            <p className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0 ml-2">
+              Edit
+            </p>
+          </Link>
+
         </div>
 
         {/* <div className="speakers">
