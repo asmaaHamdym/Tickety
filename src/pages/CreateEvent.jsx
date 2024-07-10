@@ -5,7 +5,6 @@ import { RiUploadCloudFill } from "react-icons/ri";
 import eventImage from "../assets/events-image.png";
 import uploadImage from "../assets/upload.png";
 import Input from "../components/Input";
-import { createEvent } from "../api/CreateEvent";
 import EventSuccess from "./EventSuccess";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
@@ -17,7 +16,7 @@ const api = import.meta.env.VITE_APP_API_URL;
 
 const CreateEvent = () => {
   const [fileName, setFileName] = useState("");
-  const [isModalOpen, setModalOpen] = useState(true);
+  const [isModalOpen, setModalOpen] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [loginIsLoading, setLoginIsLoading] = useState(false);
 
