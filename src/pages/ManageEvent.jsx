@@ -10,32 +10,30 @@ import { deleteEvent } from '../api/DeleteEvent';
 import { Link } from 'react-router-dom';
 import DeleteSuccess from './DeleteSuccess';
 import UpdateSuccess from './UpdateSuccess';
+import { useForm, Controller} from 'react-hook-form';
+import Label from '../components/Label';
 
+const api = import.meta.env.VITE_APP_API_URL;
 
 const ManageEvent = () => {
-  // const initialState: {
-  //   id: '',
-  //   name: '',
-  //   description: '',
-  //   category: '',
-  //   location: '',
-  //   date: '',
-  //   time:'',
-  //   RSVP:''
-  // };
   const [fileName, setFileName] = useState('');
-  const [formData, setFormData] = useState({
-    name: 'Wedding',
-    description: 'To feed people',
-    category: 'Party',
-    location: 'Nigeria',
-    date: '2024-09-26',
-    time:'09:26',
-    RSVP:'50'
-  });
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors }
+  } = useForm(
+    {
+      defaultValues:{
+        category:'',
+        location: ''
+      }
+    }
+  );
   
   const inputRef = useRef(null);
-  const [isModalOpen, setModalOpen] = useState(false);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false)
@@ -46,15 +44,6 @@ const ManageEvent = () => {
     if (file) {
       setFileName(file.name);
     }
-  };
-
-  const handleSelect = (code) => {
-    setFormData({ ...formData, location: code });
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
   };
 
   const handleUpdate = async (e) => {
@@ -118,48 +107,128 @@ const ManageEvent = () => {
                     </div>
                 )}
               </div>
+
               <form className='mt-3'>
-
-                <div className="mb-2">
-                  <label htmlFor="event name" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Name</label>
-                  <Input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Enter event name"/>
+                <div className="mb-3">
+                  <Label htmlFor="event name">Event Name</Label>
+                  <Input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    register={register}
+                    required 
+                    placeholder="Enter event name"
+                  />
+                  {errors.name && <p className=" text-[#E33629] text-sm">Event name is required</p>}
                 </div>
 
-                <div className="mb-2">
-                  <label htmlFor="event description" className="block text-[#6e7071] text-sm mb-1 font-medium">About the event</label>
-                  <textarea type="text" id="description" name="description" value={formData.description} onChange={handleChange} className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]" placeholder="Describe your event"/>  
+                <div className="mb-3">
+                  <Label htmlFor="event description">About the event</Label>
+                  <textarea 
+                    type="text" 
+                    id="description" 
+                    name="description" 
+                    {...register("description", {
+                      required: "Event description is required"
+                    })}
+                    className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]" 
+                    placeholder="Describe your event"
+                  />  
+                  {errors.description && <p className=" text-[#E33629] text-sm">{errors.description.message}</p>}
                 </div>
 
-                <div className="mb-2">
-                  <label htmlFor="options" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Category</label>
-                  <select id="category" name="category" value={formData.category} onChange={handleChange} className="w-full px-3 py-3 text-sm bg-[#eaecee] border-2  border-[#C4BAC0] rounded-md shadow-sm focus:outline-none focus:border-sky-500">
-                    <option disabled value="">Select event category</option>
-                    <option value="party" className='text-[#212D3A]'>Party</option>
-                    <option value="conference" className='text-[#212D3A]'>Conference</option>
-                    <option value="concert" className='text-[#212D3A]'>Concert</option>
-                    <option value="tech" className='text-[#212D3A]'>Tech Event</option>
-                    <option value="others"className='text-[#212D3A]'>Others</option>
+                <div className="mb-3">
+                  <Label htmlFor="options">Event Category</Label>
+                  <select 
+                    id="category" 
+                    name="category"
+                    {...register("category", {
+                      required: "Select an event category"
+                    })} 
+                    className="w-full px-3 py-3 text-sm bg-[#eaecee] border-2  border-[#C4BAC0] rounded-md shadow-sm focus:outline-none focus:border-sky-500"
+                  >
+
+                    <option disabled value="">
+                      Select event category
+                    </option>
+                    <option value="party" className='text-[#212D3A]'>
+                      Party
+                    </option>
+                    <option value="conference" className='text-[#212D3A]'>
+                      Conference
+                    </option>
+                    <option value="concert" className='text-[#212D3A]'>
+                      Concert
+                    </option>
+                    <option value="tech" className='text-[#212D3A]'>
+                      Tech Event
+                    </option>
+                    <option value="others"className='text-[#212D3A]'>
+                      Others
+                    </option>
                   </select>
+                  {errors.category && <p className=" text-[#E33629] text-sm">{errors.category.message}</p>}
                 </div>
 
-                <div className="mb-2">
-                  <label htmlFor="location" className="block text-[#212D3A] text-sm mb-1 font-medium">Location</label>
-                  <ReactFlagsSelect selected={formData.location} onSelect={handleSelect} name="location" id='location' className="bg-[#eaecee] border-2" placeholder="Enter location"/>
+                <div className="mb-3">
+                  <Label htmlFor="location"> Location </Label>
+                  <Controller
+                    name="location"
+                    id="location"
+                    control={control}
+                    rules={{required: true}}
+                    render={({ field }) => (
+                      <ReactFlagsSelect
+                        {...field}
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        className="bg-[#eaecee] border-2"
+                        placeholder="Enter location"
+                      />
+                    )}
+                  />
+                  {errors.location && <p className="text-[#E33629] text-sm">Location is required</p>}
                 </div>
 
-                <div className="mb-2">
-                  <label htmlFor="date" className="block text-[#212D3A] text-sm mb-1 font-medium">Event Date</label>
-                  <Input type="date" id="date" name="date" placeholder="Enter event date" value={formData.date} onChange={handleChange}  className='date-input'/>
+                <div className="mb-3">
+                  <Label htmlFor="date">Event Date</Label>
+                  <Input
+                    type="date"
+                    id="date"
+                    name="date"
+                    register={register}
+                    required
+                    placeholder="Enter event date"
+                    className="date-input"
+                  />
+                  {errors.date && <p className=" text-[#E33629] text-sm">Event date is required</p>}
                 </div>
 
-                <div className="mb-2">
-                  <label htmlFor="dtime" className="block text-[#212D3A] text-sm mb-1 font-medium">Start Time</label>  
-                  <Input type="time" id="time" name="time" placeholder="Enter event time" value={formData.time} onChange={handleChange} className='time-input'/>
+                <div className="mb-3">
+                  <Label htmlFor="time">Start Time</Label> 
+                  <Input
+                    type="time"
+                    id="time"
+                    name="time"
+                    register={register}
+                    required
+                    placeholder="Enter event time"
+                    className="time-input"
+                  />
+                  {errors.time && <p className=" text-[#E33629] text-sm">Event time is required</p>}
                 </div>
 
-                <div className="mb-2">
-                  <label htmlFor="rsvp" className="block text-[#212D3A] text-sm mb-1 font-medium">RSVP</label>
-                  <Input type="number" id="rsvp" name="RSVP" value={formData.RSVP} onChange={handleChange}  placeholder="Enter RSVP Number"/>
+                <div className="mb-3">
+                  <Label htmlFor="RSVP">RSVP</Label>
+                  <Input
+                    type="number"
+                    id="RSVP"
+                    name="RSVP"
+                    register={register}
+                    required
+                    placeholder="Enter RSVP Number"
+                  />
+                  {errors.RSVP && <p className=" text-[#E33629] text-sm">RSVP is required</p>}
                 </div>
 
                 <div className='mt-4 flex justify-between gap-2'>

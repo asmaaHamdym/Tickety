@@ -194,7 +194,7 @@ const CreateEvent = () => {
             </div>
 
             <div className="mb-3">
-             <Label htmlFor="location"> Location </Label>
+              <Label htmlFor="location"> Location </Label>
               <Controller
                 name="location"
                 id="location"
@@ -208,8 +208,9 @@ const CreateEvent = () => {
                     className="bg-[#eaecee] border-2"
                     placeholder="Enter location"
                   />
-                )}/>
-                {errors.location && <p className="text-[#E33629] text-sm">Location is required</p>}
+                )}
+              />
+              {errors.location && <p className="text-[#E33629] text-sm">Location is required</p>}
             </div>
 
             <div className="mb-3">
