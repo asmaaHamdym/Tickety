@@ -16,12 +16,14 @@ export const CreateAccount = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    terms: "",
   });
 
   const [errors, setErrors] = useState({
     full_name: "",
     email: "",
     password: "",
+    confirmPassword: "",
     terms: "",
   });
   const [fromValidated, setFromValidated] = useState(false);
@@ -42,6 +44,9 @@ export const CreateAccount = () => {
       ...formData,
       [id]: value,
     });
+    if (!validatePassword) {
+      return;
+    }
     for (const [key, value] of Object.entries(formData)) {
       if (value) {
         setErrors({
@@ -50,40 +55,57 @@ export const CreateAccount = () => {
         });
       }
     }
+    if (!validatePassword) {
+      return;
+    }
   };
 
   const validateFormFields = (field) => {
+    console.log(field);
     setErrors({
       ...errors,
       [field]: `${field} is required`,
     });
+    console.log(errors);
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = new RegExp(
+      `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
+    );
+    if (!emailRegex.test(email)) {
+      setErrors({
+        ...errors,
+        email: "Email is not valid",
+      });
+    }
+  };
+  const validatePassword = () => {
+    if (formData.password !== formData.confirmPassword) {
+      setErrors({
+        ...errors,
+        confirmPassword: "Password does not match",
+      });
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const emailRegex = new RegExp(
-      `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
-    );
-
+    // console.log(formData);
     for (const [key, value] of Object.entries(formData)) {
       if (!value) {
         validateFormFields(key);
         return;
-      } else if (key === "email") {
-        if (!emailRegex.test(value)) {
-          setErrors({
-            ...errors,
-            email: "Email is not valid",
-          });
-          return;
-        }
-      } else if (formData.password !== formData.confirmPassword) {
-        setErrors({
-          ...errors,
-          confirmPassword: "Password does not match",
-        });
+      } else if (formData.email) {
+        validateEmail(formData.email);
         return;
       }
+    }
+
+    if (!validatePassword) {
+      return;
     }
 
     if (!isTermsChecked) {
@@ -97,7 +119,7 @@ export const CreateAccount = () => {
 
     setIsLoginLoading(true);
     const formDataToSubmit = {
-      full_name: formData.full_name,
+      full_name: formData.name,
       email: formData.email,
       password: formData.password,
     };
@@ -161,9 +183,9 @@ export const CreateAccount = () => {
                 type="text"
                 placeholder="Enter your full name"
                 onChange={handleChange}
-                id="full_name"
-                name="full_name"
-                value={formData.full_name}
+                id="name"
+                name="name"
+                value={formData.name}
                 className="border-2 p-4 w-full rounded-md"
               />
               <span className="text-[#E33629]">{errors.full_name}</span>
@@ -254,7 +276,7 @@ export const CreateAccount = () => {
                 />
               </button>
             </div>
-            <span className="text-[#E33629]">{errors.password}</span>
+            <span className="text-[#E33629]">{errors.confirmPassword}</span>
 
             <div className="flex justify-between pb-12">
               <div className="mt-8">
