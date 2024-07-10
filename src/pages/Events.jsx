@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import Footer from "../components/Footer";
-import { getEvents } from "../api/getEvents.js";
+
 import Navbar from "./Navbar.jsx";
 
 import eventImgOne from "../assets/events-img-one.png";
 import eventImgTwo from "../assets/events-img-two.png";
 import eventImgThree from "../assets/events-img-three.png";
+import axios from "axios";
+
+const api = import.meta.env.VITE_APP_API_URL;
 
 export const Events = () => {
   const [events, setEvents] = useState([]);
@@ -17,12 +20,13 @@ export const Events = () => {
   ];
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getEvents();
-      setEvents(data.data);
-    };
-
-    fetchData();
+    axios.get(api)
+      .then(res => {
+        setEvents(res.data.data)
+      })
+      .catch(err => {
+        console.log(err.response.data.error);
+      })
   }, []);
 
   return (
@@ -40,6 +44,7 @@ export const Events = () => {
               location={event.location}
               time={event.time}
               date={event.date}
+              eventId={event.id}
             />
           ))}
         </div>

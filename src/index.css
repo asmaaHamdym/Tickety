@@ -66,3 +66,7 @@
 .upload-icon, .arrow-icon{
   color: #412234;
 }
+
+.react-flag-hide-padding-bottom{
+  padding-bottom: 0 !important;
+}

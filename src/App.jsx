@@ -40,7 +40,7 @@ const router = createBrowserRouter([
     element: <Rsvps />,
   },
   {
-    path: "/manage-event", 
+    path: "/manage-event/:eventId", 
     element: <ManageEvent />,
   },
   {
