@@ -12,16 +12,16 @@ const api = import.meta.env.VITE_APP_API_URL;
 
 export const CreateAccount = () => {
   const [formData, setFormData] = useState({
-    full_name: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
-    terms: "",
   });
 
   const [errors, setErrors] = useState({
-    full_name: "",
+    name: "",
     email: "",
+    emailInvalid: "",
     password: "",
     confirmPassword: "",
     terms: "",
@@ -44,9 +44,7 @@ export const CreateAccount = () => {
       ...formData,
       [id]: value,
     });
-    if (!validatePassword) {
-      return;
-    }
+
     for (const [key, value] of Object.entries(formData)) {
       if (value) {
         setErrors({
@@ -55,58 +53,46 @@ export const CreateAccount = () => {
         });
       }
     }
-    if (!validatePassword) {
-      return;
-    }
+    validatePassword();
   };
 
   const validateFormFields = (field) => {
-    console.log(field);
     setErrors({
       ...errors,
       [field]: `${field} is required`,
     });
-    console.log(errors);
   };
 
-  const validateEmail = (email) => {
+  const validateEmail = () => {
     const emailRegex = new RegExp(
       `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
     );
-    if (!emailRegex.test(email)) {
-      setErrors({
-        ...errors,
-        email: "Email is not valid",
-      });
+    if (!emailRegex.test(formData.email)) {
+      errors.emailInvalid = "Email is not valid";
+    } else {
+      errors.emailInvalid = "";
     }
   };
   const validatePassword = () => {
     if (formData.password !== formData.confirmPassword) {
-      setErrors({
-        ...errors,
-        confirmPassword: "Password does not match",
-      });
-      return false;
+      errors.confirmPassword = "Passwords do not match";
     }
-    return true;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(formData);
+
+    if (formData.email) {
+      validateEmail();
+    }
     for (const [key, value] of Object.entries(formData)) {
       if (!value) {
         validateFormFields(key);
         return;
-      } else if (formData.email) {
-        validateEmail(formData.email);
-        return;
       }
     }
 
-    if (!validatePassword) {
-      return;
-    }
+    validatePassword();
 
     if (!isTermsChecked) {
       setErrors({
@@ -188,7 +174,7 @@ export const CreateAccount = () => {
                 value={formData.name}
                 className="border-2 p-4 w-full rounded-md"
               />
-              <span className="text-[#E33629]">{errors.full_name}</span>
+              <span className="text-[#E33629]">{errors.name}</span>
             </div>
             <div className="mb-2">
               <label
@@ -206,7 +192,9 @@ export const CreateAccount = () => {
                 value={formData.email}
                 className="border-2 p-4 w-full rounded-md"
               />
-              <span className="text-[#E33629]">{errors.email}</span>
+              <span className="text-[#E33629]">
+                {errors.email || errors.emailInvalid}
+              </span>
             </div>
             <label
               htmlFor="password"
