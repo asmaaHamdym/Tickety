@@ -1,13 +1,23 @@
 import tickety from "../assets/tickety.png";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <footer className="bg-[#131B22]">
         <div className="flex flex-wrap justify-around pt-10 text-white">
           <div className="first-col">
             <div className="w-24 pb-4">
-              <img src={tickety} alt="Logo Icon"></img>
+              <img
+                src={tickety}
+                className="hover:cursor-pointer"
+                alt="Logo Icon"
+                onClick={() => {
+                  navigate("/");
+                }}
+              />
             </div>
             <p className="max-w-xs font-raleway font-lg text-base md:leading-5 pb-4">
               Tickety is an e booking app that aims to make organizing events
