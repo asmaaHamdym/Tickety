@@ -28,24 +28,23 @@ export const Events = () => {
 
   return (
     <>
-      <div>
-        <Navbar />
-        <div className="mx-12 py-8 px-0">
-          {events.map((event) => (
-            <Card
-              key={event.id}
-              eventName={event.description}
-              eventImgUrl={imgs[Math.floor(Math.random() * 3)]}
-              rsvps={event.RSVP}
-              description={event.description}
-              location={event.location}
-              time={event.time}
-              date={event.date}
-              eventId={event.id}
-            />
-          ))}
-        </div>
+      <Navbar />
+      <div className="mx-12 py-8 px-0">
+        {events.map((event) => (
+          <Card
+            key={event.id}
+            eventName={event.name}
+            eventImgUrl={imgs[Math.floor(Math.random() * 3)]}
+            rsvps={event.RSVP}
+            description={event.description}
+            location={event.location}
+            time={event.time}
+            date={event.date}
+            eventId={event.id}
+          />
+        ))}
       </div>
+
       <Footer />
     </>
   );

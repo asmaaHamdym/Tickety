@@ -12,10 +12,29 @@ import ticketIcon from "../assets/ticket-icon.png";
 import eventImgOne from "../assets/events-img-one.png";
 import eventImgTwo from "../assets/events-img-two.png";
 import eventImgThree from "../assets/events-img-three.png";
+
 import { useAuthContext } from "../store/auth-context";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+const api = import.meta.env.VITE_APP_API_URL;
 
 export const HomePage = () => {
+  const [events, setEvents] = useState([]);
+  const imgs = [eventImgOne, eventImgThree, eventImgTwo];
+
   const { user } = useAuthContext();
+
+  useEffect(() => {
+    axios
+      .get(api)
+      .then((res) => {
+        setEvents(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data.error);
+      });
+  }, []);
 
   return (
     <>
@@ -31,17 +50,20 @@ export const HomePage = () => {
             <div className="text-white md:py-8 py-20">
               <div className="md:mb-28 mb-4 text-center md:text-left">
                 <h1 className="md:text-6xl text-5xl font-bold mb-6">
-                  Let's help you create a <br/>Memorable event
+                  Let's help you create a <br />
+                  Memorable event
                 </h1>
                 <p className="text-xl leading-8">
-                  Experience seamless planning and extraordinary<br/>{" "}
-                  celebrations with our expert event management team
+                  Experience seamless planning and extraordinary
+                  <br /> celebrations with our expert event management team
                 </p>
               </div>
 
               <div className="flex justify-center md:justify-start">
                 <button className="p-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
-                  <Link to={user ? "/create-event" : "/login"}>Create your next Event</Link>
+                  <Link to={user ? "/create-event" : "/login"}>
+                    Create your next Event
+                  </Link>
                 </button>
               </div>
             </div>
@@ -56,8 +78,8 @@ export const HomePage = () => {
               </h3>
               <p className="text-sm text-[#586675] mb-10">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste
-                quaerat, quisquam labore minima excepturi, <br/>ducimus
-                earum maxime consectetur, enim unde nesciunt.{" "}
+                quaerat, quisquam labore minima excepturi, <br />
+                ducimus earum maxime consectetur, enim unde nesciunt.{" "}
               </p>
             </div>
 
@@ -73,15 +95,15 @@ export const HomePage = () => {
               <div className="mt-4 px-10">
                 <div className="flex gap-10 border border-[#BDD9BF] rounded-md p-4 mb-10">
                   <div>
-                    <img src={noteIcon} alt="Note Icon" className="mt-2"/>
+                    <img src={noteIcon} alt="Note Icon" className="mt-2" />
                   </div>
                   <div>
                     <p className="text-sm text-[#212D3A] font-semibold">
                       Create your personal event
                     </p>
                     <p className="text-sm text-[#586675] px-18">
-                      Organize a seamlesss experience for your customers{" "}
-                      <br/>at your event like never before.
+                      Organize a seamlesss experience for your customers <br />
+                      at your event like never before.
                     </p>
                   </div>
                 </div>
@@ -95,26 +117,23 @@ export const HomePage = () => {
                       Reach more Audience
                     </p>
                     <p className="text-sm text-[#586675] px-18">
-                      Reach new customersand get more audience <br/>to
-                      participate at your event.
+                      Reach new customersand get more audience <br />
+                      to participate at your event.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex gap-10 border border-[#BDD9BF] rounded-md p-4 mb-20">
                   <div>
-                    <img
-                      src={ticketIcon}
-                      alt="Ticket Icon"
-                      className="mt-2"
-                    />
+                    <img src={ticketIcon} alt="Ticket Icon" className="mt-2" />
                   </div>
                   <div>
                     <p className="text-sm text-[#212D3A] font-semibold">
                       Book a Ticket
                     </p>
                     <p className="text-sm text-[#586675] px-18">
-                      Get a ticket and RSVP for your favourite event<br/>
+                      Get a ticket and RSVP for your favourite event
+                      <br />
                       with ease.
                     </p>
                   </div>
@@ -139,39 +158,19 @@ export const HomePage = () => {
           </div>
         </div>
         <div className="mx-12 py-8 px-0">
-          <Card
-            eventName={"Girls in Tech Meetup"}
-            eventImgUrl={eventImgOne}
-            description={
-              "Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, repellendus?dolor sit amet consectetur adipisicing elit. Ea, repellendus?"
-            }
-            location={"2464 Royal Ln. Mesa, New Jersey 45463"}
-            time={"9 am"}
-            date={"25-5-2024"}
-            rsvps={20}
-          />
-          <Card
-            eventName={"Open Source Day"}
-            eventImgUrl={eventImgTwo}
-            description={
-              "Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, repellendus?dolor sit amet consectetur adipisicing elit. Ea, repellendus?"
-            }
-            location={"2464 Royal Ln. Mesa, New Jersey 45463"}
-            time={"9 am"}
-            date={"25-5-2024"}
-            rsvps={70}
-          />
-          <Card
-            eventName={"Tech Summit"}
-            eventImgUrl={eventImgThree}
-            description={
-              "Lorem ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, repellendus?dolor sit amet consectetur adipisicing elit. Ea, repellendus?"
-            }
-            location={"2464 Royal Ln. Mesa, New Jersey 45463"}
-            time={"9 am"}
-            date={"25-5-2024"}
-            rsvps={100}
-          />
+          {events.slice(0, 3).map((event) => {
+            <Card
+              key={event.id}
+              eventName={event.name}
+              eventImgUrl={imgs[Math.floor(Math.random() * 3)]}
+              rsvps={event.RSVP}
+              description={event.description}
+              location={event.location}
+              time={event.time}
+              date={event.date}
+              eventId={event.id}
+            />;
+          })}
         </div>
         <Footer />
       </div>
