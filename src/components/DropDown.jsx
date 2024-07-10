@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
 export default function DropDown() {
@@ -6,5 +6,5 @@ export default function DropDown() {
     <div>
       <RiArrowDropDownLine size={30} />
     </div>
-  )
+  );
 }

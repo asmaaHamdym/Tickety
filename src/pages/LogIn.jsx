@@ -5,7 +5,7 @@ import togglePassword from "../assets/tooglePassword.png";
 import eventImage from "../assets/events-image.png";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 import { useAuthContext } from "../store/auth-context";
 
 const api = import.meta.env.VITE_APP_API_URL;
@@ -19,14 +19,14 @@ export const LogIn = () => {
     email: "",
     password: "",
   });
-  const [fromValidated, setFromValidated] = useState(false);
+  // const [formValidated, setFormValidated] = useState(false);
   const [isLoginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
 
   const passwordRef = useRef(null);
   const navigate = useNavigate();
 
-  const { handleUser, handleToken, handleTokenExpiresAt } = useAuthContext()
+  const { handleUser, handleToken, handleTokenExpiresAt } = useAuthContext();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -72,33 +72,24 @@ export const LogIn = () => {
         }
       }
     }
-    setFromValidated(true);
+    // setFormValidated(true);
 
-    setLoginLoading(true)
+    setLoginLoading(true);
 
-    axios.post(`${api}/auth/login`,  formData)
-      .then(res => {
-        setLoginLoading(false)
-        handleUser(res.data.data.user)
-        handleToken(res.data.data.jwt.token)
-        handleTokenExpiresAt(res.data.data.jwt.expires_at)
+    axios
+      .post(`${api}/auth/login`, formData)
+      .then((res) => {
+        setLoginLoading(false);
+        handleUser(res.data.data.user);
+        handleToken(res.data.data.jwt.token);
+        handleTokenExpiresAt(res.data.data.jwt.expires_at);
         navigate("/create-event");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response.data.error);
-        setLoginLoading(false)
-        setLoginError(err.response.data.error)
-      })
-
-    // const result = await CheckLogin(formData)
-    // console.log("login result", result)
-    // if (result?.isSuccess) {
-    //   alert("success")
-    //   // navigate("/create-event")/;
-    // } else {
-    //   alert("error")
-    // }
-    
+        setLoginLoading(false);
+        setLoginError(err.response.data.error);
+      });
   };
   return (
     <div className="h-screen overflow-y-hidden">
@@ -184,8 +175,7 @@ export const LogIn = () => {
               </button>
             </div>
             <span className="text-[#E33629] m-4">{errors.password}</span>
-            
-           
+
             <div className="flex justify-between pb-12">
               <div className="mt-8">
                 <input
@@ -197,12 +187,14 @@ export const LogIn = () => {
                   Keep me Logged in
                 </label>
               </div>
-              <p className="font-semibold">Forgot Password?</p> 
+              <p className="font-semibold">Forgot Password?</p>
             </div>
 
             <button
               type="submit"
-              className={`mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center ${isLoginLoading ? "cursor-not-allowed" : "cursor-pointer"}`}
+              className={`mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center ${
+                isLoginLoading ? "cursor-not-allowed" : "cursor-pointer"
+              }`}
               disabled={isLoginLoading}
             >
               {isLoginLoading ? "Loading..." : "Log into Account"}

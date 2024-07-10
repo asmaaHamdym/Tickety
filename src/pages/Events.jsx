@@ -13,20 +13,17 @@ const api = import.meta.env.VITE_APP_API_URL;
 
 export const Events = () => {
   const [events, setEvents] = useState([]);
-  const imgs = [
-    eventImgOne,
-    eventImgThree,
-    eventImgTwo
-  ];
+  const imgs = [eventImgOne, eventImgThree, eventImgTwo];
 
   useEffect(() => {
-    axios.get(api)
-      .then(res => {
-        setEvents(res.data.data)
+    axios
+      .get(api)
+      .then((res) => {
+        setEvents(res.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response.data.error);
-      })
+      });
   }, []);
 
   return (

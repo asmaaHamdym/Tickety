@@ -26,7 +26,7 @@ export const CreateAccount = () => {
     confirmPassword: "",
     terms: "",
   });
-  const [fromValidated, setFromValidated] = useState(false);
+  // const [formValidated, setFormValidated] = useState(false);
   const [isTermsChecked, setIsTermsChecked] = useState(false);
 
   const [isLoginLoading, setIsLoginLoading] = useState(false);
@@ -102,7 +102,7 @@ export const CreateAccount = () => {
     } else {
       errors.terms = "";
     }
-    setFromValidated(true);
+    // setFormValidated(true);
 
     setIsLoginLoading(true);
     const formDataToSubmit = {

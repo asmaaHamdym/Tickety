@@ -30,32 +30,55 @@ const Navbar = () => {
       <nav>
         <ul className="hidden md:flex">
           <li className="mr-14">
-            <NavLink to="/" className= {({ isActive }) => isActive ? "text-[#1B0E16] font-medium" : "text-[#806B77]" }>Home</NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "text-[#1B0E16] font-medium" : "text-[#806B77]"
+              }
+            >
+              Home
+            </NavLink>
           </li>
           <li className="mr-14">
-            <NavLink to="/about" className= {({ isActive }) => isActive ? "text-[#1B0E16] font-medium" : "text-[#806B77]" }>About Us</NavLink>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ? "text-[#1B0E16] font-medium" : "text-[#806B77]"
+              }
+            >
+              About Us
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/events" className= {({ isActive }) => isActive ? "text-[#1B0E16] font-medium" : "text-[#806B77]" }>Events</NavLink>
+            <NavLink
+              to="/events"
+              className={({ isActive }) =>
+                isActive ? "text-[#1B0E16] font-medium" : "text-[#806B77]"
+              }
+            >
+              Events
+            </NavLink>
           </li>
         </ul>
       </nav>
-      
+
       <div className="flex">
-        <div className="flex">
+        <div className="flex ">
           {user ? (
             <>
+              <button className="px-4 py-2  mx-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
+                <Link to="/create-event">Create Event</Link>
+              </button>
               <Avatar imageUrl={""} name={user.full_name} />
-              <DropDown/>
+              <DropDown />
             </>
-          ):(
+          ) : (
             <div>
               <button className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
                 <Link to="/login">Login</Link>
               </button>
             </div>
           )}
-            
         </div>
 
         {/* Hamburger Menu */}
@@ -69,7 +92,6 @@ const Navbar = () => {
             <FaTimes size={35} />
           )}
         </div>
-
       </div>
 
       {/* Hamburger Menu Items */}
