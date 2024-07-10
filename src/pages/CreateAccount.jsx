@@ -99,7 +99,8 @@ export const CreateAccount = () => {
         ...errors,
         terms: "You must accept the terms and conditions",
       });
-      return;
+    } else {
+      errors.terms = "";
     }
     setFromValidated(true);
 
