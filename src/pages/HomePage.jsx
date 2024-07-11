@@ -50,7 +50,7 @@ export const HomePage = () => {
             <div className="text-white md:py-8 py-20">
               <div className="md:mb-28 mb-4 text-center md:text-left">
                 <h1 className="md:text-6xl text-5xl font-bold mb-6">
-                  Let's help you create a <br />
+                  Let us help you create a <br />
                   Memorable event
                 </h1>
                 <p className="text-xl leading-8">
@@ -158,19 +158,25 @@ export const HomePage = () => {
           </div>
         </div>
         <div className="mx-12 py-8 px-0">
-          {events.slice(0, 3).map((event) => {
-            <Card
-              key={event.id}
-              eventName={event.name}
-              eventImgUrl={imgs[Math.floor(Math.random() * 3)]}
-              rsvps={event.RSVP}
-              description={event.description}
-              location={event.location}
-              time={event.time}
-              date={event.date}
-              eventId={event.id}
-            />;
-          })}
+          {events.length === 0 ? (
+            <p>Loading events...</p>
+          ) : (
+            events
+              .slice(0, 3)
+              .map((event) => (
+                <Card
+                  key={event.id}
+                  eventName={event.name}
+                  eventImgUrl={imgs[Math.floor(Math.random() * 3)]}
+                  rsvps={event.RSVP}
+                  description={event.description}
+                  location={event.location}
+                  time={event.time}
+                  date={event.date}
+                  eventId={event.id}
+                />
+              ))
+          )}
         </div>
         <Footer />
       </div>
