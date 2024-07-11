@@ -30,19 +30,23 @@ export const Events = () => {
     <>
       <Navbar />
       <div className="mx-12 py-8 px-0">
-        {events.map((event) => (
-          <Card
-            key={event.id}
-            eventName={event.name}
-            eventImgUrl={imgs[Math.floor(Math.random() * 3)]}
-            rsvps={event.RSVP}
-            description={event.description}
-            location={event.location}
-            time={event.time}
-            date={event.date}
-            eventId={event.id}
-          />
-        ))}
+        {events.length === 0 ? (
+          <p>Loading events...</p>
+        ) : (
+          events.map((event) => (
+            <Card
+              key={event.id}
+              eventName={event.name}
+              eventImgUrl={imgs[Math.floor(Math.random() * 3)]}
+              rsvps={event.RSVP}
+              description={event.description}
+              location={event.location}
+              time={event.time}
+              date={event.date}
+              eventId={event.id}
+            />
+          ))
+        )}
       </div>
 
       <Footer />
