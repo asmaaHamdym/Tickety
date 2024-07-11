@@ -19,7 +19,6 @@ export const LogIn = () => {
     email: "",
     password: "",
   });
-  // const [formValidated, setFormValidated] = useState(false);
   const [isLoginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
 
@@ -72,7 +71,6 @@ export const LogIn = () => {
         }
       }
     }
-    // setFormValidated(true);
 
     setLoginLoading(true);
 
@@ -125,7 +123,6 @@ export const LogIn = () => {
                 Kindly input your details below to log in to your account
               </p>
             </div>
-            <span className="my-4 text-[#E33629]">{loginError}</span>
             <div className="mb-2">
               <label
                 htmlFor="email"
@@ -176,7 +173,7 @@ export const LogIn = () => {
             </div>
             <span className="text-[#E33629] m-4">{errors.password}</span>
 
-            <div className="flex justify-between pb-12">
+            <div className="flex justify-between pb-4">
               <div className="mt-8">
                 <input
                   type="checkbox"
@@ -189,6 +186,9 @@ export const LogIn = () => {
               </div>
               <p className="font-semibold">Forgot Password?</p>
             </div>
+            <div className="pb-4 text-center text-lg text-[#E33629]">
+              {loginError}
+            </div>
 
             <button
               type="submit"
@@ -200,7 +200,7 @@ export const LogIn = () => {
               {isLoginLoading ? "Loading..." : "Log into Account"}
             </button>
 
-            <div className="pb-12">
+            <div className="pb-2">
               <button
                 type="button"
                 className="flex justify-center border-2 border-button-border w-full bg-white text-[#412234] font-semibold rounded-lg mb-8 px-8 py-4"
@@ -210,7 +210,8 @@ export const LogIn = () => {
               </button>
             </div>
           </form>
-          <div className="flex justify-center">
+
+          <div className="flex justify-center flex-col items-center">
             <p>
               Don&apos;t have an account?
               <Link to="/create-account" className="ml-2 font-semibold">
