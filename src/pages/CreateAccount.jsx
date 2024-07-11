@@ -26,11 +26,10 @@ export const CreateAccount = () => {
     confirmPassword: "",
     terms: "",
   });
-  // const [formValidated, setFormValidated] = useState(false);
   const [isTermsChecked, setIsTermsChecked] = useState(false);
 
-  const [isLoginLoading, setIsLoginLoading] = useState(false);
-  const [loginError, setLoginError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [signupError, setSignupError] = useState("");
 
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
@@ -104,7 +103,7 @@ export const CreateAccount = () => {
     }
     // setFormValidated(true);
 
-    setIsLoginLoading(true);
+    setIsLoading(true);
     const formDataToSubmit = {
       full_name: formData.name,
       email: formData.email,
@@ -114,13 +113,13 @@ export const CreateAccount = () => {
     axios
       .post(`${api}/auth/register`, formDataToSubmit)
       .then((res) => {
-        setIsLoginLoading(false);
+        setIsLoading(false);
         navigate("/login");
       })
       .catch((err) => {
         console.log(err.response.data.error);
-        setIsLoginLoading(false);
-        setLoginError(err.response.data.error);
+        setIsLoading(false);
+        setSignupError(err.response.data.error);
       });
   };
 
@@ -158,7 +157,7 @@ export const CreateAccount = () => {
                 Kindly input your details below to create your account
               </p>
             </div>
-            <span className="my-4 text-[#E33629]">{loginError}</span>
+
             <div className="mb-4">
               <label
                 htmlFor="name"
@@ -290,15 +289,18 @@ export const CreateAccount = () => {
               </div>
             </div>
 
+            <div className="pb-4 text-center text-lg text-[#E33629]">
+              {signupError}
+            </div>
             <button
               type="submit"
               className={`mb-8 w-full py-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md text-center ${
-                isLoginLoading ? "cursor-not-allowed" : "cursor-pointer"
+                isLoading ? "cursor-not-allowed" : "cursor-pointer"
               }`}
               onClick={handleSubmit}
-              disabled={isLoginLoading}
+              disabled={isLoading}
             >
-              {isLoginLoading ? "Loading...." : "Create an Account"}
+              {isLoading ? "Loading...." : "Create an Account"}
             </button>
 
             <div className="pb-12">
