@@ -4,7 +4,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 export default function DropDown() {
   return (
     <div>
-      <RiArrowDropDownLine size={30} />
+      <RiArrowDropDownLine size={30} className="mt-1"/>
     </div>
   );
 }

@@ -66,17 +66,15 @@ const Navbar = () => {
         <div className="flex ">
           {user ? (
             <>
-              <button className="px-4 py-2  mx-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
-                <Link to="/create-event">Create Event</Link>
-              </button>
-              <Avatar imageUrl={""} name={user.full_name} />
+              <Link to="/create-event"><button className="px-4 py-2  mx-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md"> Create Event </button></Link>
+              <Avatar imageUrl={""} name={user.full_name}/>
               <DropDown />
             </>
           ) : (
             <div>
-              <button className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
-                <Link to="/login">Login</Link>
-              </button>
+              <Link to="/login"><button className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
+                Login
+              </button></Link>
             </div>
           )}
         </div>
