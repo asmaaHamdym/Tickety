@@ -1,8 +1,29 @@
 import back from "../assets/back.png";
-import { Link, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import axios from "axios";
+
+const api = import.meta.env.VITE_APP_API_URL;
 
 const Rsvps = () => {
+  const [event, setEvent] = useState();
   const navigate = useNavigate();
+  const location = useLocation();
+  const id = location.state?.id;
+
+  console.log(id);
+
+  useEffect(() => {
+    axios
+      .get(`${api}/${id}`)
+      .then((res) => {
+        setEvent(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data.error);
+      });
+  }, []);
 
   let data = [
     {
@@ -17,7 +38,6 @@ const Rsvps = () => {
       Name: "Kwame Nkrumah Mensah",
       ContactInformation: "kwame.n.mensah@example.com",
       Date: "2024-08-15",
-      Event: "Ghana Independence Day Celebration",
       Price: "Free",
       Venue: "Virtual",
     },
@@ -25,7 +45,6 @@ const Rsvps = () => {
       Name: "Fatoumata Keita Diallo",
       ContactInformation: "fatoumata.k.diallo@example.com",
       Date: "2024-09-20",
-      Event: "West African Art Exhibition",
       Price: "$30",
       Venue: "Virtual",
     },
@@ -33,7 +52,6 @@ const Rsvps = () => {
       Name: "Njeri Wanjiku Kamau",
       ContactInformation: "njeri.w.kamau@example.com",
       Date: "2024-10-05",
-      Event: "Nairobi Marathon",
       Price: "$20",
       Venue: "Virtual",
     },
@@ -41,7 +59,6 @@ const Rsvps = () => {
       Name: "Thabo Sipho Maseko",
       ContactInformation: "thabo.s.maseko@example.com",
       Date: "2024-11-11",
-      Event: "South African Film Festival",
       Price: "$40",
       Venue: "Virtual",
     },
@@ -49,7 +66,6 @@ const Rsvps = () => {
       Name: "Zainab Yara Conteh",
       ContactInformation: "zainab.y.conteh@example.com",
       Date: "2024-12-25",
-      Event: "Sierra Leone Christmas Concert",
       Price: "$25",
       Venue: "Virtual",
     },
@@ -57,7 +73,6 @@ const Rsvps = () => {
       Name: "Chidera Ifeanyi Okeke",
       ContactInformation: "chidera.i.okeke@example.com",
       Date: "2024-06-18",
-      Event: "Lagos Fashion Week",
       Price: "$100",
       Venue: "Virtual",
     },
@@ -65,7 +80,6 @@ const Rsvps = () => {
       Name: "Adama Kofi Owusu",
       ContactInformation: "adama.k.owusu@example.com",
       Date: "2024-07-01",
-      Event: "Accra Food Festival",
       Price: "$10",
       Venue: "Virtual",
     },
@@ -82,7 +96,9 @@ const Rsvps = () => {
             navigate("/");
           }}
         />
-        <h1 className="text-3xl">Youth Conference RSVP</h1>
+        <h1 className="text-3xl">
+          {event.name}: {event.RSVP} guests
+        </h1>
       </div>
       <div className="flex justify-between items-center">
         <input
@@ -104,7 +120,6 @@ const Rsvps = () => {
         <p className="name">Name</p>
         <p className="contactnfo">Contact Information</p>
         <p className="contactinfo">Date</p>
-        <p className="contactinfo">Event</p>
         <p className="contactinfo">Price</p>
         <p className="contactinfo">Venue</p>
       </div>
@@ -115,7 +130,6 @@ const Rsvps = () => {
               <p className="name">{row.Name}</p>
               <p className="text-[#87909a]">{row.ContactInformation}</p>
               <p className="contactinfo">{row.Date}</p>
-              <p className="text-[#87909a]">{row.Event}</p>
               <p className="contactinfo">{row.Price}</p>
               <p className="contactinfo">{row.Venue}</p>
             </div>

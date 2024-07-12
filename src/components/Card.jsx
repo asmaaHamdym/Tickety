@@ -14,6 +14,9 @@ export const Card = ({
   eventId,
 }) => {
   const navigate = useNavigate();
+  const handleNavigation = (id) => {
+    navigate("/rsvps", { state: { id } });
+  };
 
   return (
     <div className="events-grid">
@@ -40,7 +43,7 @@ export const Card = ({
           <p
             className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0 cursor-pointer"
             onClick={() => {
-              navigate("/rsvps");
+              handleNavigation(eventId);
             }}
           >
             {rsvps} RSVP
