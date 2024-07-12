@@ -21,10 +21,8 @@ export const CreateAccount = () => {
   const [errors, setErrors] = useState({
     name: "",
     email: "",
-    emailInvalid: "",
     password: "",
     confirmPassword: "",
-    terms: "",
   });
   const [isTermsChecked, setIsTermsChecked] = useState(false);
 
@@ -52,7 +50,6 @@ export const CreateAccount = () => {
         });
       }
     }
-    validatePassword();
   };
 
   const validateFormFields = (field) => {
@@ -67,41 +64,59 @@ export const CreateAccount = () => {
       `^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$`
     );
     if (!emailRegex.test(formData.email)) {
-      errors.emailInvalid = "Email is not valid";
+      return false;
     } else {
-      errors.emailInvalid = "";
+      return true;
     }
   };
   const validatePassword = () => {
     if (formData.password !== formData.confirmPassword) {
-      errors.confirmPassword = "Passwords do not match";
+      return false;
     }
+    return true;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (formData.email) {
-      validateEmail();
+    if (formData.email && !validateEmail()) {
+      setErrors({
+        ...errors,
+        emailInvalid: "Email is not valid",
+      });
+      return;
+    } else {
+      errors.emailInvalid = "";
     }
+
+    if (formData.password && !validatePassword()) {
+      setErrors({
+        ...errors,
+        password: "Passwords do not match",
+      });
+      return;
+    } else {
+      errors.password = "";
+    }
+
     for (const [key, value] of Object.entries(formData)) {
       if (!value) {
         validateFormFields(key);
         return;
       }
     }
-
-    validatePassword();
-
     if (!isTermsChecked) {
       setErrors({
         ...errors,
         terms: "You must accept the terms and conditions",
       });
+      return;
     } else {
-      errors.terms = "";
+      setErrors({
+        ...errors,
+        terms: "",
+      });
     }
-    // setFormValidated(true);
 
     setIsLoading(true);
     const formDataToSubmit = {
@@ -243,6 +258,7 @@ export const CreateAccount = () => {
                 id="confirmPassword"
                 name="confirmPassword"
                 minLength={8}
+                value={formData.confirmPassword}
                 className="border-2 p-4 w-full rounded-md"
                 onChange={handleChange}
                 ref={confirmPasswordRef}
@@ -264,7 +280,7 @@ export const CreateAccount = () => {
                 />
               </button>
             </div>
-            <span className="text-[#E33629]">{errors.confirmPassword}</span>
+            <span className="text-[#E33629]">{errors.password}</span>
 
             <div className="flex justify-between pb-12">
               <div className="mt-8">
