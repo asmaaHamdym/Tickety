@@ -1,6 +1,6 @@
 import "../styles/Card.css";
 import locationIcon from "../assets/location.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Card = ({
   eventName,
@@ -11,8 +11,10 @@ export const Card = ({
   location,
   time,
   date,
-  eventId
+  eventId,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="events-grid">
       <img className="w-full h-full rounded-lg" src={eventImgUrl} alt="" />
@@ -35,7 +37,12 @@ export const Card = ({
             </div>
           </div>
 
-          <p className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0">
+          <p
+            className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0 cursor-pointer"
+            onClick={() => {
+              navigate("/rsvps");
+            }}
+          >
             {rsvps} RSVP
           </p>
           <Link to={`/manage-event/${eventId}`}>
@@ -43,7 +50,6 @@ export const Card = ({
               Edit
             </p>
           </Link>
-
         </div>
 
         {/* <div className="speakers">

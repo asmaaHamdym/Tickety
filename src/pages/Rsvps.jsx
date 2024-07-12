@@ -1,6 +1,9 @@
 import back from "../assets/back.png";
+import { Link, useNavigate } from "react-router-dom";
 
 const Rsvps = () => {
+  const navigate = useNavigate();
+
   let data = [
     {
       Name: "Amina Binta Ahmed",
@@ -70,8 +73,15 @@ const Rsvps = () => {
 
   return (
     <div className="bg-[#c4bac0] px-20">
-      <div className="flex items-center pt-8 ob-4 font-semibold">
-        <img src={back} alt="go back icon " className="w-14 h-14 mr-4" />
+      <div className="flex items-center pt-8 ob-4 font-semibold ">
+        <img
+          src={back}
+          alt="go back icon "
+          className="w-14 h-14 mr-4 cursor-pointer"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
         <h1 className="text-3xl">Youth Conference RSVP</h1>
       </div>
       <div className="flex justify-between items-center">
