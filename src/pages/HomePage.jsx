@@ -38,14 +38,6 @@ export const HomePage = () => {
   const { user, handleUser } = useAuthContext();
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      handleUser(foundUser);
-    }
-  }, [handleUser]);
-
-  useEffect(() => {
     axios
       .get(api)
       .then((res) => {
@@ -54,6 +46,11 @@ export const HomePage = () => {
       .catch((err) => {
         console.log(err.response.data.error);
       });
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      handleUser(foundUser);
+    }
   }, []);
 
   return (
