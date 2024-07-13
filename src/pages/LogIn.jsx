@@ -26,8 +26,7 @@ export const LogIn = () => {
   const passwordRef = useRef(null);
   const navigate = useNavigate();
 
-  const { handleUser, handleToken, handleTokenExpiresAt, user } =
-    useAuthContext();
+  const { handleUser, handleToken, handleTokenExpiresAt } = useAuthContext();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -83,6 +82,9 @@ export const LogIn = () => {
         handleUser(res.data.data.user);
         handleToken(res.data.data.jwt.token);
         handleTokenExpiresAt(res.data.data.jwt.expires_at);
+        if (keepLoggedin) {
+          localStorage.setItem("user", JSON.stringify(res.data.data.user));
+        }
         navigate("/create-event");
       })
       .catch((err) => {
@@ -90,9 +92,6 @@ export const LogIn = () => {
         setLoginLoading(false);
         setLoginError(err.response.data.error);
       });
-    if (user && keepLoggedin) {
-      localStorage.setItem("user", JSON.stringify(user));
-    }
   };
   return (
     <div className="h-screen overflow-y-hidden">

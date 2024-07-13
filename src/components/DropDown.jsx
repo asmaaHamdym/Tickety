@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { useAuthContext } from "../store/auth-context";
 
 export default function DropDown() {
   const [arrowOpen, setArrowOpen] = useState(false);
+  const { handleUser } = useAuthContext();
+
+  const handleLogout = () => {
+    handleUser(null);
+    localStorage.clear();
+  };
   return (
     <div>
       <RiArrowDropDownLine
@@ -19,7 +26,10 @@ export default function DropDown() {
             <li className="w-full p-2 hover:text-white hover:bg-[#412234]">
               My Profile
             </li>
-            <li className="w-full p-2 hover:text-white hover:bg-[#412234] ">
+            <li
+              className="w-full p-2 hover:text-white hover:bg-[#412234] "
+              onClick={handleLogout}
+            >
               Sign out
             </li>
           </ul>

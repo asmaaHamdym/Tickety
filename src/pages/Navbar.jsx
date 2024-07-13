@@ -69,7 +69,7 @@ const Navbar = () => {
               <button className="px-4 py-2  mx-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
                 <Link to="/create-event">Create Event</Link>
               </button>
-              <Avatar imageUrl={""} name={user.full_name} />
+              <Avatar imageUrl={""} name={user ? user.full_name : null} />
               <DropDown />
             </>
           ) : (
