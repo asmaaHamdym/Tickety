@@ -28,7 +28,6 @@ export const HomePage = () => {
     "https://thepaintsesh.com/wp-content/uploads/2021/04/corporate-580e8bbf3df78c2c73adc69a-scaled.jpeg",
     "https://cdn.business2community.com/wp-content/uploads/2018/02/community-events.jpeg",
     "https://www.oyorooms.com/blog/wp-content/uploads/2018/03/fe-30.jpg",
-    "https://hire4event.com/blogs/wp-content/uploads/2019/07/Corporate-Event-Planning.jpg",
     "https://i.pinimg.com/originals/48/89/38/488938d6eec996de2365b072357aac16.jpg",
     "https://tse4.mm.bing.net/th?id=OIP.6BnSnib2JesKeZfpjQFRuQHaFI&pid=Api",
     "https://www.adobe.com/content/dam/www/us/en/events/overview-page/eventshub_evergreen_opengraph_1200x630_2x.jpg",
