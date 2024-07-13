@@ -26,7 +26,8 @@ export const LogIn = () => {
   const passwordRef = useRef(null);
   const navigate = useNavigate();
 
-  const { handleUser, handleToken, handleTokenExpiresAt } = useAuthContext();
+  const { handleUser, handleToken, handleTokenExpiresAt, user } =
+    useAuthContext();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -80,8 +81,6 @@ export const LogIn = () => {
       .then((res) => {
         setLoginLoading(false);
         handleUser(res.data.data.user);
-        if (keepLoggedin) localStorage.setItem("user", res.data.data.user);
-        console.log(localStorage.getItem("user"));
         handleToken(res.data.data.jwt.token);
         handleTokenExpiresAt(res.data.data.jwt.expires_at);
         navigate("/create-event");
@@ -91,6 +90,9 @@ export const LogIn = () => {
         setLoginLoading(false);
         setLoginError(err.response.data.error);
       });
+    if (user && keepLoggedin) {
+      localStorage.setItem("user", JSON.stringify(user));
+    }
   };
   return (
     <div className="h-screen overflow-y-hidden">
@@ -182,6 +184,7 @@ export const LogIn = () => {
                   type="checkbox"
                   className="rounded-md text-[#412234]"
                   id="checkbox"
+                  value={keepLoggedin}
                   onChange={() => {
                     setKeepLoggedin(!keepLoggedin);
                   }}
