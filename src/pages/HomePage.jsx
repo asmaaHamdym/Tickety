@@ -35,7 +35,15 @@ export const HomePage = () => {
     "https://skift.com/wp-content/uploads/2018/01/c2.jpg",
   ];
 
-  const { user } = useAuthContext();
+  const { user, handleUser } = useAuthContext();
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      handleUser(foundUser);
+    }
+  }, []);
 
   useEffect(() => {
     axios
