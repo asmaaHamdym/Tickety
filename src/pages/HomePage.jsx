@@ -43,7 +43,7 @@ export const HomePage = () => {
       const foundUser = JSON.parse(loggedInUser);
       handleUser(foundUser);
     }
-  }, []);
+  }, [handleUser]);
 
   useEffect(() => {
     axios
