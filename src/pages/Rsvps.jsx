@@ -96,9 +96,13 @@ const Rsvps = () => {
             navigate("/");
           }}
         />
-        <h1 className="text-3xl">
-          {event.name}: {event.RSVP} guests
-        </h1>
+        {event ? (
+          <h1 className="text-3xl">
+            {event.name}: {event.RSVP} guests{" "}
+          </h1>
+        ) : (
+          <h1 className="text-3xl">Your Event</h1>
+        )}
       </div>
       <div className="flex justify-between items-center">
         <input
@@ -116,7 +120,7 @@ const Rsvps = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-6 gap-4 rounded-t-lg w-full justify-around p-4 font-bold  bg-[#412234] text-white ">
+      <div className="grid grid-cols-5 gap-4 rounded-t-lg w-full justify-around p-4 font-bold  bg-[#412234] text-white ">
         <p className="name">Name</p>
         <p className="contactnfo">Contact Information</p>
         <p className="contactinfo">Date</p>
@@ -126,7 +130,7 @@ const Rsvps = () => {
       {data.map((row) => {
         return (
           <>
-            <div className="grid grid-cols-6 gap-4 w-full justify-around py-8 px-4 bg-white">
+            <div className="grid grid-cols-5 gap-4 w-full justify-around py-8 px-4 bg-white">
               <p className="name">{row.Name}</p>
               <p className="text-[#87909a]">{row.ContactInformation}</p>
               <p className="contactinfo">{row.Date}</p>
