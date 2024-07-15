@@ -10,9 +10,9 @@ const Rsvps = () => {
   const [event, setEvent] = useState();
   const navigate = useNavigate();
   const location = useLocation();
-  const id = location.state?.id;
+  const id = location.state;
 
-  console.log(id);
+  console.log(location.state);
 
   useEffect(() => {
     axios
@@ -93,7 +93,7 @@ const Rsvps = () => {
           alt="go back icon "
           className="w-14 h-14 mr-4 cursor-pointer"
           onClick={() => {
-            navigate("/");
+            navigate(-1);
           }}
         />
         {event ? (

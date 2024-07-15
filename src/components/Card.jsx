@@ -1,6 +1,6 @@
 import "../styles/Card.css";
 import locationIcon from "../assets/location.png";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Card = ({
   eventName,
@@ -14,8 +14,8 @@ export const Card = ({
   eventId,
 }) => {
   const navigate = useNavigate();
-  const handleNavigation = (id) => {
-    navigate("/rsvps", { state: { id } });
+  const handleNavigation = (id, page) => {
+    navigate(`/${page}/${eventId}`, { state: eventId });
   };
 
   return (
@@ -43,16 +43,21 @@ export const Card = ({
           <p
             className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0 cursor-pointer"
             onClick={() => {
-              handleNavigation(eventId);
+              handleNavigation(eventId, "rsvps");
             }}
           >
             {rsvps} RSVP
           </p>
-          <Link to={`/manage-event/${eventId}`}>
-            <p className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0 ml-2">
-              Edit
-            </p>
-          </Link>
+          {/* <Link to={`/manage-event/${eventId}`}> */}
+          <p
+            className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0 ml-2"
+            onClick={() => {
+              handleNavigation(eventId, "manage-event");
+            }}
+          >
+            Edit
+          </p>
+          {/* </Link> */}
         </div>
 
         {/* <div className="speakers">
