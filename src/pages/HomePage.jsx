@@ -48,8 +48,9 @@ export const HomePage = () => {
       });
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
-      console.log(loggedInUser);
-      handleUser(loggedInUser);
+      // console.log(loggedInUser);
+      const foundUser = JSON.parse(loggedInUser);
+      handleUser(foundUser);
     }
   }, []);
 
