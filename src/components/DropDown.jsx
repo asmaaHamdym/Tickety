@@ -18,16 +18,16 @@ export default function DropDown() {
         className="cursor-pointer"
       />
       {arrowOpen && (
-        <div className="w-36 absolute border-2 border-[#412234] right-12 top-20 bg-white rounded-md">
-          <ul className="text-[#412234] font-medium text-lg text-center hover:cursor-pointer">
-            <li className="w-full p-2 hover:text-white hover:bg-[#412234]">
+        <div className="w-36 absolute border-2 border-[#412234] right-0 top-16 bg-white rounded-md">
+          <ul className="text-[#412234] font-medium text-lg text-center hover:cursor-pointer ">
+            <li className="w-full py-4 hover:text-white hover:bg-[#412234]">
               My Events
             </li>
-            <li className="w-full p-2 hover:text-white hover:bg-[#412234]">
+            <li className="w-full py-4 hover:text-white hover:bg-[#412234]">
               My Profile
             </li>
             <li
-              className="w-full p-2 hover:text-white hover:bg-[#412234] "
+              className="w-full py-4 hover:text-white hover:bg-[#412234] "
               onClick={handleLogout}
             >
               Sign out
