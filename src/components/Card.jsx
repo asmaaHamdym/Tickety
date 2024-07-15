@@ -1,6 +1,7 @@
 import "../styles/Card.css";
 import locationIcon from "../assets/location.png";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../store/auth-context";
 
 export const Card = ({
   eventName,
@@ -14,6 +15,8 @@ export const Card = ({
   eventId,
 }) => {
   const navigate = useNavigate();
+  const { user } = useAuthContext();
+
   const handleNavigation = (id, page) => {
     navigate(`/${page}/${eventId}`, { state: eventId });
   };
@@ -48,16 +51,17 @@ export const Card = ({
           >
             {rsvps} RSVP
           </p>
-          {/* <Link to={`/manage-event/${eventId}`}> */}
-          <p
-            className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0 ml-2 cursor-pointer"
-            onClick={() => {
-              handleNavigation(eventId, "manage-event");
-            }}
-          >
-            Edit
-          </p>
-          {/* </Link> */}
+
+          {user && (
+            <p
+              className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0 ml-2 cursor-pointer"
+              onClick={() => {
+                handleNavigation(eventId, "manage-event");
+              }}
+            >
+              Edit
+            </p>
+          )}
         </div>
 
         {/* <div className="speakers">
