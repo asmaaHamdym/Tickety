@@ -50,7 +50,7 @@ export const Card = ({
           </p>
           {/* <Link to={`/manage-event/${eventId}`}> */}
           <p
-            className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0 ml-2"
+            className="text-blue-900 font-semibold border-2 border-purple-700 rounded-md py-3 px-6 inline-block mt-2 md:mt-0 ml-2 cursor-pointer"
             onClick={() => {
               handleNavigation(eventId, "manage-event");
             }}

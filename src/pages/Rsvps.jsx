@@ -12,8 +12,6 @@ const Rsvps = () => {
   const location = useLocation();
   const id = location.state;
 
-  console.log(location.state);
-
   useEffect(() => {
     axios
       .get(`${api}/${id}`)

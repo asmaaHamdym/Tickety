@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ReactFlagsSelect from "react-flags-select";
 import { RiUploadCloudFill } from "react-icons/ri";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
@@ -12,14 +12,37 @@ import DeleteSuccess from "./DeleteSuccess";
 import UpdateSuccess from "./UpdateSuccess";
 import { useForm, Controller } from "react-hook-form";
 import Label from "../components/Label";
+import axios from "axios";
 
 const api = import.meta.env.VITE_APP_API_URL;
 
 const ManageEvent = () => {
   const [fileName, setFileName] = useState("");
+  const [eventData, setEventData] = useState({
+    id: "",
+    name: "",
+    description: "",
+    category: "",
+    location: "",
+    date: "",
+    Time: "",
+    status: "",
+    RSVP: "",
+  });
   const location = useLocation();
-  const id = location.state?.id;
+  const id = location.state;
   const [isModalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`${api}/${id}`)
+      .then((res) => {
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data.error);
+      });
+  }, []);
 
   const {
     register,
@@ -48,7 +71,7 @@ const ManageEvent = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await updateEvent(formData.id, formData);
+      const response = await updateEvent(id, formData);
       console.log("Event updated successfully:", response);
     } catch (error) {
       console.error("An error occurred:", error);
@@ -59,7 +82,7 @@ const ManageEvent = () => {
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
-      const response = await deleteEvent(formData.id);
+      const response = await deleteEvent(id);
       console.log("User deleted successfully:", response);
       // setFormData(initialState)
     } catch (error) {
