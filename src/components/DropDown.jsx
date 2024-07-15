@@ -8,7 +8,7 @@ export default function DropDown() {
 
   const handleLogout = () => {
     handleUser(null);
-    localStorage.clear();
+    localStorage.removeItem("user");
   };
   return (
     <div>
