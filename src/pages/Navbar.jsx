@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../store/auth-context";
 import DropDown from "../components/DropDown";
-import Avatar from "../components/Avatar";
+// import Avatar from "../components/Avatar";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -63,11 +63,15 @@ const Navbar = () => {
       </nav>
 
       <div className="flex">
-        <div className="flex ">
+        <div className="flex items-center">
           {user ? (
             <>
               <Link to="/create-event"><button className="px-4 py-2  mx-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md"> Create Event </button></Link>
               <Avatar imageUrl={""} name={user.full_name}/>
+              <div className="border-[#806B77] border-2 rounded-full h-6 w-6 flex items-center justify-center">
+                <span className="capitalize">{user.full_name[0]}</span>
+              </div>
+              {/* <Avatar imageUrl={""} name={user ? user.full_name : null} /> */}
               <DropDown />
             </>
           ) : (

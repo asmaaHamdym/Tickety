@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     element: <CreateEvent />,
   },
   {
-    path: "/rsvps",
+    path: "/rsvps/:eventId",
     element: <Rsvps />,
   },
   {

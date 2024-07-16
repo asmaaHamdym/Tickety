@@ -21,6 +21,7 @@ export const LogIn = () => {
   });
   const [isLoginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [keepLoggedin, setKeepLoggedin] = useState(false);
 
   const passwordRef = useRef(null);
   const navigate = useNavigate();
@@ -81,6 +82,9 @@ export const LogIn = () => {
         handleUser(res.data.data.user);
         handleToken(res.data.data.jwt.token);
         handleTokenExpiresAt(res.data.data.jwt.expires_at);
+        if (keepLoggedin) {
+          localStorage.setItem("user", JSON.stringify(res.data.data.user));
+        }
         navigate("/create-event");
       })
       .catch((err) => {
@@ -179,6 +183,10 @@ export const LogIn = () => {
                   type="checkbox"
                   className="rounded-md text-[#412234]"
                   id="checkbox"
+                  value={keepLoggedin}
+                  onChange={() => {
+                    setKeepLoggedin(!keepLoggedin);
+                  }}
                 />
                 <label htmlFor="checkbox" className="pl-3">
                   Keep me Logged in

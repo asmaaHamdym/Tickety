@@ -1,25 +1,25 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext(null);
 
 export const useAuthContext = () => useContext(AuthContext);
-  
-export function AuthProvider({children}){
+
+export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState("");
-  const [tokenExpiressAt, setTokenExpiresAt] = useState("")
+  const [tokenExpiressAt, setTokenExpiresAt] = useState("");
 
   const handleUser = (user) => {
-    setUser(user)
-  }
+    setUser(user);
+  };
 
   const handleToken = (token) => {
-    setToken(token)
-  }
+    setToken(token);
+  };
 
   const handleTokenExpiresAt = (date) => {
-    setTokenExpiresAt(date)
-  }
+    setTokenExpiresAt(date);
+  };
 
   return (
     <AuthContext.Provider
@@ -29,9 +29,10 @@ export function AuthProvider({children}){
         token,
         handleToken,
         tokenExpiressAt,
-        handleTokenExpiresAt
-      }}>
-        {children}
+        handleTokenExpiresAt,
+      }}
+    >
+      {children}
     </AuthContext.Provider>
-  )
+  );
 }
