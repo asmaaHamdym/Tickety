@@ -29,7 +29,7 @@ const ManageEvent = () => {
     Time: "",
     status: "",
     RSVP: "",
-  // });
+   });
   // const navigate = useNavigate();
   const location = useLocation();
   const id = location.state;
