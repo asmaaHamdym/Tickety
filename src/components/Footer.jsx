@@ -166,7 +166,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <p className="bg-white text-center text-lg py-4">
+        <p className="bg-white text-center text-lg py-4 bottom-0">
           &copy; All right reserved 2024
         </p>
       </footer>

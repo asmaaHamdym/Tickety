@@ -1,22 +1,29 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
 import ReactFlagsSelect from "react-flags-select";
 import { RiUploadCloudFill } from "react-icons/ri";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
-import Navbar from './Navbar';
-import uploadImage from '../assets/upload.png'
-import Input from '../components/Input';
-import { updateEvent } from '../api/UpdateEvent';
-import { deleteEvent } from '../api/DeleteEvent';
-import { Link, useParams } from 'react-router-dom';
-import UpdateSuccess from './UpdateSuccess';
-import { useForm, Controller} from 'react-hook-form';
-import Label from '../components/Label';
-import axios from 'axios';
+import Navbar from "./Navbar";
+import uploadImage from "../assets/upload.png";
+import Input from "../components/Input";
+import { updateEvent } from "../api/UpdateEvent";
+import { deleteEvent } from "../api/DeleteEvent";
+import { Link, useParams, useLocation } from "react-router-dom";
+import UpdateSuccess from "./UpdateSuccess";
+import { useForm, Controller } from "react-hook-form";
+import Label from "../components/Label";
+import axios from "axios";
 
 const api = import.meta.env.VITE_APP_API_URL;
+const options = [
+  { value: "Party" },
+  { value: "Conference" },
+  { value: "Concert" },
+  { value: "Tech Event" },
+  { value: "Other" },
+];
 
 const ManageEvent = () => {
-  const { eventId } = useParams()
+  const { eventId } = useParams();
 
   const [fileName, setFileName] = useState("");
   const [eventData, setEventData] = useState({
@@ -29,7 +36,7 @@ const ManageEvent = () => {
     Time: "",
     status: "",
     RSVP: "",
-   });
+  });
   // const navigate = useNavigate();
   const location = useLocation();
   const id = location.state;
@@ -59,7 +66,7 @@ const ManageEvent = () => {
   });
 
   const inputRef = useRef(null);
-  const nameRef = useRef(null)
+  const nameRef = useRef(null);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
@@ -72,20 +79,21 @@ const ManageEvent = () => {
   };
 
   useEffect(() => {
-    axios.get(`${api}/${eventId}`)
-    .then((res) => {
-      console.log(res.data.data)
-      nameRef.current = "dummy name"
-    })
-    .catch((err) => {
-      console.log("error loading data")
-    });
-  }, [eventId])
+    axios
+      .get(`${api}/${eventId}`)
+      .then((res) => {
+        console.log(res.data.data);
+        nameRef.current = "dummy name";
+      })
+      .catch((err) => {
+        console.log("error loading data");
+      });
+  }, [eventId]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await updateEvent(id, formData);
+      const response = await updateEvent(id, eventData);
       console.log("Event updated successfully:", response);
     } catch (error) {
       console.error("An error occurred:", error);
@@ -178,14 +186,15 @@ const ManageEvent = () => {
                 )}
               </div>
 
-              <form className='mt-3' onSubmit={handleSubmit(handleUpdate)}>
+              <form className="mt-3" onSubmit={handleSubmit(handleUpdate)}>
                 <div className="mb-3">
                   <Label htmlFor="event name">Event Name</Label>
-                  <Input 
-                    type="text" 
-                    id="name" 
+                  <Input
+                    type="text"
+                    id="name"
+                    value={eventData.name}
                     ref={nameRef}
-                    name="name" 
+                    name="name"
                     register={register}
                     required
                     placeholder="Enter event name"
@@ -203,6 +212,7 @@ const ManageEvent = () => {
                     type="text"
                     id="description"
                     name="description"
+                    value={eventData.description}
                     {...register("description", {
                       required: "Event description is required",
                     })}
@@ -229,21 +239,16 @@ const ManageEvent = () => {
                     <option disabled value="">
                       Select event category
                     </option>
-                    <option value="party" className="text-[#212D3A]">
-                      Party
-                    </option>
-                    <option value="conference" className="text-[#212D3A]">
-                      Conference
-                    </option>
-                    <option value="concert" className="text-[#212D3A]">
-                      Concert
-                    </option>
-                    <option value="tech" className="text-[#212D3A]">
-                      Tech Event
-                    </option>
-                    <option value="others" className="text-[#212D3A]">
-                      Others
-                    </option>
+                    {options.map((option) => (
+                      <option
+                        key={option.value}
+                        selected={eventData.category === option.value}
+                        value={option.value}
+                        className="text-[#212D3A]"
+                      >
+                        {option.value}
+                      </option>
+                    ))}
                   </select>
                   {errors.category && (
                     <p className=" text-[#E33629] text-sm">
@@ -318,6 +323,7 @@ const ManageEvent = () => {
                     type="number"
                     id="RSVP"
                     name="RSVP"
+                    value={eventData.RSVP}
                     register={register}
                     required
                     placeholder="Enter RSVP Number"
@@ -327,12 +333,14 @@ const ManageEvent = () => {
                   )}
                 </div>
 
-                <div className='mt-4 flex justify-between gap-2'>
+                <div className="mt-4 flex justify-between gap-2">
                   {/* <button onClick={handleDelete} className='md:w-2/5 px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'>Delete Event</button> */}
                   {/* <DeleteSuccess isOpen={isModalOpen} closeModal={closeModal}/> */}
-                  
-                  <button className= 'md:w-2/5 px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md'>Save Changes</button>
-                  <UpdateSuccess isOpen={isModalOpen} closeModal={closeModal}/>
+
+                  <button className="md:w-2/5 px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
+                    Save Changes
+                  </button>
+                  <UpdateSuccess isOpen={isModalOpen} closeModal={closeModal} />
                 </div>
               </form>
             </div>
