@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ReactFlagsSelect from "react-flags-select";
 import { RiUploadCloudFill } from "react-icons/ri";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
@@ -7,15 +7,18 @@ import uploadImage from '../assets/upload.png'
 import Input from '../components/Input';
 import { updateEvent } from '../api/UpdateEvent';
 import { deleteEvent } from '../api/DeleteEvent';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import DeleteSuccess from './DeleteSuccess';
 import UpdateSuccess from './UpdateSuccess';
 import { useForm, Controller} from 'react-hook-form';
 import Label from '../components/Label';
+import axios from 'axios';
 
 const api = import.meta.env.VITE_APP_API_URL;
 
 const ManageEvent = () => {
+  const { eventId } = useParams()
+
   const [fileName, setFileName] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -34,6 +37,7 @@ const ManageEvent = () => {
   );
   
   const inputRef = useRef(null);
+  const nameRef = useRef(null)
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false)
@@ -45,6 +49,17 @@ const ManageEvent = () => {
       setFileName(file.name);
     }
   };
+
+  useEffect(() => {
+    axios.get(`${api}/${eventId}`)
+    .then((res) => {
+      console.log(res.data.data)
+      nameRef.current = "dummy name"
+    })
+    .catch((err) => {
+      console.log("error loading data")
+    });
+  }, [eventId])
 
   const handleUpdate = async (e) => {
     e.preventDefault()
@@ -108,12 +123,13 @@ const ManageEvent = () => {
                 )}
               </div>
 
-              <form className='mt-3'>
+              <form className='mt-3' onSubmit={handleSubmit(handleUpdate)}>
                 <div className="mb-3">
                   <Label htmlFor="event name">Event Name</Label>
                   <Input 
                     type="text" 
                     id="name" 
+                    ref={nameRef}
                     name="name" 
                     register={register}
                     required 
@@ -232,10 +248,11 @@ const ManageEvent = () => {
                 </div>
 
                 <div className='mt-4 flex justify-between gap-2'>
-                  <button onClick={handleDelete} className='md:w-2/5 px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'>Delete Event</button>
+                  {/* <button onClick={handleDelete} className='md:w-2/5 px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'>Delete Event</button> */}
+                  {/* <DeleteSuccess isOpen={isModalOpen} closeModal={closeModal}/> */}
+                  
+                  <button className= 'md:w-2/5 px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md'>Save Changes</button>
                   <UpdateSuccess isOpen={isModalOpen} closeModal={closeModal}/>
-                  <button onClick={handleUpdate} className= 'md:w-2/5 px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md'>Save Changes</button>
-                  <DeleteSuccess isOpen={isModalOpen} closeModal={closeModal}/>
                 </div>
               
             </form>
