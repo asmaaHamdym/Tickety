@@ -7,7 +7,7 @@ import uploadImage from "../assets/upload.png";
 import Input from "../components/Input";
 import { updateEvent } from "../api/UpdateEvent";
 import { deleteEvent } from "../api/DeleteEvent";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import DeleteSuccess from "./DeleteSuccess";
 import UpdateSuccess from "./UpdateSuccess";
 import { useForm, Controller } from "react-hook-form";
@@ -29,6 +29,7 @@ const ManageEvent = () => {
     status: "",
     RSVP: "",
   });
+  // const navigate = useNavigate();
   const location = useLocation();
   const id = location.state;
   const [isModalOpen, setModalOpen] = useState(false);
@@ -37,7 +38,7 @@ const ManageEvent = () => {
     axios
       .get(`${api}/${id}`)
       .then((res) => {
-        console.log(res.data.data);
+        setEventData(res.data.data);
       })
       .catch((err) => {
         console.log(err.response.data.error);
@@ -103,16 +104,23 @@ const ManageEvent = () => {
                 size={40}
               />
             </Link>
-            <div className="font-bold text-2xl">My Events</div>
+            {eventData ? (
+              <div className="font-bold text-2xl">{eventData.name}</div>
+            ) : (
+              <div className="font-bold text-2xl">My Events</div>
+            )}
           </div>
 
-          <div>
-            <Link to="/rsvp">
-              <button className="px-10 py-2 bg-[#412234] text-white font-semibold rounded shadow-md">
-                View RSVP
-              </button>
-            </Link>
-          </div>
+          {/* <div>
+            <button
+              className="px-10 py-2 bg-[#412234] text-white font-semibold rounded shadow-md"
+              onClick={() => {
+                navigate(`/rsvps/${id}`);
+              }}
+            >
+              View RSVP
+            </button>
+          </div> */}
         </div>
 
         <div className="md:w-3/4 w-full items-center mx-auto">
