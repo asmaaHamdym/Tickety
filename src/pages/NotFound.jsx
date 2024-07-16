@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const NotFound = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <main className="bg-[#412234] w-full h-screen flex flex-col justify-center items-center">
@@ -10,12 +12,20 @@ export const NotFound = () => {
         <p className="font-bold  text-white mb-8">
           WE ARE SORRY, BUT THE PAGE YOU REQUESTED WAS NOT FOUND
         </p>
-        <Link
-          to="/"
-          className="block text-lg text-[#412234] bg-white rounded-3xl px-8 py-4"
-        >
-          Go Home
-        </Link>
+        <div className="flex gap-5">
+          <Link
+            to="/"
+            className="block text-lg text-[#412234] bg-white rounded-3xl px-8 py-4"
+          >
+            Go Home
+          </Link>
+          <button
+            className="block text-lg text-[#412234] bg-white rounded-3xl px-8 py-4"
+            onClick={() => navigate(-1)}
+          >
+            Go back
+          </button>
+        </div>
       </main>
     </>
   );

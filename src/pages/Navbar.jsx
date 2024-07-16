@@ -66,19 +66,26 @@ const Navbar = () => {
         <div className="flex items-center">
           {user ? (
             <>
-              <Link to="/create-event"><button className="px-4 py-2  mx-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md"> Create Event </button></Link>
-              <Avatar imageUrl={""} name={user.full_name}/>
+              <Link to="/create-event">
+                <button className="px-4 py-2  mx-4 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
+                  {" "}
+                  Create Event{" "}
+                </button>
+              </Link>
+
               <div className="border-[#806B77] border-2 rounded-full h-6 w-6 flex items-center justify-center">
                 <span className="capitalize">{user.full_name[0]}</span>
               </div>
-              {/* <Avatar imageUrl={""} name={user ? user.full_name : null} /> */}
+
               <DropDown />
             </>
           ) : (
             <div>
-              <Link to="/login"><button className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
-                Login
-              </button></Link>
+              <Link to="/login">
+                <button className="px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
+                  Login
+                </button>
+              </Link>
             </div>
           )}
         </div>
