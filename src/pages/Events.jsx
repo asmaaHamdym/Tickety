@@ -29,7 +29,7 @@ export const Events = () => {
 
   useEffect(() => {
     axios
-      .get(api)
+      .get(`${api}/events`)
       .then((res) => {
         setEvents(res.data.data);
       })

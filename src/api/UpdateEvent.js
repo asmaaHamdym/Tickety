@@ -2,22 +2,22 @@ const api = import.meta.env.VITE_APP_API_URL;
 
 export const updateEvent = async (id, body) => {
   const url = `${api}/:${id}`; // Adjust the endpoint as needed
-  console.log(url)
+  console.log(url);
   try {
     const response = await fetch(url, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     });
-    console.log(await response.json())
+    console.log(await response.json());
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    return await response.json();
+    return await response;
   } catch (error) {
-    console.error('An error occurred:', error);
+    console.error("An error occurred:", error);
   }
 };

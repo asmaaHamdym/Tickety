@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
 
   const handleToken = (token) => {
     setToken(token);
+    // console.log(token);
   };
 
   const handleTokenExpiresAt = (date) => {

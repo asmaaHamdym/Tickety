@@ -78,6 +78,7 @@ export const LogIn = () => {
     axios
       .post(`${api}/auth/login`, formData)
       .then((res) => {
+        console.log(res.data.data);
         setLoginLoading(false);
         handleUser(res.data.data.user);
         handleToken(res.data.data.jwt.token);

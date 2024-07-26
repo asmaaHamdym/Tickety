@@ -8,13 +8,24 @@ import Input from "../components/Input";
 import EventSuccess from "./EventSuccess";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
-import { useForm, Controller} from 'react-hook-form';
+import { useForm, Controller } from "react-hook-form";
 import Label from "../components/Label";
 import axios from "axios";
+import { useAuthContext } from "../store/auth-context";
 
 const api = import.meta.env.VITE_APP_API_URL;
 
+const options = [
+  { value: "party", label: "Party" },
+  { value: "confernece", label: "Conference" },
+  { value: "concert", label: "Concert" },
+  { value: "tech", label: "Tech Event" },
+  { value: "other", label: "Other" },
+];
+
 const CreateEvent = () => {
+  const { token, user } = useAuthContext();
+
   const [fileName, setFileName] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
   const [loginError, setLoginError] = useState("");
@@ -24,15 +35,13 @@ const CreateEvent = () => {
     register,
     handleSubmit,
     control,
-    formState: { errors }
-  } = useForm(
-    {
-      defaultValues:{
-        category:'',
-        location: ''
-      }
-    }
-  );
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      category: "",
+      location: "",
+    },
+  });
 
   const inputRef = useRef(null);
   const navigate = useNavigate();
@@ -58,27 +67,42 @@ const CreateEvent = () => {
     // }
     setLoginIsLoading(true);
 
-    axios.post(api, data)
-      .then(res => {
+    axios
+      .post(`${api}/events`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
         setLoginIsLoading(false);
         openModal();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.response.data.error);
         setLoginIsLoading(false);
-        setLoginError(err.response.data.error)
-      })
-
+        setLoginError(err.response.data.error);
+      });
   };
 
   return (
     <>
       {/* <Navbar /> */}
       <div className="flex w-full">
-        <EventSuccess isOpen={isModalOpen} closeModal={closeModal}/>
-        <div className="hidden md:block w-1/3 bg-center bg-cover" style={{ backgroundImage: `url(${eventImage})` }}>
+        <EventSuccess isOpen={isModalOpen} closeModal={closeModal} />
+        <div
+          className="hidden md:block w-1/3 bg-center bg-cover"
+          style={{ backgroundImage: `url(${eventImage})` }}
+        >
           <div className="flex">
-            <Link onClick={() => navigate(-1)}><FaArrowAltCircleLeft className='arrow-icon mt-8 ml-8 cursor-pointer' fill="white" size={45}/></Link>
+            <Link onClick={() => navigate(-1)}>
+              <FaArrowAltCircleLeft
+                className="arrow-icon mt-8 ml-8 cursor-pointer"
+                fill="white"
+                size={45}
+              />
+            </Link>
             <img
               src={tickety}
               alt="Logo Icon"
@@ -119,7 +143,8 @@ const CreateEvent = () => {
               >
                 <RiUploadCloudFill className="mx-auto upload-icon" size={20} />
                 <p className="text-[#412234] flex justify-center text-sm font-semibold">
-                  Upload Photos <br/>and Video
+                  Upload Photos <br />
+                  and Video
                 </p>
               </button>
             </div>
@@ -143,7 +168,11 @@ const CreateEvent = () => {
                 required
                 placeholder="Enter event name"
               />
-              {errors.name && <p className=" text-[#E33629] text-sm">Event name is required</p>}
+              {errors.name && (
+                <p className=" text-[#E33629] text-sm">
+                  Event name is required
+                </p>
+              )}
             </div>
 
             <div className="mb-3">
@@ -153,12 +182,16 @@ const CreateEvent = () => {
                 id="description"
                 name="description"
                 {...register("description", {
-                  required: "Event description is required"
+                  required: "Event description is required",
                 })}
                 className="mt-1 px-3 py-2 bg-[#eaecee] border-2 shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm border-[#C4BAC0] placeholder:text-[#9FA7AF]"
                 placeholder="Describe your event"
               />
-              {errors.description && <p className=" text-[#E33629] text-sm">{errors.description.message}</p>}
+              {errors.description && (
+                <p className=" text-[#E33629] text-sm">
+                  {errors.description.message}
+                </p>
+              )}
             </div>
 
             <div className="mb-3">
@@ -167,30 +200,29 @@ const CreateEvent = () => {
                 id="category"
                 name="category"
                 {...register("category", {
-                  required: "Select an event category"
+                  required: "Select an event category",
                 })}
                 className="w-full px-3 py-3 text-sm bg-[#eaecee] border-2  border-[#C4BAC0] rounded-md shadow-sm focus:outline-none focus:border-sky-500"
               >
                 <option disabled value="">
                   Select event category
                 </option>
-                <option value="party" className="text-[#212D3A]">
-                  Party
-                </option>
-                <option value="conference" className="text-[#212D3A]">
-                  Conference
-                </option>
-                <option value="concert" className="text-[#212D3A]">
-                  Concert
-                </option>
-                <option value="tech" className="text-[#212D3A]">
-                  Tech Event
-                </option>
-                <option value="others" className="text-[#212D3A]">
-                  Others
-                </option>
+                {options.map((option) => (
+                  <option
+                    key={option.value}
+                    // selected={eventpreData.category === option.value}
+                    value={option.value}
+                    className="text-[#212D3A]"
+                  >
+                    {option.label}
+                  </option>
+                ))}
               </select>
-              {errors.category && <p className=" text-[#E33629] text-sm">{errors.category.message}</p>}
+              {errors.category && (
+                <p className=" text-[#E33629] text-sm">
+                  {errors.category.message}
+                </p>
+              )}
             </div>
 
             <div className="mb-3">
@@ -199,7 +231,7 @@ const CreateEvent = () => {
                 name="location"
                 id="location"
                 control={control}
-                rules={{required: true}}
+                rules={{ required: true }}
                 render={({ field }) => (
                   <ReactFlagsSelect
                     {...field}
@@ -210,7 +242,9 @@ const CreateEvent = () => {
                   />
                 )}
               />
-              {errors.location && <p className="text-[#E33629] text-sm">Location is required</p>}
+              {errors.location && (
+                <p className="text-[#E33629] text-sm">Location is required</p>
+              )}
             </div>
 
             <div className="mb-3">
@@ -224,7 +258,11 @@ const CreateEvent = () => {
                 placeholder="Enter event date"
                 className="date-input"
               />
-              {errors.date && <p className=" text-[#E33629] text-sm">Event date is required</p>}
+              {errors.date && (
+                <p className=" text-[#E33629] text-sm">
+                  Event date is required
+                </p>
+              )}
             </div>
 
             <div className="mb-3">
@@ -238,7 +276,11 @@ const CreateEvent = () => {
                 placeholder="Enter event time"
                 className="time-input"
               />
-              {errors.time && <p className=" text-[#E33629] text-sm">Event time is required</p>}
+              {errors.time && (
+                <p className=" text-[#E33629] text-sm">
+                  Event time is required
+                </p>
+              )}
             </div>
 
             <div className="mb-3">
@@ -251,11 +293,16 @@ const CreateEvent = () => {
                 required
                 placeholder="Enter RSVP Number"
               />
-              {errors.RSVP && <p className=" text-[#E33629] text-sm">RSVP is required</p>}
+              {errors.RSVP && (
+                <p className=" text-[#E33629] text-sm">RSVP is required</p>
+              )}
             </div>
 
             <div className="mt-4">
-              <button type= "submit" className="px-4 py-2 w-full bg-[#412234] text-white font-semibold rounded shadow-md">
+              <button
+                type="submit"
+                className="px-4 py-2 w-full bg-[#412234] text-white font-semibold rounded shadow-md"
+              >
                 {loginIsLoading ? "Loading..." : "Continue"}
               </button>
             </div>

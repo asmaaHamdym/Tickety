@@ -15,11 +15,11 @@ import axios from "axios";
 
 const api = import.meta.env.VITE_APP_API_URL;
 const options = [
-  { value: "Party" },
-  { value: "Conference" },
-  { value: "Concert" },
-  { value: "Tech Event" },
-  { value: "Other" },
+  { value: "party", label: "Party" },
+  { value: "confernece", label: "Conference" },
+  { value: "concert", label: "Concert" },
+  { value: "tech", label: "Tech Event" },
+  { value: "other", label: "Other" },
 ];
 
 const ManageEvent = () => {
@@ -37,6 +37,7 @@ const ManageEvent = () => {
     status: "",
     RSVP: "",
   });
+  const [selectedCategory, setSelectedCategory] = useState("");
   // const navigate = useNavigate();
   const location = useLocation();
   const id = location.state;
@@ -51,6 +52,7 @@ const ManageEvent = () => {
       .catch((err) => {
         console.log(err.response.data.error);
       });
+    console.log(eventData);
   }, []);
 
   const {
@@ -60,8 +62,8 @@ const ManageEvent = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      category: "",
-      location: "",
+      category: eventData.category,
+      location: eventData.location,
     },
   });
 
@@ -77,21 +79,26 @@ const ManageEvent = () => {
       setFileName(file.name);
     }
   };
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
 
-  useEffect(() => {
-    axios
-      .get(`${api}/${eventId}`)
-      .then((res) => {
-        console.log(res.data.data);
-        nameRef.current = "dummy name";
-      })
-      .catch((err) => {
-        console.log("error loading data");
-      });
-  }, [eventId]);
+    setEventData({
+      ...eventData,
+      [id]: value,
+    });
+    console.log(eventData);
+  };
+
+  const handleCategeoryChange = (e) => {
+    console.log(e.target.value);
+
+    setSelectedCategory(e.target.value);
+    setEventData({ ...eventData, category: selectedCategory });
+    console.log(eventData);
+  };
 
   const handleUpdate = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       const response = await updateEvent(id, eventData);
       console.log("Event updated successfully:", response);
@@ -102,7 +109,7 @@ const ManageEvent = () => {
   };
 
   const handleDelete = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       const response = await deleteEvent(id);
       console.log("User deleted successfully:", response);
@@ -193,6 +200,7 @@ const ManageEvent = () => {
                     type="text"
                     id="name"
                     value={eventData.name}
+                    onChange={handleInputChange}
                     ref={nameRef}
                     name="name"
                     register={register}
@@ -213,6 +221,7 @@ const ManageEvent = () => {
                     id="description"
                     name="description"
                     value={eventData.description}
+                    onChange={handleInputChange}
                     {...register("description", {
                       required: "Event description is required",
                     })}
@@ -231,14 +240,13 @@ const ManageEvent = () => {
                   <select
                     id="category"
                     name="category"
+                    value={eventData.category}
+                    onChange={(e) => handleCategeoryChange(e)}
                     {...register("category", {
                       required: "Select an event category",
                     })}
                     className="w-full px-3 py-3 text-sm bg-[#eaecee] border-2  border-[#C4BAC0] rounded-md shadow-sm focus:outline-none focus:border-sky-500"
                   >
-                    <option disabled value="">
-                      Select event category
-                    </option>
                     {options.map((option) => (
                       <option
                         key={option.value}
@@ -246,7 +254,7 @@ const ManageEvent = () => {
                         value={option.value}
                         className="text-[#212D3A]"
                       >
-                        {option.value}
+                        {option.label}
                       </option>
                     ))}
                   </select>
@@ -287,6 +295,7 @@ const ManageEvent = () => {
                     type="date"
                     id="date"
                     name="date"
+                    value={eventData.date}
                     register={register}
                     required
                     placeholder="Enter event date"
@@ -305,6 +314,7 @@ const ManageEvent = () => {
                     type="time"
                     id="time"
                     name="time"
+                    value={eventData.Time}
                     register={register}
                     required
                     placeholder="Enter event time"
@@ -337,7 +347,10 @@ const ManageEvent = () => {
                   {/* <button onClick={handleDelete} className='md:w-2/5 px-4 py-2 bg-white text-[#412234] font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#412234] focus:ring-opacity-75 border-[#412234] border-2'>Delete Event</button> */}
                   {/* <DeleteSuccess isOpen={isModalOpen} closeModal={closeModal}/> */}
 
-                  <button className="md:w-2/5 px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md">
+                  <button
+                    type="submit"
+                    className="md:w-2/5 px-4 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md"
+                  >
                     Save Changes
                   </button>
                   <UpdateSuccess isOpen={isModalOpen} closeModal={closeModal} />
