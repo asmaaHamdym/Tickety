@@ -167,7 +167,7 @@ const Footer = () => {
           </div>
         </div>
         <p className="bg-white text-center text-lg py-4 bottom-0">
-          &copy; All right reserved 2024
+          &copy; All right reserved {new Date().getFullYear()}
         </p>
       </footer>
     </>
