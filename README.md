@@ -1,12 +1,13 @@
 
 
 # Tickety Event Management Platform
-A robust event management platform built on React, Node.js, Express, and MongoDB, inspired by this Figma design.https://www.figma.com/design/4uLGbs4BaKjhQURRl3fTVW/Group-10-Project?node-id=130-1019
+A robust event management platform built on React, Node.js, Express, and MongoDB, inspired by this (Figma design)[https://www.figma.com/design/4uLGbs4BaKjhQURRl3fTVW/Group-10-Project?node-id=130-1019]
 
 ## Overview
 This project is a full-stack event management platform designed to streamline event creation, management, and attendee engagement. It incorporates a visually appealing user interface crafted using React, React Router, Toastify, and Tailwind CSS, while the backend leverages Node.js, Express, and MongoDB for efficient data handling and storage.
 
-## Tech Stack:## Frontend
+## Tech Stack:
+## Frontend
 - React: For building the user interface.
 - React Router: For handling navigation and routing.
 - Toastify: For displaying notifications.
