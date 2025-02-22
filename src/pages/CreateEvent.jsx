@@ -25,7 +25,7 @@ const options = [
 
 const CreateEvent = () => {
   const { token, user } = useAuthContext();
-
+  console.log(token);
   const [fileName, setFileName] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
   const [loginError, setLoginError] = useState("");
