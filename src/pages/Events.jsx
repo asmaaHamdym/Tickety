@@ -12,7 +12,60 @@ import axios from "axios";
 const api = import.meta.env.VITE_APP_API_URL;
 
 export const Events = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([
+    {
+      id: 1,
+      title: "Annual Tech Conference",
+      date: "2024-03-15",
+      time: "9:00 AM - 5:00 PM",
+      location: "San Francisco, CA",
+      description: "A gathering of the brightest minds in technology.",
+      category: "Technology",
+      attendees: 5000,
+    },
+    {
+      id: 2,
+      title: "Local Art Fair",
+      date: "2024-04-20",
+      time: "10:00 AM - 6:00 PM",
+      location: "Central Park, New York",
+      description: "Showcasing the works of local artists and artisans.",
+      category: "Arts & Culture",
+      attendees: 1000,
+    },
+    {
+      id: 3,
+      title: "Summer Music Festival",
+      date: "2024-06-22",
+      time: "12:00 PM - 10:00 PM",
+      location: "Grant Park, Chicago",
+      description: "A weekend of live music from various genres.",
+      category: "Music",
+      attendees: 20000,
+    },
+    {
+      id: 4,
+      title: "Coding Bootcamp Open House",
+      date: "2024-07-10",
+      time: "6:00 PM - 8:00 PM",
+      location: "Online",
+      description:
+        "Learn about our intensive coding programs and career opportunities.",
+      category: "Education",
+      attendees: 500,
+    },
+    {
+      id: 5,
+      title: "Community Cleanup Day",
+      date: "2024-09-07",
+      time: "9:00 AM - 12:00 PM",
+      location: "Riverside Park",
+      description:
+        "Join us in cleaning up our local park and making it a better place.",
+      category: "Community",
+      attendees: 100,
+    },
+  ]);
   const imgs = [
     eventImgOne,
     eventImgThree,
@@ -27,16 +80,16 @@ export const Events = () => {
     "https://skift.com/wp-content/uploads/2018/01/c2.jpg",
   ];
 
-  useEffect(() => {
-    axios
-      .get(`${api}/events`)
-      .then((res) => {
-        setEvents(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data.error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${api}/events`)
+  //     .then((res) => {
+  //       setEvents(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.response.data.error);
+  //     });
+  // }, []);
 
   return (
     <>
