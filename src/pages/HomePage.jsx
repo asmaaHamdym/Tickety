@@ -217,7 +217,7 @@ export const HomePage = () => {
           </div>
           <div className="mt-4 text-left">
             <button className="px-10 py-2 bg-[#412234] text-white font-semibold rounded-lg shadow-md ">
-              <Link to="events">View All</Link>
+              <Link to="events">See More Events</Link>
             </button>
           </div>
         </div>
