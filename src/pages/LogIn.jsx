@@ -1,12 +1,12 @@
 import { useState, useRef } from "react";
 import tickety from "../assets/tickety.png";
-import googleImg from "../assets/google.png";
 import togglePassword from "../assets/tooglePassword.png";
 import eventImage from "../assets/events-image.png";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuthContext } from "../store/auth-context";
+import GoogleLogin from "../components/GoogleLogin";
 
 const api = import.meta.env.VITE_APP_API_URL;
 
@@ -209,25 +209,23 @@ export const LogIn = () => {
               {isLoginLoading ? "Loading..." : "Log into Account"}
             </button>
 
-            <div className="pb-2">
-              <button
-                type="button"
-                className="flex justify-center border-2 border-button-border w-full bg-white text-[#412234] font-semibold rounded-lg mb-8 px-8 py-4"
-              >
-                <img src={googleImg} alt="google icon" className="w-[24px] " />
-                <p className="ml-2">Continue with Google</p>
-              </button>
+            <div className="relative flex py-5 items-center">
+              <div className="flex-grow border-t border-gray-300"></div>
+              <span className="flex-shrink mx-4 text-gray-600">or</span>
+              <div className="flex-grow border-t border-gray-300"></div>
+            </div>
+
+            <GoogleLogin />
+
+            <div className="flex justify-center flex-col items-center">
+              <p>
+                Don&apos;t have an account?
+                <Link to="/create-account" className="ml-2 font-semibold">
+                  Create an account
+                </Link>
+              </p>
             </div>
           </form>
-
-          <div className="flex justify-center flex-col items-center">
-            <p>
-              Don&apos;t have an account?
-              <Link to="/create-account" className="ml-2 font-semibold">
-                Create an account
-              </Link>
-            </p>
-          </div>
         </div>
       </div>
     </div>
