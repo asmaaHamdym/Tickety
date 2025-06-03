@@ -6,10 +6,8 @@ import { AuthProvider } from "./store/auth-context";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </GoogleOAuthProvider>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </React.StrictMode>
 );

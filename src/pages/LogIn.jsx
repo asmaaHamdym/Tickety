@@ -6,7 +6,6 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuthContext } from "../store/auth-context";
-import GoogleLogin from "../components/GoogleLogin";
 
 const api = import.meta.env.VITE_APP_API_URL;
 
@@ -78,18 +77,18 @@ export const LogIn = () => {
     axios
       .post(`${api}/auth/login`, formData)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data);
         setLoginLoading(false);
-        handleUser(res.data.data.user);
-        handleToken(res.data.data.jwt.token);
-        handleTokenExpiresAt(res.data.data.jwt.expires_at);
+        handleUser(res.data.user);
+        handleToken(res.data.jwt.token);
+        handleTokenExpiresAt(res.data.jwt.expires_at);
         if (keepLoggedin) {
-          localStorage.setItem("user", JSON.stringify(res.data.data.user));
+          localStorage.setItem("user", JSON.stringify(res.data.user));
         }
         navigate("/create-event");
       })
       .catch((err) => {
-        console.log(err.response.data.error);
+        console.log(err);
         setLoginLoading(false);
         setLoginError(err.response.data.error);
       });
@@ -214,8 +213,6 @@ export const LogIn = () => {
               <span className="flex-shrink mx-4 text-gray-600">or</span>
               <div className="flex-grow border-t border-gray-300"></div>
             </div>
-
-            <GoogleLogin />
 
             <div className="flex justify-center flex-col items-center">
               <p>
